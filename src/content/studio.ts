@@ -36,7 +36,6 @@ export const studioContent = {
       title: "Dos personas. Una práctica digital cercana.",
       body: "Luca y Rafa forman Lufinha. Trabajamos junto a cada marca desde la estructura y el contenido hasta el desarrollo, la interacción y la salida a producción.",
       people: "Las personas detrás del trabajo",
-      profilePending: "Perfil y enlaces editables desde la configuración del estudio.",
     },
     contact: {
       eyebrow: "¿Tenés una idea?",
@@ -81,7 +80,6 @@ export const studioContent = {
       title: "Two people. One close digital practice.",
       body: "Luca and Rafa are Lufinha. We work alongside each brand from structure and content to development, interaction and launch.",
       people: "The people behind the work",
-      profilePending: "Profile and links are editable from the central studio configuration.",
     },
     contact: {
       eyebrow: "Have an idea?",

@@ -5,10 +5,12 @@
 .people { margin-top: clamp(7rem, 12vw, 12rem); border-top: 1px solid var(--site-line); }
 .person { display: grid; grid-template-columns: 0.55fr 0.9fr 1.45fr; gap: 2rem; align-items: start; padding: 2rem 0; border-bottom: 1px solid var(--site-line); }
 .name { font-size: clamp(4rem, 8vw, 8rem); line-height: 0.8; }
-.profile p:last-child { max-width: 29rem; margin-top: 2rem; color: rgb(246 247 242 / 0.65); line-height: 1.6; }
+.profileContacts { display: flex; flex-wrap: wrap; gap: 0.7rem 1.2rem; max-width: 29rem; margin-top: 2rem; color: rgb(246 247 242 / 0.68); font-family: "IBM Plex Mono", monospace; font-size: 0.68rem; line-height: 1.5; }
+.profileContacts a { overflow-wrap: anywhere; border-bottom: 1px solid rgb(246 247 242 / 0.3); }
 .link { display: flex; justify-content: space-between; margin-top: 4rem; padding: 1.2rem 0; border-bottom: 1px solid currentColor; }
 @media (max-width: 760px) {
   .intro, .person { grid-template-columns: 1fr; }
   .person { gap: 1.25rem; }
-  .profile p:last-child { margin-top: 1rem; }
+  .profileContacts { display: grid; gap: 0.65rem; margin-top: 1rem; }
+  .profileContacts a { width: fit-content; max-width: 100%; }
 }

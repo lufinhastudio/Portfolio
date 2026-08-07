@@ -62,7 +62,9 @@
 
 @media (max-width: 640px) {
   .contact {
-    min-height: 82svh;
+    min-height: auto;
+    gap: clamp(4rem, 18vw, 7rem);
+    padding-bottom: 3rem;
   }
 
   .eyebrow,
@@ -71,7 +73,31 @@
     flex-direction: column;
   }
 
-  .mail { display: grid; grid-template-columns: 1fr auto; }
+  .title {
+    font-size: clamp(3rem, 15vw, 4.8rem);
+  }
+
+  .mail { display: grid; min-width: 0; grid-template-columns: minmax(0, 1fr) auto; }
   .address { grid-column: 1; grid-row: 2; margin: 0; }
   .arrow { grid-column: 2; grid-row: 1 / 3; }
+
+  .bottom {
+    padding-bottom: 5rem;
+  }
+
+  .socials {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+  }
+
+  .socials a {
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (max-width: 380px) {
+  .socials {
+    grid-template-columns: 1fr;
+  }
 }

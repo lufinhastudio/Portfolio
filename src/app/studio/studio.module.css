@@ -68,36 +68,53 @@
   line-height: 0.85;
 }
 
+.personDetails {
+  min-width: 0;
+}
+
 .personNote {
   max-width: 35rem;
   font-size: clamp(1rem, 1.5vw, 1.25rem);
   line-height: 1.6;
 }
 
-.personLinks {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem 1.25rem;
+.personContacts {
+  display: grid;
   margin-top: 1.5rem;
+  border-top: 1px solid var(--site-line);
 }
 
-.personLinks a {
-  display: inline-flex;
+.personContact {
+  display: grid;
+  grid-template-columns: 6.5rem minmax(0, 1fr) auto;
   align-items: center;
-  gap: 0.45rem;
-  padding-bottom: 0.2rem;
-  border-bottom: 1px solid currentColor;
+  gap: 1rem;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid var(--site-line);
+}
+
+.contactLabel,
+.contactValue {
   font-family: "IBM Plex Mono", monospace;
-  font-size: 0.7rem;
+  font-size: 0.68rem;
+}
+
+.contactLabel {
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
-.personLinks a span {
+.contactValue {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  letter-spacing: 0.02em;
+}
+
+.contactArrow {
   transition: transform 220ms var(--ease-out);
 }
 
-.personLinks a:hover span {
+.personContact:hover .contactArrow {
   transform: translate(0.18rem, -0.18rem);
 }
 
@@ -139,6 +156,18 @@
 .contactLink { display: flex; justify-content: space-between; margin-top: clamp(5rem, 9vw, 9rem); padding: 1.2rem 0; border-top: 1px solid rgb(20 21 18 / 0.25); border-bottom: 1px solid rgb(20 21 18 / 0.25); font-family: "Anybody Variable", sans-serif; font-size: clamp(2rem, 5vw, 5rem); font-variation-settings: "wdth" 105, "wght" 700; letter-spacing: -0.045em; }
 
 @media (max-width: 760px) {
+  .hero {
+    min-height: auto;
+    gap: clamp(3.5rem, 16vw, 6rem);
+    padding-bottom: 4rem;
+  }
+
+  .title {
+    max-width: 9ch;
+    font-size: clamp(3.35rem, 17vw, 5.25rem);
+    line-height: 0.82;
+  }
+
   .foot,
   .teamHeader,
   .person {
@@ -149,6 +178,32 @@
   .person {
     min-height: 0;
     gap: 1.5rem;
+    padding: 2.5rem 0;
+  }
+
+  .personName {
+    font-size: clamp(3.75rem, 21vw, 6rem);
+  }
+
+  .personContact {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.3rem 1rem;
+    padding: 0.9rem 0;
+  }
+
+  .contactLabel {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .contactValue {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .contactArrow {
+    grid-column: 2;
+    grid-row: 1 / 3;
   }
 
   .principlesGrid {
@@ -157,5 +212,16 @@
 
   .principle {
     min-height: 18rem;
+  }
+
+  .contactLink {
+    align-items: flex-end;
+    gap: 1.5rem;
+    font-size: clamp(2.4rem, 13vw, 4.5rem);
+    line-height: 0.92;
+  }
+
+  .contactLink span {
+    flex: none;
   }
 }

@@ -1,7 +1,6 @@
-import Link from "next/link";
 import type { Locale } from "@/types/project";
 import { getStudioContent } from "@/content";
-import { localePath, siteConfig } from "@/config/site";
+import { siteConfig } from "@/config/site";
 import styles from "@/app/studio/studio.module.css";
 
 const principles = {
@@ -19,6 +18,8 @@ const principles = {
 
 export function StudioPage({ locale }: { locale: Locale }) {
   const content = getStudioContent(locale).studio;
+  const projectEmailHref = `mailto:${siteConfig.contact.email}?subject=${encodeURIComponent(locale === "es" ? "Nuevo proyecto para Lufinha Studio" : "New project for Lufinha Studio")}`;
+
   return (
     <main className={styles.page} lang={locale}>
       <section className={styles.hero}>
@@ -28,11 +29,45 @@ export function StudioPage({ locale }: { locale: Locale }) {
       </section>
       <section className={styles.team} aria-labelledby="team-title">
         <div className={styles.teamHeader}><p className="mono" data-reveal>{content.people}</p><h2 className={`${styles.teamTitle} display`} id="team-title" data-reveal>{locale === "es" ? "Pequeño a propósito. Cercano por diseño." : "Small on purpose. Close by design."}</h2></div>
-        <div className={styles.people}>{siteConfig.team.map((person, index) => <article className={styles.person} key={person.name} data-reveal><span className="mono">0{index + 1}</span><h3 className={`${styles.personName} display`}>{person.name}</h3><div><p className="mono">{person.role ?? "Lufinha Studio"}</p><p className={styles.personNote}>{person.bio ?? content.profilePending}</p><div className={styles.personLinks}>{person.links.map((link) => <a href={link.href} key={link.href} target="_blank" rel="noreferrer">{link.label}<span aria-hidden="true">↗</span></a>)}</div></div></article>)}</div>
+        <div className={styles.people}>
+          {siteConfig.team.map((person, index) => {
+            const whatsapp = siteConfig.contact.whatsapp.find((contact) => contact.name === person.name);
+            const contacts = [
+              { label: "Email", value: siteConfig.contact.email, href: `mailto:${siteConfig.contact.email}`, external: false },
+              ...(whatsapp ? [{ label: "WhatsApp", value: whatsapp.phone, href: whatsapp.href, external: true }] : []),
+              ...person.links.map((link) => ({
+                label: link.label,
+                value: locale === "es" ? "Ver perfil" : "View profile",
+                href: link.href,
+                external: true,
+              })),
+            ];
+
+            return (
+              <article className={styles.person} key={person.name} data-reveal>
+                <span className="mono">0{index + 1}</span>
+                <h3 className={`${styles.personName} display`}>{person.name}</h3>
+                <div className={styles.personDetails}>
+                  <p className="mono">{person.role ?? "Lufinha Studio"}</p>
+                  {person.bio ? <p className={styles.personNote}>{person.bio}</p> : null}
+                  <div className={styles.personContacts} aria-label={`${locale === "es" ? "Contacto de" : "Contact details for"} ${person.name}`}>
+                    {contacts.map((contact) => (
+                      <a className={styles.personContact} href={contact.href} key={`${person.name}-${contact.label}`} target={contact.external ? "_blank" : undefined} rel={contact.external ? "noreferrer" : undefined}>
+                        <span className={styles.contactLabel}>{contact.label}</span>
+                        <span className={styles.contactValue}>{contact.value}</span>
+                        <span className={styles.contactArrow} aria-hidden="true">↗</span>
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </article>
+            );
+          })}
+        </div>
       </section>
       <section className={styles.principles} aria-label={locale === "es" ? "Principios del estudio" : "Studio principles"}>
         <div className={styles.principlesGrid}>{principles[locale].map((principle, index) => <article className={styles.principle} key={principle.title} data-reveal><span className="mono">{locale === "es" ? "Principio" : "Principle"} 0{index + 1}</span><div><h2>{principle.title}</h2><p>{principle.text}</p></div></article>)}</div>
-        <Link className={styles.contactLink} href={`${localePath(locale, "/")}#contact`}>{locale === "es" ? "Empezar un proyecto" : "Start a project"}<span>↗</span></Link>
+        <a className={styles.contactLink} href={projectEmailHref}>{locale === "es" ? "Empezar un proyecto" : "Start a project"}<span>↗</span></a>
       </section>
     </main>
   );

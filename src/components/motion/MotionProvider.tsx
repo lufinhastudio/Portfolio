@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useLayoutEffect } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef } from "react";
+import type Lenis from "lenis";
 import { usePathname } from "next/navigation";
 import { siteConfig } from "@/config/site";
 import { localeFromPathname } from "@/lib/locale";
@@ -8,21 +9,62 @@ import { CustomCursor } from "./CustomCursor";
 
 export function MotionProvider({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const lenisRef = useRef<Lenis | null>(null);
+  const restoreScrollBehaviorFrame = useRef<number | null>(null);
+
+  const scrollToTop = useCallback(() => {
+    const root = document.documentElement;
+    root.style.scrollBehavior = "auto";
+    lenisRef.current?.scrollTo(0, { immediate: true, force: true });
+    window.scrollTo({ top: 0, left: 0 });
+
+    if (restoreScrollBehaviorFrame.current !== null) {
+      window.cancelAnimationFrame(restoreScrollBehaviorFrame.current);
+    }
+    restoreScrollBehaviorFrame.current = window.requestAnimationFrame(() => {
+      root.style.removeProperty("scroll-behavior");
+      restoreScrollBehaviorFrame.current = null;
+    });
+  }, []);
 
   useLayoutEffect(() => {
     if (window.location.hash) return;
+    scrollToTop();
+  }, [pathname, scrollToTop]);
 
-    const root = document.documentElement;
-    const previousScrollBehavior = root.style.scrollBehavior;
-    root.style.scrollBehavior = "auto";
-    window.scrollTo({ top: 0, left: 0 });
+  useEffect(() => {
+    const previousScrollRestoration = window.history.scrollRestoration;
+    window.history.scrollRestoration = "manual";
 
-    const frame = window.requestAnimationFrame(() => {
-      root.style.scrollBehavior = previousScrollBehavior;
-    });
+    const resetInternalNavigation = (event: MouseEvent) => {
+      if (
+        event.defaultPrevented ||
+        event.button !== 0 ||
+        event.metaKey ||
+        event.ctrlKey ||
+        event.shiftKey ||
+        event.altKey
+      ) return;
 
-    return () => window.cancelAnimationFrame(frame);
-  }, [pathname]);
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+      const anchor = target.closest<HTMLAnchorElement>("a[href]");
+      if (!anchor || anchor.hasAttribute("download") || (anchor.target && anchor.target !== "_self")) return;
+
+      const destination = new URL(anchor.href, window.location.href);
+      if (destination.origin !== window.location.origin || destination.hash) return;
+      scrollToTop();
+    };
+
+    document.addEventListener("click", resetInternalNavigation, true);
+    return () => {
+      document.removeEventListener("click", resetInternalNavigation, true);
+      window.history.scrollRestoration = previousScrollRestoration;
+      if (restoreScrollBehaviorFrame.current !== null) {
+        window.cancelAnimationFrame(restoreScrollBehaviorFrame.current);
+      }
+    };
+  }, [scrollToTop]);
 
   useEffect(() => {
     document.documentElement.lang = localeFromPathname(pathname);
@@ -38,7 +80,7 @@ export function MotionProvider({ children }: { children: React.ReactNode }) {
         if (cancelled) return;
         const gsap = gsapModule.gsap;
         const ScrollTrigger = triggerModule.ScrollTrigger;
-        const Lenis = lenisModule.default;
+        const LenisConstructor = lenisModule.default;
         gsap.registerPlugin(ScrollTrigger);
 
         const context = gsap.context(() => {
@@ -57,7 +99,8 @@ export function MotionProvider({ children }: { children: React.ReactNode }) {
         });
 
         const smooth = siteConfig.motion.smoothScroll && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-        const lenis = smooth ? new Lenis({ duration: 1.05, smoothWheel: true, wheelMultiplier: 0.9 }) : null;
+        const lenis = smooth ? new LenisConstructor({ duration: 1.05, smoothWheel: true, wheelMultiplier: 0.9 }) : null;
+        lenisRef.current = lenis;
         let animationFrame = 0;
         if (lenis) {
           lenis.on("scroll", ScrollTrigger.update);
@@ -72,6 +115,7 @@ export function MotionProvider({ children }: { children: React.ReactNode }) {
         cleanup = () => {
           cancelAnimationFrame(animationFrame);
           lenis?.destroy();
+          if (lenisRef.current === lenis) lenisRef.current = null;
           context.revert();
         };
       },
