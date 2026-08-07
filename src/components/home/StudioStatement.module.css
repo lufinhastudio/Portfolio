@@ -1,0 +1,75 @@
+.statement {
+  color: var(--site-ink);
+  background: var(--site-paper);
+  padding: clamp(6rem, 12vw, 12rem) var(--page-gutter);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 0.65fr 1.35fr;
+  gap: 3rem;
+  padding-bottom: clamp(5rem, 10vw, 9rem);
+}
+
+.copy {
+  max-width: 18ch;
+  font-size: clamp(2.5rem, 5.4vw, 6rem);
+  line-height: 0.98;
+}
+
+.body {
+  max-width: 43rem;
+  margin-top: 2rem;
+  font-size: clamp(1.05rem, 1.8vw, 1.55rem);
+  line-height: 1.55;
+}
+
+.capabilities {
+  border-top: 1px solid rgb(20 21 18 / 0.22);
+}
+
+.capability {
+  display: grid;
+  grid-template-columns: 4rem 1fr auto;
+  align-items: center;
+  gap: 1rem;
+  min-height: clamp(4.5rem, 8vw, 7rem);
+  border-bottom: 1px solid rgb(20 21 18 / 0.22);
+}
+
+.capabilityName {
+  font-family: "Anybody Variable", sans-serif;
+  font-size: clamp(1.45rem, 3vw, 3rem);
+  font-variation-settings: "wdth" 105, "wght" 620;
+  letter-spacing: -0.04em;
+  transition: font-variation-settings 0.4s var(--ease-out), transform 0.4s var(--ease-out);
+}
+
+.capability:hover .capabilityName {
+  font-variation-settings: "wdth" 125, "wght" 760;
+  transform: translateX(0.35rem);
+}
+
+.stack { margin: clamp(7rem, 12vw, 12rem) calc(var(--page-gutter) * -1) 0; border-top: 1px solid rgb(20 21 18 / 0.22); border-bottom: 1px solid rgb(20 21 18 / 0.22); padding-top: 1rem; overflow: hidden; }
+.stack > p { padding: 0 var(--page-gutter) 1rem; }
+.marquee { overflow: hidden; padding: clamp(1.5rem, 3vw, 3rem) 0; }
+.marqueeTrack { width: max-content; display: flex; animation: stack-marquee 34s linear infinite; }
+.marqueeTrack span { display: flex; align-items: center; gap: 2.5rem; padding-right: 2.5rem; font-family: "Anybody Variable", sans-serif; font-size: clamp(2rem, 5.2vw, 5.4rem); font-variation-settings: "wdth" 105, "wght" 650; letter-spacing: -0.045em; white-space: nowrap; }
+.marqueeTrack i { font-family: "IBM Plex Mono", monospace; font-size: 0.8em; font-style: normal; opacity: 0.35; }
+@keyframes stack-marquee { to { transform: translateX(-50%); } }
+
+@media (max-width: 760px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .copy {
+    max-width: 15ch;
+  }
+
+  .capability {
+    grid-template-columns: 2.5rem 1fr auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) { .marqueeTrack { animation: none; } }

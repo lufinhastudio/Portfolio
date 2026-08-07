@@ -1,0 +1,36 @@
+.cursor {
+  position: fixed;
+  z-index: 100;
+  top: -2.4rem;
+  left: -2.4rem;
+  width: 4.8rem;
+  height: 4.8rem;
+  display: none;
+  place-items: center;
+  border: 1px solid rgb(246 247 242 / 0.55);
+  color: #111410;
+  background: #f6f7f2;
+  border-radius: 50%;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0;
+  scale: 0.25;
+  pointer-events: none;
+  transition: opacity 180ms ease, scale 320ms var(--ease-out);
+  will-change: transform;
+}
+
+.active {
+  opacity: 1;
+  scale: 1;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .cursor { display: grid; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor { display: none; }
+}

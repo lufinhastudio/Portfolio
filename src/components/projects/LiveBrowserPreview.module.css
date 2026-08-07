@@ -1,0 +1,56 @@
+.browser {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 22rem;
+  overflow: hidden;
+  color: #171a16;
+  background: #f6f7f2;
+  border: 1px solid rgb(23 26 22 / 0.22);
+  box-shadow: 0 1.5rem 5rem rgb(0 0 0 / 0.16);
+}
+
+.chrome {
+  height: 2.1rem;
+  display: grid;
+  grid-template-columns: repeat(3, 0.38rem) minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.32rem;
+  padding: 0 0.75rem;
+  border-bottom: 1px solid rgb(23 26 22 / 0.13);
+  background: #eceee8;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.52rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.dot { width: 0.38rem; height: 0.38rem; border: 1px solid currentColor; border-radius: 50%; opacity: 0.45; }
+.address { overflow: hidden; margin-left: 0.65rem; opacity: 0.62; text-overflow: ellipsis; white-space: nowrap; }
+.live { display: flex; align-items: center; gap: 0.35rem; }
+.live i { width: 0.38rem; height: 0.38rem; border-radius: 50%; background: #63a64a; box-shadow: 0 0 0 0.18rem rgb(99 166 74 / 0.17); }
+.viewport { position: relative; height: calc(100% - 2.1rem); min-height: 20rem; overflow: hidden; background: #ddd; }
+.fallback { object-fit: cover; transition: opacity 450ms var(--ease-out); }
+.hidden { opacity: 0; }
+.frame {
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 166.667%;
+  height: 166.667%;
+  border: 0;
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.6);
+  transform-origin: 0 0;
+  transition: opacity 450ms var(--ease-out);
+}
+.ready { opacity: 1; }
+
+@media (max-width: 899px) {
+  .browser { min-height: 0; aspect-ratio: 4 / 5; box-shadow: 0 1rem 3rem rgb(0 0 0 / 0.12); }
+  .viewport { min-height: 0; }
+}
+
+@media (min-width: 1600px) {
+  .frame { width: 142.857%; height: 142.857%; transform: scale(0.7); }
+}

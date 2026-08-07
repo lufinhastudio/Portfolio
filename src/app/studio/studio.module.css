@@ -1,0 +1,134 @@
+.page {
+  color: var(--site-ink);
+  background: var(--site-paper);
+}
+
+.hero {
+  min-height: 100svh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding: calc(var(--header-height) + 2rem) var(--page-gutter) 2rem;
+}
+
+.eyebrow,
+.foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.title {
+  max-width: 10ch;
+  align-self: center;
+  font-size: clamp(4.4rem, 12vw, 12rem);
+  line-height: 0.78;
+}
+
+.foot p {
+  max-width: 43rem;
+  font-size: clamp(1.05rem, 1.7vw, 1.45rem);
+  line-height: 1.55;
+}
+
+.team {
+  padding: clamp(6rem, 12vw, 12rem) var(--page-gutter);
+  color: var(--site-fg);
+  background: var(--site-bg);
+}
+
+.teamHeader {
+  display: grid;
+  grid-template-columns: 0.65fr 1.35fr;
+  gap: 2rem;
+  margin-bottom: clamp(4rem, 9vw, 8rem);
+}
+
+.teamTitle {
+  max-width: 12ch;
+  font-size: clamp(2.8rem, 6vw, 6rem);
+  line-height: 0.95;
+}
+
+.people {
+  border-top: 1px solid var(--site-line);
+}
+
+.person {
+  display: grid;
+  grid-template-columns: 0.7fr 0.9fr 1.4fr;
+  gap: 2rem;
+  align-items: start;
+  min-height: 17rem;
+  padding: 2rem 0;
+  border-bottom: 1px solid var(--site-line);
+}
+
+.personName {
+  font-size: clamp(3.2rem, 7vw, 7rem);
+  line-height: 0.85;
+}
+
+.personNote {
+  max-width: 35rem;
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  line-height: 1.6;
+}
+
+.principles {
+  padding: clamp(6rem, 12vw, 12rem) var(--page-gutter);
+}
+
+.principlesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgb(20 21 18 / 0.2);
+  border: 1px solid rgb(20 21 18 / 0.2);
+}
+
+.principle {
+  min-height: 24rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 3rem;
+  padding: 1.5rem;
+  background: var(--site-paper);
+}
+
+.principle h2 {
+  font-family: "Anybody Variable", sans-serif;
+  font-size: clamp(2rem, 4vw, 4rem);
+  line-height: 0.95;
+  font-variation-settings: "wdth" 102, "wght" 680;
+  letter-spacing: -0.045em;
+}
+
+.principle p {
+  max-width: 26rem;
+  line-height: 1.6;
+}
+
+.contactLink { display: flex; justify-content: space-between; margin-top: clamp(5rem, 9vw, 9rem); padding: 1.2rem 0; border-top: 1px solid rgb(20 21 18 / 0.25); border-bottom: 1px solid rgb(20 21 18 / 0.25); font-family: "Anybody Variable", sans-serif; font-size: clamp(2rem, 5vw, 5rem); font-variation-settings: "wdth" 105, "wght" 700; letter-spacing: -0.045em; }
+
+@media (max-width: 760px) {
+  .foot,
+  .teamHeader,
+  .person {
+    grid-template-columns: 1fr;
+    flex-direction: column;
+  }
+
+  .person {
+    min-height: 0;
+    gap: 1.5rem;
+  }
+
+  .principlesGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .principle {
+    min-height: 18rem;
+  }
+}

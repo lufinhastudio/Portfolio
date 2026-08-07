@@ -1,0 +1,106 @@
+.page {
+  min-height: 100svh;
+  color: var(--site-ink);
+  background: var(--site-paper);
+  padding: calc(var(--header-height) + 3rem) var(--page-gutter) clamp(5rem, 10vw, 10rem);
+}
+
+.hero {
+  min-height: 56svh;
+  display: grid;
+  grid-template-columns: 0.65fr 1.35fr;
+  align-items: end;
+  gap: 2rem;
+  padding-bottom: clamp(4rem, 8vw, 8rem);
+}
+
+.title {
+  max-width: 8ch;
+  font-size: clamp(4.2rem, 12vw, 12rem);
+  line-height: 0.78;
+}
+
+.list {
+  border-top: 1px solid rgb(20 21 18 / 0.25);
+}
+
+.item {
+  --row-bg: transparent;
+  --row-fg: var(--site-ink);
+  position: relative;
+  display: grid;
+  grid-template-columns: 4rem 1.35fr 0.8fr 0.45fr;
+  align-items: center;
+  min-height: clamp(8rem, 15vw, 13.5rem);
+  gap: 1rem;
+  border-bottom: 1px solid rgb(20 21 18 / 0.25);
+  overflow: hidden;
+  transition: color 0.45s var(--ease-out), padding 0.45s var(--ease-out);
+}
+
+.item::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  background: var(--row-bg);
+  transform: translateY(101%);
+  transition: transform 0.55s var(--ease-out);
+}
+
+.item:hover {
+  color: var(--row-fg);
+  padding-inline: 1rem;
+}
+
+.item:hover::before {
+  transform: translateY(0);
+}
+
+.item > * {
+  position: relative;
+  z-index: 1;
+}
+
+.name {
+  font-family: "Anybody Variable", sans-serif;
+  font-size: clamp(2.2rem, 5.2vw, 5.8rem);
+  line-height: 0.9;
+  letter-spacing: -0.055em;
+  font-variation-settings: "wdth" 94, "wght" 710;
+  transition: font-variation-settings 0.45s var(--ease-out);
+}
+
+.item:hover .name {
+  font-variation-settings: "wdth" 118, "wght" 790;
+}
+
+.category {
+  line-height: 1.45;
+}
+
+.arrow {
+  justify-self: end;
+  font-size: 1.5rem;
+  transition: transform 0.35s var(--ease-out);
+}
+
+.item:hover .arrow {
+  transform: translate(0.35rem, -0.35rem);
+}
+
+@media (max-width: 760px) {
+  .hero {
+    min-height: 48svh;
+    grid-template-columns: 1fr;
+  }
+
+  .item {
+    grid-template-columns: 2.5rem 1fr auto;
+    min-height: 8rem;
+  }
+
+  .category {
+    display: none;
+  }
+}

@@ -1,0 +1,19 @@
+.section {
+  min-height: 100svh;
+  display: grid;
+  grid-template-columns: 0.55fr 1.45fr;
+  align-content: center;
+  gap: 2rem;
+  padding: clamp(7rem, 14vw, 14rem) var(--page-gutter);
+  color: var(--site-ink);
+  background: var(--site-paper);
+}
+.copy { display: grid; gap: clamp(3rem, 8vw, 8rem); }
+.before { max-width: 14ch; color: rgb(23 26 22 / 0.32); font-size: clamp(2.7rem, 6vw, 6.5rem); line-height: 0.94; text-decoration: line-through; text-decoration-thickness: 0.045em; }
+.after { max-width: 13ch; font-size: clamp(3.6rem, 8.4vw, 9rem); line-height: 0.86; }
+.ruler { grid-column: 2; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 0.8rem; margin-top: 3rem; font-family: "IBM Plex Mono", monospace; font-size: 0.6rem; }
+.ruler i { height: 1px; background: currentColor; }
+@media (max-width: 760px) {
+  .section { min-height: 85svh; grid-template-columns: 1fr; align-content: end; }
+  .ruler { grid-column: 1; }
+}

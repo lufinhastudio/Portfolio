@@ -1,0 +1,145 @@
+:root {
+  --site-bg: #111410;
+  --site-fg: #f6f7f2;
+  --site-paper: #dde1da;
+  --site-ink: #171a16;
+  --site-signal: #b9d635;
+  --site-line: rgba(241, 240, 234, 0.2);
+  --page-gutter: clamp(1rem, 3vw, 3.25rem);
+  --header-height: 5rem;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--site-bg);
+  scrollbar-gutter: stable;
+}
+
+body {
+  margin: 0;
+  color: var(--site-fg);
+  background: var(--site-bg);
+  font-family: "Manrope Variable", "Helvetica Neue", sans-serif;
+  font-synthesis: none;
+  overflow-x: clip;
+}
+
+::selection {
+  color: white;
+  background: var(--site-signal);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+img {
+  max-width: 100%;
+}
+
+iframe { display: block; }
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+:focus-visible {
+  outline: 2px solid var(--site-signal);
+  outline-offset: 4px;
+}
+
+.skip-link {
+  position: fixed;
+  z-index: 100;
+  top: 0.75rem;
+  left: 0.75rem;
+  padding: 0.75rem 1rem;
+  color: var(--site-ink);
+  background: var(--site-paper);
+  transform: translateY(-160%);
+  transition: transform 0.2s ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+.mono {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.72rem;
+  line-height: 1.3;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.display {
+  font-family: "Anybody Variable", "Arial Black", sans-serif;
+  font-variation-settings: "wdth" 92, "wght" 760;
+  letter-spacing: -0.055em;
+}
+
+.page-shell {
+  min-height: 100svh;
+  padding: calc(var(--header-height) + 3rem) var(--page-gutter) 5rem;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+[data-reveal] {
+  will-change: transform, opacity;
+}
+
+@media (max-width: 720px) {
+  :root {
+    --header-height: 4.25rem;
+  }
+
+  .page-shell {
+    padding-top: calc(var(--header-height) + 2rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,14 @@
+.section { padding: clamp(7rem, 13vw, 13rem) var(--page-gutter); color: var(--site-fg); background: var(--site-bg); }
+.intro { display: grid; grid-template-columns: 0.55fr 1.45fr; gap: 2rem; }
+.title { max-width: 12ch; font-size: clamp(3.2rem, 7vw, 7.4rem); line-height: 0.9; }
+.body { max-width: 42rem; margin-top: 2.5rem; font-size: clamp(1.05rem, 1.8vw, 1.5rem); line-height: 1.55; }
+.people { margin-top: clamp(7rem, 12vw, 12rem); border-top: 1px solid var(--site-line); }
+.person { display: grid; grid-template-columns: 0.55fr 0.9fr 1.45fr; gap: 2rem; align-items: start; padding: 2rem 0; border-bottom: 1px solid var(--site-line); }
+.name { font-size: clamp(4rem, 8vw, 8rem); line-height: 0.8; }
+.profile p:last-child { max-width: 29rem; margin-top: 2rem; color: rgb(246 247 242 / 0.65); line-height: 1.6; }
+.link { display: flex; justify-content: space-between; margin-top: 4rem; padding: 1.2rem 0; border-bottom: 1px solid currentColor; }
+@media (max-width: 760px) {
+  .intro, .person { grid-template-columns: 1fr; }
+  .person { gap: 1.25rem; }
+  .profile p:last-child { margin-top: 1rem; }
+}

@@ -1,0 +1,24 @@
+.section { position: relative; min-height: 120svh; display: grid; align-content: center; padding: 12rem var(--page-gutter); overflow: hidden; isolation: isolate; background: var(--site-bg); }
+.eyebrow, .title, .body { position: relative; z-index: 3; }
+.title { max-width: 10ch; margin-left: 19vw; font-size: clamp(4rem, 10vw, 11rem); line-height: 0.82; mix-blend-mode: difference; }
+.body { max-width: 32rem; margin: 3rem 12vw 0 auto; font-size: clamp(1rem, 1.6vw, 1.4rem); line-height: 1.55; }
+.fragments { position: absolute; z-index: 1; inset: 0; }
+.fragment { position: absolute; overflow: hidden; border: 1px solid rgb(246 247 242 / 0.28); box-shadow: 0 1.5rem 4rem rgb(0 0 0 / 0.2); }
+.fragment img { object-fit: cover; }
+.mayma { top: 8%; right: 7%; width: 17vw; height: 26vw; transform: rotate(3deg); }
+.xeneize { top: 20%; left: 5%; width: 14vw; height: 14vw; transform: rotate(-5deg); }
+.xeneize img { object-fit: contain; background: white; }
+.santa { bottom: 7%; left: 11%; width: 18vw; height: 28vw; transform: rotate(2deg); }
+.santa img { object-fit: contain; background: #173b28; }
+.uruguai { right: 8%; bottom: 11%; width: 17vw; height: 22vw; transform: rotate(-4deg); }
+.uruguai img { object-fit: contain; background: #394736; }
+@media (max-width: 760px) {
+  .section { min-height: 100svh; padding-block: 8rem; }
+  .title { margin-left: 0; font-size: 16vw; }
+  .body { margin: 3rem 0 0; max-width: 24rem; }
+  .fragment { opacity: 0.55; }
+  .mayma { width: 30vw; height: 45vw; right: -7%; }
+  .xeneize { width: 27vw; height: 27vw; left: -8%; top: 29%; }
+  .santa { width: 30vw; height: 45vw; left: -7%; bottom: 2%; }
+  .uruguai { width: 31vw; height: 39vw; right: -8%; bottom: 6%; }
+}
