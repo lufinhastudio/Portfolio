@@ -14,11 +14,21 @@ export const siteConfig = {
     en: "Independent digital studio for design, ecommerce and creative development. We build web experiences with identity, interaction and purpose.",
   },
   contact: {
-    email: "hola@lufinha.studio",
-    whatsapp: null as string | null,
+    email: "lufinhastudio@gmail.com",
+    whatsapp: [
+      {
+        name: "Luca",
+        phone: "+54 9 3447 497062",
+        href: "https://wa.me/5493447497062",
+      },
+      {
+        name: "Rafa",
+        phone: "+54 9 3446 608118",
+        href: "https://wa.me/5493446608118",
+      },
+    ],
     instagram: null as string | null,
     github: null as string | null,
-    linkedin: null as string | null,
     location: "Entre Ríos, Argentina",
     availability: {
       es: "Disponible para proyectos seleccionados",
@@ -31,14 +41,24 @@ export const siteConfig = {
       role: null as string | null,
       bio: null as string | null,
       photo: null as string | null,
-      links: [] as { label: string; href: string }[],
+      links: [
+        {
+          label: "LinkedIn",
+          href: "https://www.linkedin.com/in/luca-saboredo-066b242a8/",
+        },
+      ],
     },
     {
       name: "Rafa",
       role: null as string | null,
       bio: null as string | null,
       photo: null as string | null,
-      links: [] as { label: string; href: string }[],
+      links: [
+        {
+          label: "LinkedIn",
+          href: "https://www.linkedin.com/in/rafaela-sanna-23a329371/",
+        },
+      ],
     },
   ],
   stack: [

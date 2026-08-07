@@ -18,7 +18,7 @@ export function SiteHeader() {
 
   return (
     <header className={`${styles.header} ${open ? styles.mobileOpen : ""}`}>
-      <Link className={styles.brand} href={locale === "es" ? "/" : "/en"} onClick={() => setOpen(false)}>LUFINHA®</Link>
+      <Link className={styles.brand} href={locale === "es" ? "/" : "/en"} onClick={() => setOpen(false)}>LUFINHA STUDIO</Link>
       <nav className={styles.nav} aria-label={locale === "es" ? "Navegación principal" : "Main navigation"}>
         {navigation.map((item) => {
           const active = !item.href.includes("#") && (item.href === (locale === "es" ? "/" : "/en") ? pathname === item.href : pathname.startsWith(item.href));

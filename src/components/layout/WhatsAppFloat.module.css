@@ -1,0 +1,159 @@
+.widget {
+  position: fixed;
+  z-index: 70;
+  right: var(--page-gutter);
+  bottom: clamp(1rem, 2.5vw, 2rem);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.65rem;
+}
+
+.trigger {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  min-height: 3.6rem;
+  padding: 0.45rem 1rem 0.45rem 0.45rem;
+  border: 1px solid rgb(255 255 255 / 0.24);
+  border-radius: 999px;
+  color: #fff;
+  background: #1faa59;
+  box-shadow: 0 0.75rem 2rem rgb(0 0 0 / 0.22);
+  cursor: pointer;
+  transition: transform 220ms var(--ease-out), background-color 220ms ease;
+}
+
+.trigger:hover {
+  transform: translateY(-0.2rem);
+  background: #168f4a;
+}
+
+.triggerOpen {
+  background: var(--site-ink);
+}
+
+.icon {
+  display: grid;
+  width: 2.7rem;
+  height: 2.7rem;
+  place-items: center;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 0.12);
+}
+
+.icon svg {
+  width: 1.55rem;
+  fill: currentColor;
+}
+
+.triggerLabel {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.panel {
+  width: min(22rem, calc(100vw - 2rem));
+  padding: 1.35rem;
+  color: var(--site-ink);
+  background: var(--site-paper);
+  border: 1px solid rgb(23 26 22 / 0.2);
+  box-shadow: 0 1.5rem 4rem rgb(0 0 0 / 0.28);
+  opacity: 0;
+  transform: translateY(0.8rem) scale(0.98);
+  transform-origin: bottom right;
+  pointer-events: none;
+  visibility: hidden;
+  transition: opacity 220ms ease, transform 280ms var(--ease-out), visibility 220ms;
+}
+
+.panelOpen {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+  visibility: visible;
+}
+
+.panelHeader {
+  padding-bottom: 1.25rem;
+}
+
+.panelHeader h2 {
+  max-width: 12ch;
+  margin-top: 1.25rem;
+  font-family: "Anybody Variable", sans-serif;
+  font-size: 1.8rem;
+  font-variation-settings: "wdth" 96, "wght" 720;
+  letter-spacing: -0.055em;
+  line-height: 0.95;
+}
+
+.panelHeader p {
+  margin-top: 0.75rem;
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.contacts {
+  border-top: 1px solid rgb(23 26 22 / 0.22);
+}
+
+.contact {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.95rem 0;
+  border-bottom: 1px solid rgb(23 26 22 / 0.22);
+  transition: padding 220ms var(--ease-out), color 220ms ease;
+}
+
+.contact:hover {
+  padding-left: 0.4rem;
+  color: #168f4a;
+}
+
+.contact > span:first-child {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.contact strong {
+  font-size: 0.95rem;
+}
+
+.contact small {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.67rem;
+  letter-spacing: 0.03em;
+}
+
+@media (max-width: 640px) {
+  .widget {
+    right: 1rem;
+    bottom: 1rem;
+  }
+
+  .trigger {
+    width: 3.6rem;
+    padding: 0.45rem;
+  }
+
+  .triggerLabel {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trigger,
+  .panel,
+  .contact {
+    transition: none;
+  }
+}

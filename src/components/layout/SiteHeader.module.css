@@ -21,6 +21,7 @@
 
 .brand {
   justify-self: start;
+  white-space: nowrap;
   font-family: "Anybody Variable", sans-serif;
   font-size: 1rem;
   font-variation-settings: "wdth" 115, "wght" 760;
