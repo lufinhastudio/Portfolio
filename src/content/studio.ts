@@ -32,7 +32,7 @@ export const studioContent = {
     },
     studio: {
       eyebrow: "El estudio",
-      title: "Somos Luca y Rafa. Trabajamos con vos.",
+      title: "Somos Rafa y Luca. Trabajamos con vos.",
       body: "En Lufinha nos involucramos de principio a fin: escuchamos el problema, diseñamos la solución y la llevamos a producción. Vas a hablar directamente con quienes hacen el trabajo.",
       people: "Las personas detrás del trabajo",
     },
@@ -75,7 +75,7 @@ export const studioContent = {
     },
     studio: {
       eyebrow: "The studio",
-      title: "We're Luca and Rafa. We work with you.",
+      title: "We're Rafa and Luca. We work with you.",
       body: "At Lufinha we stay involved from start to finish: we understand the problem, design the solution and bring it to production. You'll speak directly with the people doing the work.",
       people: "The people behind the work",
     },

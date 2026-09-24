@@ -17,14 +17,14 @@ export const siteConfig = {
     email: "lufinhastudio@gmail.com",
     whatsapp: [
       {
-        name: "Luca",
-        phone: "+54 9 3447 497062",
-        href: "https://wa.me/5493447497062",
-      },
-      {
         name: "Rafa",
         phone: "+54 9 3446 608118",
         href: "https://wa.me/5493446608118",
+      },
+      {
+        name: "Luca",
+        phone: "+54 9 3447 497062",
+        href: "https://wa.me/5493447497062",
       },
     ],
     instagram: null as string | null,
@@ -32,18 +32,6 @@ export const siteConfig = {
     location: "Entre Ríos, Argentina",
   },
   team: [
-    {
-      name: "Luca",
-      role: null as string | null,
-      bio: null as string | null,
-      photo: "/luca.jpeg",
-      links: [
-        {
-          label: "LinkedIn",
-          href: "https://www.linkedin.com/in/luca-saboredo-066b242a8/",
-        },
-      ],
-    },
     {
       name: "Rafa",
       role: null as string | null,
@@ -53,6 +41,18 @@ export const siteConfig = {
         {
           label: "LinkedIn",
           href: "https://www.linkedin.com/in/rafaela-sanna-23a329371/",
+        },
+      ],
+    },
+    {
+      name: "Luca",
+      role: null as string | null,
+      bio: null as string | null,
+      photo: "/luca.jpeg",
+      links: [
+        {
+          label: "LinkedIn",
+          href: "https://www.linkedin.com/in/luca-saboredo-066b242a8/",
         },
       ],
     },

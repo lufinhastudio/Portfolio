@@ -26,7 +26,7 @@ export function StudioPage({ locale }: { locale: Locale }) {
       <section className={styles.hero}>
         <div className={`${styles.eyebrow} mono`}><span>{content.eyebrow}</span><span>{siteConfig.contact.location}</span></div>
         <h1 className={`${styles.title} display`}>{content.title}</h1>
-        <div className={styles.foot}><span className="mono">Luca + Rafa</span><p>{content.body}</p></div>
+        <div className={styles.foot}><span className="mono">Rafa + Luca</span><p>{content.body}</p></div>
       </section>
       <section className={styles.team} aria-labelledby="team-title">
         <div className={styles.teamHeader}><p className="mono" data-reveal>{content.people}</p><h2 className={`${styles.teamTitle} display`} id="team-title" data-reveal>{locale === "es" ? "Conocé a quienes van a trabajar en tu proyecto." : "Meet the people who will work on your project."}</h2></div>
