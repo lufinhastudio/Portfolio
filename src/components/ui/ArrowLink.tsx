@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ArrowUpRight } from "@/components/ui/Icons";
 
 type ArrowLinkProps = {
   href: string;
@@ -11,7 +12,7 @@ export function ArrowLink({ href, children, className, external }: ArrowLinkProp
   const content = (
     <>
       <span>{children}</span>
-      <span aria-hidden="true">↗</span>
+      <ArrowUpRight size="0.9em" />
     </>
   );
 

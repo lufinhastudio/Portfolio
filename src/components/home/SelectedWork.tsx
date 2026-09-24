@@ -7,6 +7,7 @@ import type { CSSProperties, MouseEvent, PointerEvent, KeyboardEvent } from "rea
 import type { Locale, LocalizedProject } from "@/types/project";
 import { localePath } from "@/config/site";
 import { getStudioContent } from "@/content";
+import { ArrowLeft, ArrowRight, ArrowUpRight } from "@/components/ui/Icons";
 import styles from "./SelectedWork.module.css";
 
 type PaletteStyle = CSSProperties & {
@@ -25,6 +26,8 @@ export function SelectedWork({ projects, locale }: { projects: LocalizedProject[
   const startX = useRef(0);
   const scrollStart = useRef(0);
   const hasMoved = useRef(false);
+  const isProgrammatic = useRef(false);
+  const programmaticTimer = useRef<NodeJS.Timeout | null>(null);
 
   // Update active slide and boundary states
   const updateScrollState = useCallback(() => {
@@ -36,7 +39,23 @@ export function SelectedWork({ projects, locale }: { projects: LocalizedProject[
     setCanScrollPrev(scrollLeft > 15);
     setCanScrollNext(scrollLeft < maxScroll - 15);
 
+    if (isProgrammatic.current) return;
+
     const children = Array.from(track.children) as HTMLElement[];
+    if (!children.length) return;
+
+    // If near or at the end of the scroll track, select the last project (e.g. Uruguaí)
+    if (maxScroll > 0 && scrollLeft >= maxScroll - 35) {
+      setActiveIndex(children.length - 1);
+      return;
+    }
+
+    // If near the beginning, select the first project
+    if (scrollLeft <= 35) {
+      setActiveIndex(0);
+      return;
+    }
+
     let closestIndex = 0;
     let minDiff = Infinity;
     const trackLeft = track.getBoundingClientRect().left;
@@ -67,21 +86,45 @@ export function SelectedWork({ projects, locale }: { projects: LocalizedProject[
     return () => {
       track.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
+      if (programmaticTimer.current) clearTimeout(programmaticTimer.current);
     };
   }, [updateScrollState]);
 
   const scrollToIndex = useCallback((index: number) => {
     const track = trackRef.current;
     if (!track) return;
-    const target = track.children[index] as HTMLElement | undefined;
+    const children = Array.from(track.children) as HTMLElement[];
+    const target = children[index];
     if (!target) return;
+
+    setActiveIndex(index);
+    isProgrammatic.current = true;
+    if (programmaticTimer.current) clearTimeout(programmaticTimer.current);
+    programmaticTimer.current = setTimeout(() => {
+      isProgrammatic.current = false;
+      updateScrollState();
+    }, 600);
+
+    const maxScroll = track.scrollWidth - track.clientWidth;
+
+    // Direct scroll to end for last item (Uruguaí)
+    if (index === children.length - 1) {
+      track.scrollTo({ left: maxScroll, behavior: "smooth" });
+      return;
+    }
+
+    // Direct scroll to start for first item
+    if (index === 0) {
+      track.scrollTo({ left: 0, behavior: "smooth" });
+      return;
+    }
 
     const trackLeft = track.getBoundingClientRect().left;
     const targetLeft = target.getBoundingClientRect().left;
     const offset = targetLeft - trackLeft;
 
     track.scrollBy({ left: offset, behavior: "smooth" });
-  }, []);
+  }, [updateScrollState]);
 
   const handlePrev = () => {
     if (activeIndex > 0) {
@@ -165,9 +208,7 @@ export function SelectedWork({ projects, locale }: { projects: LocalizedProject[
               disabled={!canScrollPrev}
               aria-label={locale === "es" ? "Proyecto anterior" : "Previous project"}
             >
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <path d="M19 12H5M12 19l-7-7 7-7" />
-              </svg>
+              <ArrowLeft size="1.25rem" />
             </button>
             <button
               type="button"
@@ -176,9 +217,7 @@ export function SelectedWork({ projects, locale }: { projects: LocalizedProject[
               disabled={!canScrollNext}
               aria-label={locale === "es" ? "Proyecto siguiente" : "Next project"}
             >
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
+              <ArrowRight size="1.25rem" />
             </button>
           </div>
         </div>
@@ -242,7 +281,7 @@ export function SelectedWork({ projects, locale }: { projects: LocalizedProject[
                     <h3 className={`${styles.name} display`}>{project.name}</h3>
                     <p className={styles.description}>{project.description}</p>
                     <span className={`${styles.caseLabel} mono`}>
-                      {content.work.open} <span aria-hidden="true">↗</span>
+                      {content.work.open} <ArrowUpRight className={styles.labelArrow} size="0.85em" />
                     </span>
                   </div>
                 </Link>
@@ -254,7 +293,7 @@ export function SelectedWork({ projects, locale }: { projects: LocalizedProject[
                   aria-label={`${content.work.visit}: ${project.client}`}
                   title={`${content.work.visit}: ${project.client}`}
                 >
-                  ↗
+                  <ArrowUpRight size="1.2rem" />
                 </a>
               </article>
             );
@@ -285,7 +324,7 @@ export function SelectedWork({ projects, locale }: { projects: LocalizedProject[
         </div>
 
         <Link className={`${styles.allProjectsLink} mono`} href={localePath(locale, "/work")}>
-          {content.common.allProjects} <span aria-hidden="true">↗</span>
+          {content.common.allProjects} <ArrowUpRight size="0.9em" />
         </Link>
       </footer>
     </section>

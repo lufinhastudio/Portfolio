@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { Locale } from "@/types/project";
 import { getStudioContent } from "@/content";
 import { localePath, siteConfig } from "@/config/site";
+import { ArrowUpRight } from "@/components/ui/Icons";
 import styles from "./StudioPreview.module.css";
 
 export function StudioPreview({ locale }: { locale: Locale }) {
@@ -29,7 +30,11 @@ export function StudioPreview({ locale }: { locale: Locale }) {
                 <div className={styles.profileContacts}>
                   <a href={`mailto:${siteConfig.contact.email}`}>{siteConfig.contact.email}</a>
                   {whatsapp ? <a href={whatsapp.href}>{whatsapp.phone}</a> : null}
-                  {person.links.map((link) => <a href={link.href} key={link.href}>{link.label} ↗</a>)}
+                  {person.links.map((link) => (
+                    <a href={link.href} key={link.href}>
+                      {link.label} <ArrowUpRight size="0.85em" />
+                    </a>
+                  ))}
                 </div>
               </div>
             </article>
@@ -37,7 +42,7 @@ export function StudioPreview({ locale }: { locale: Locale }) {
         })}
       </div>
       <Link className={`${styles.link} mono`} href={localePath(locale, "/studio")} data-cursor={locale === "es" ? "ABRIR" : "OPEN"}>
-        {content.people} <span aria-hidden="true">↗</span>
+        {content.people} <ArrowUpRight size="0.9em" />
       </Link>
     </section>
   );

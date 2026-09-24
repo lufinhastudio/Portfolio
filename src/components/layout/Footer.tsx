@@ -5,6 +5,7 @@ import Link from "next/link";
 import { localePath, siteConfig } from "@/config/site";
 import { getSocialLinks, getStudioContent } from "@/content";
 import { localeFromPathname } from "@/lib/locale";
+import { ArrowUpRight } from "@/components/ui/Icons";
 import styles from "./Footer.module.css";
 
 function ContactIcon({ kind }: { kind: "email" | "whatsapp" | "linkedin" | "instagram" | "github" }) {
@@ -25,7 +26,7 @@ export function Footer() {
         <div className={`${styles.eyebrow} mono`}><span>{content.eyebrow}</span><span>{siteConfig.contact.location}</span></div>
         <h2 className={`${styles.title} display`} data-reveal>{content.title}</h2>
         <Link className={styles.mail} href={localePath(locale, locale === "es" ? "/contacto" : "/contact")} data-cursor={locale === "es" ? "ESCRIBIR" : "WRITE"}>
-          <span>{content.cta}</span><span className={styles.address}>{siteConfig.contact.email}</span><span className={styles.arrow} aria-hidden="true">↗</span>
+          <span>{content.cta}</span><span className={styles.address}>{siteConfig.contact.email}</span><span className={styles.arrow} aria-hidden="true"><ArrowUpRight size="1.1em" /></span>
         </Link>
       </div>
       <div className={`${styles.bottom} mono`}>
@@ -35,7 +36,7 @@ export function Footer() {
             <a className={styles.socialLink} key={link.label} href={link.href} aria-label={link.label}>
               <span className={styles.socialIcon}><ContactIcon kind={link.kind} /></span>
               <span className={styles.socialText}><strong>{link.label}</strong><small>{link.kind === "whatsapp" ? (locale === "es" ? "Escribir mensaje" : "Send a message") : link.kind === "linkedin" ? (locale === "es" ? "Ver perfil" : "View profile") : link.kind === "email" ? (locale === "es" ? "Enviar correo" : "Send email") : (locale === "es" ? "Abrir perfil" : "Open profile")}</small></span>
-              <span className={styles.socialArrow} aria-hidden="true">↗</span>
+              <span className={styles.socialArrow} aria-hidden="true"><ArrowUpRight size="0.9em" /></span>
             </a>
           ))}
         </div>

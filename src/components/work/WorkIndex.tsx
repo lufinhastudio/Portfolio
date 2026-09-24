@@ -3,6 +3,7 @@ import type { CSSProperties } from "react";
 import type { Locale } from "@/types/project";
 import { getLocalizedProjects, getStudioContent } from "@/content";
 import { localePath, siteConfig } from "@/config/site";
+import { ArrowUpRight } from "@/components/ui/Icons";
 import styles from "./WorkIndex.module.css";
 
 type RowStyle = CSSProperties & { "--row-bg": string; "--row-fg": string };
@@ -21,7 +22,7 @@ export function WorkIndex({ locale }: { locale: Locale }) {
       <section className={styles.list} aria-label={content.common.selectedWork}>
         {projects.map((project) => (
           <Link className={styles.item} href={localePath(locale, `/work/${project.slug}`)} key={project.slug} data-cursor={locale === "es" ? "VER" : "VIEW"} style={{ "--row-bg": project.palette.background, "--row-fg": project.palette.foreground } as RowStyle}>
-            <span className="mono">{project.index}</span><span className={styles.name}>{project.name}</span><span className={`${styles.category} mono`}>{project.category}<br />{project.year}</span><span className={styles.arrow} aria-hidden="true">↗</span>
+            <span className="mono">{project.index}</span><span className={styles.name}>{project.name}</span><span className={`${styles.category} mono`}>{project.category}<br />{project.year}</span><span className={styles.arrow} aria-hidden="true"><ArrowUpRight size="1.2em" /></span>
           </Link>
         ))}
       </section>

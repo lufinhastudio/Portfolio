@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { Locale } from "@/types/project";
 import { getStudioContent } from "@/content";
 import { localePath, siteConfig } from "@/config/site";
+import { ArrowUpRight } from "@/components/ui/Icons";
 import styles from "@/app/studio/studio.module.css";
 
 const principles = {
@@ -56,7 +57,7 @@ export function StudioPage({ locale }: { locale: Locale }) {
                       <a className={styles.personContact} href={contact.href} key={`${person.name}-${contact.label}`}>
                         <span className={styles.contactLabel}>{contact.label}</span>
                         <span className={styles.contactValue}>{contact.value}</span>
-                        <span className={styles.contactArrow} aria-hidden="true">↗</span>
+                        <span className={styles.contactArrow} aria-hidden="true"><ArrowUpRight size="0.85em" /></span>
                       </a>
                     ))}
                   </div>
@@ -68,7 +69,7 @@ export function StudioPage({ locale }: { locale: Locale }) {
       </section>
       <section className={styles.principles} aria-label={locale === "es" ? "Principios del estudio" : "Studio principles"}>
         <div className={styles.principlesGrid}>{principles[locale].map((principle, index) => <article className={styles.principle} key={principle.title} data-reveal><span className="mono">{locale === "es" ? "Principio" : "Principle"} 0{index + 1}</span><div><h2>{principle.title}</h2><p>{principle.text}</p></div></article>)}</div>
-        <Link className={styles.contactLink} href={localePath(locale, locale === "es" ? "/contacto" : "/contact")}>{locale === "es" ? "Empezar un proyecto" : "Start a project"}<span>↗</span></Link>
+        <Link className={styles.contactLink} href={localePath(locale, locale === "es" ? "/contacto" : "/contact")}>{locale === "es" ? "Empezar un proyecto" : "Start a project"}<span aria-hidden="true"><ArrowUpRight size="0.85em" /></span></Link>
       </section>
     </main>
   );

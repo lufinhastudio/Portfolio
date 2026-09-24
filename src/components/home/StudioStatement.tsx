@@ -1,6 +1,7 @@
 import type { Locale } from "@/types/project";
 import { getStudioContent } from "@/content";
 import { siteConfig } from "@/config/site";
+import { ArrowUpRight } from "@/components/ui/Icons";
 import styles from "./StudioStatement.module.css";
 
 export function StudioStatement({ locale }: { locale: Locale }) {
@@ -16,7 +17,7 @@ export function StudioStatement({ locale }: { locale: Locale }) {
           <div className={styles.capability} key={capability} data-reveal>
             <span className="mono">0{index + 1}</span>
             <span className={styles.capabilityName}>{capability}</span>
-            <span aria-hidden="true">↗</span>
+            <ArrowUpRight size="0.85em" />
           </div>
         ))}
       </div>

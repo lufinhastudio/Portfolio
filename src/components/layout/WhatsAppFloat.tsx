@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { siteConfig } from "@/config/site";
 import { localeFromPathname } from "@/lib/locale";
+import { ArrowUpRight } from "@/components/ui/Icons";
 import styles from "./WhatsAppFloat.module.css";
 
 const copy = {
@@ -78,7 +79,7 @@ export function WhatsAppFloat() {
               aria-label={`${content.contact} ${contact.name} ${locale === "es" ? "por" : "via"} WhatsApp`}
             >
               <span><strong>{contact.name}</strong><small>{contact.phone}</small></span>
-              <span aria-hidden="true">↗</span>
+              <ArrowUpRight size="1em" />
             </a>
           ))}
         </div>

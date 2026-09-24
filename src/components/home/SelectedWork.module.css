@@ -88,8 +88,6 @@
 }
 
 .navButton svg {
-  width: 1.25rem;
-  height: 1.25rem;
   transition: transform 200ms ease;
 }
 
@@ -128,7 +126,8 @@
 .track {
   display: flex;
   gap: clamp(1.2rem, 2vw, 2rem);
-  padding-inline: var(--page-gutter);
+  padding-left: var(--page-gutter);
+  padding-right: calc(100vw - clamp(320px, 58vw, 780px) - var(--page-gutter) * 2);
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
@@ -159,7 +158,7 @@
   background: var(--project-bg);
   overflow: hidden;
   isolation: isolate;
-  transition: border-color 280ms ease, transform 280ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 280ms ease;
+  transition: border-color 240ms ease;
 }
 
 .project::after {
@@ -176,12 +175,6 @@
 .project:focus-within::after,
 .projectActive::after {
   border-color: var(--project-accent);
-}
-
-.project:hover,
-.project:focus-within {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 40px -12px rgba(0, 0, 0, 0.6);
 }
 
 .projectLink {
@@ -312,7 +305,11 @@
   font-size: 0.66rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  transition: gap 220ms ease, border-color 220ms ease;
+  transition: gap 220ms ease, border-color 220ms ease, color 220ms ease;
+}
+
+.labelArrow {
+  transition: transform 200ms ease;
 }
 
 .project:hover .caseLabel,
@@ -320,6 +317,11 @@
   gap: 0.85rem;
   border-color: var(--site-signal);
   color: var(--site-signal);
+}
+
+.project:hover .labelArrow,
+.project:focus-within .labelArrow {
+  transform: translate(2px, -2px);
 }
 
 /* Visit external site button */
@@ -337,7 +339,6 @@
   color: #fff;
   background: rgba(0, 0, 0, 0.35);
   backdrop-filter: blur(12px);
-  font-size: 1.25rem;
   text-decoration: none;
   transition: all 200ms ease;
 }
@@ -447,6 +448,10 @@
     flex: 0 0 clamp(320px, 72vw, 640px);
     height: clamp(440px, 58vh, 560px);
   }
+
+  .track {
+    padding-right: calc(100vw - clamp(320px, 72vw, 640px) - var(--page-gutter) * 2);
+  }
 }
 
 @media (max-width: 768px) {
@@ -469,6 +474,10 @@
   .project {
     flex: 0 0 86vw;
     height: clamp(400px, 66vh, 520px);
+  }
+
+  .track {
+    padding-right: calc(100vw - 86vw - var(--page-gutter) * 2);
   }
 
   .name {
@@ -510,6 +519,10 @@
     height: 440px;
   }
 
+  .track {
+    padding-right: calc(100vw - 88vw - var(--page-gutter) * 2);
+  }
+
   .topBar {
     gap: 0.4rem;
   }
@@ -523,7 +536,6 @@
   .visit {
     width: 2.6rem;
     height: 2.6rem;
-    font-size: 1.1rem;
   }
 
   .cardContent {

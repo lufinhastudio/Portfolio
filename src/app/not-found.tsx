@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ArrowLeft } from "@/components/ui/Icons";
 
 export default function NotFound() {
   return (
@@ -7,7 +8,7 @@ export default function NotFound() {
       <h1 className="display" style={{ fontSize: "clamp(4rem, 14vw, 13rem)", lineHeight: 0.8 }}>
         Volvamos al estudio.
       </h1>
-      <Link className="mono" href="/">← Ir al inicio</Link>
+      <Link className="mono" href="/"><ArrowLeft size="0.9em" /> Ir al inicio</Link>
     </main>
   );
 }

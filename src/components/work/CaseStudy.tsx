@@ -6,6 +6,7 @@ import { getLocalizedProjects, getStudioContent } from "@/content";
 import { localePath } from "@/config/site";
 import { projectJsonLd } from "@/lib/jsonLd";
 import { LiveBrowserPreview } from "@/components/projects/LiveBrowserPreview";
+import { ArrowLeft, ArrowUpRight } from "@/components/ui/Icons";
 import styles from "./CaseStudy.module.css";
 
 type CaseStyle = CSSProperties & Record<`--${string}`, string>;
@@ -23,9 +24,9 @@ export function CaseStudy({ project, locale }: { project: LocalizedProject; loca
     <main className={styles.caseStudy} lang={locale} style={{ "--case-bg": project.palette.background, "--case-fg": project.palette.foreground, "--case-accent": project.palette.accent } as CaseStyle}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(projectJsonLd(project, locale)) }} />
       <section className={styles.hero}>
-        <div className={`${styles.top} mono`}><Link href={localePath(locale, "/work")}>← {content.allProjects}</Link><span>{project.category}</span><span className={styles.services}>{project.services.join(" · ")}</span></div>
+        <div className={`${styles.top} mono`}><Link href={localePath(locale, "/work")}><ArrowLeft size="0.9em" /> {content.allProjects}</Link><span>{project.category}</span><span className={styles.services}>{project.services.join(" · ")}</span></div>
         <div className={styles.titleWrap}><h1 className={`${styles.title} display`}>{project.name}</h1></div>
-        <div className={styles.bottom}><span className="mono">{project.index} / {project.year}</span><p className={styles.statement}>{project.description}</p><a className={`${styles.siteLink} mono`} href={project.url}>{content.visitSite} ↗</a></div>
+        <div className={styles.bottom}><span className="mono">{project.index} / {project.year}</span><p className={styles.statement}>{project.description}</p><a className={`${styles.siteLink} mono`} href={project.url}>{content.visitSite} <ArrowUpRight size="0.9em" /></a></div>
       </section>
       <div className={styles.cover}><Image data-parallax src={project.cover.src} alt={project.cover.alt} fill priority sizes="100vw" style={{ objectPosition: project.cover.position ?? "center" }} /></div>
       <section className={styles.liveSection} aria-label={`${project.client} ${locale === "es" ? "sitio web" : "website"}`}>
@@ -49,7 +50,7 @@ export function CaseStudy({ project, locale }: { project: LocalizedProject; loca
         <div className={styles.highlightGrid}>{project.caseStudy.highlights.map((highlight, index) => <article className={styles.highlight} key={highlight.title} data-reveal><span className="mono">{labels.decisions} 0{index + 1}</span><h3>{highlight.title}</h3><p>{highlight.text}</p></article>)}</div>
         <div className={styles.outcome}><p className="mono" data-reveal>{labels.result}</p><p className="display" data-reveal>{project.caseStudy.outcome}</p></div>
       </section>
-      <Link className={styles.next} href={localePath(locale, `/work/${nextProject.slug}`)} data-cursor={locale === "es" ? "SIGUIENTE" : "NEXT"} style={{ "--next-bg": nextProject.palette.background, "--next-fg": nextProject.palette.foreground } as CaseStyle}><span className="mono">{content.next} ↗</span><span className={`${styles.nextName} display`}>{nextProject.name}</span></Link>
+      <Link className={styles.next} href={localePath(locale, `/work/${nextProject.slug}`)} data-cursor={locale === "es" ? "SIGUIENTE" : "NEXT"} style={{ "--next-bg": nextProject.palette.background, "--next-fg": nextProject.palette.foreground } as CaseStyle}><span className="mono">{content.next} <ArrowUpRight size="0.85em" /></span><span className={`${styles.nextName} display`}>{nextProject.name}</span></Link>
     </main>
   );
 }

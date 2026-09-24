@@ -137,7 +137,7 @@
 
 @media (max-width: 720px) {
   .hero {
-    padding-bottom: 1rem;
+    padding-bottom: 1.5rem;
   }
 
   .stage {
@@ -145,8 +145,8 @@
   }
 
   .reelMask {
-    inset: 5% -15% 7% 10%;
-    clip-path: polygon(0 0, 88% 0, 100% 100%, 10% 100%);
+    inset: 5% 0 7% 0;
+    clip-path: polygon(4% 0, 96% 0, 100% 100%, 0% 100%);
   }
 
   .frame {
@@ -154,19 +154,28 @@
   }
 
   .wordmark {
-    justify-content: flex-start;
-    margin-left: -0.04em;
-    font-size: 20.4vw;
+    justify-content: center;
+    margin-left: 0;
+    text-align: center;
+    font-size: clamp(3.4rem, 19vw, 5.5rem);
+    letter-spacing: -0.07em;
   }
 
   .bottomline {
-    align-items: flex-start;
+    align-items: center;
+    text-align: center;
     flex-direction: column;
-    padding-right: 3.5rem;
+    padding-right: 0;
+    gap: 1.25rem;
   }
 
   .description {
     max-width: 27rem;
+    margin-inline: auto;
+  }
+
+  .scroll {
+    margin-inline: auto;
   }
 }
 

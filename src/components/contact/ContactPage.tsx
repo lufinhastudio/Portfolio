@@ -3,6 +3,7 @@
 import { useState, type FormEvent } from "react";
 import type { Locale } from "@/types/project";
 import { siteConfig } from "@/config/site";
+import { ArrowUpRight } from "@/components/ui/Icons";
 import styles from "@/app/contacto/contact.module.css";
 
 const copy = {
@@ -83,7 +84,7 @@ export function ContactPage({ locale }: { locale: Locale }) {
         <div className={styles.intro}>
           <h1 className={`${styles.title} display`}>{t.title}</h1>
           <p className={styles.description}>{t.intro}</p>
-          <div className={styles.direct}><span className="mono">{t.direct}</span><a href={`mailto:${siteConfig.contact.email}`}>{siteConfig.contact.email} <span aria-hidden="true">↗</span></a><small>{t.response}</small></div>
+          <div className={styles.direct}><span className="mono">{t.direct}</span><a href={`mailto:${siteConfig.contact.email}`}>{siteConfig.contact.email} <span aria-hidden="true"><ArrowUpRight size="0.9em" /></span></a><small>{t.response}</small></div>
         </div>
         <form className={styles.form} onSubmit={handleSubmit}>
           <div className={styles.row}>
@@ -93,7 +94,7 @@ export function ContactPage({ locale }: { locale: Locale }) {
           <label className={styles.field}><span>{t.company} <em>{t.companyHint}</em></span><input name="company" type="text" autoComplete="organization" placeholder={t.companyPlaceholder} maxLength={120} /></label>
           <label className={styles.field}><span>{t.message} <b>*</b></span><textarea name="message" placeholder={t.messagePlaceholder} minLength={10} maxLength={5000} rows={6} required /></label>
           <label className={styles.trap} aria-hidden="true">Website<input name="website" type="text" tabIndex={-1} autoComplete="off" /></label>
-          <div className={styles.submitRow}><button className={styles.submit} type="submit" disabled={status === "sending"}><span>{status === "sending" ? t.sending : t.send}</span><span aria-hidden="true">↗</span></button><p className={`${styles.feedback} ${status === "error" ? styles.error : ""}`} role="status" aria-live="polite">{feedback}</p></div>
+          <div className={styles.submitRow}><button className={styles.submit} type="submit" disabled={status === "sending"}><span>{status === "sending" ? t.sending : t.send}</span><span aria-hidden="true"><ArrowUpRight size="1.2em" /></span></button><p className={`${styles.feedback} ${status === "error" ? styles.error : ""}`} role="status" aria-live="polite">{feedback}</p></div>
         </form>
       </div>
     </main>
