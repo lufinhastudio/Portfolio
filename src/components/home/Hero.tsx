@@ -49,7 +49,7 @@ export function Hero({ locale, projects }: { locale: Locale; projects: Localized
       </div>
       <div className={styles.bottomline}>
         <p className={styles.description}>{content.hero.description}</p>
-        <a className={`${styles.scroll} mono`} href="#manifesto">{content.hero.scroll}</a>
+        <a className={`${styles.scroll} mono`} href="#selected-work">{content.hero.scroll}</a>
       </div>
     </section>
   );

@@ -80,11 +80,11 @@
   display: flex;
   justify-content: center;
   width: 100%;
-  color: white;
+  color: rgb(255 255 255 / 0.88);
   font-size: clamp(4.7rem, 16.6vw, 17.5rem);
   line-height: 0.72;
   letter-spacing: -0.095em;
-  mix-blend-mode: difference;
+  mix-blend-mode: normal;
   transform: translateX(var(--hero-shift));
   transition: transform 0.65s var(--ease-out);
   user-select: none;

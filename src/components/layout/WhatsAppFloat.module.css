@@ -14,8 +14,9 @@
   display: flex;
   align-items: center;
   gap: 0.7rem;
+  width: 3.6rem;
   min-height: 3.6rem;
-  padding: 0.45rem 1rem 0.45rem 0.45rem;
+  padding: 0.45rem;
   border: 1px solid rgb(255 255 255 / 0.24);
   border-radius: 999px;
   color: #fff;
@@ -50,10 +51,11 @@
 }
 
 .triggerLabel {
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
 }
 
 .panel {
@@ -138,18 +140,6 @@
     bottom: 1rem;
   }
 
-  .trigger {
-    width: 3.6rem;
-    padding: 0.45rem;
-  }
-
-  .triggerLabel {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
