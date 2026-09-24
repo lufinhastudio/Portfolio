@@ -14,6 +14,9 @@
 .ruler { grid-column: 2; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 0.8rem; margin-top: 3rem; font-family: "IBM Plex Mono", monospace; font-size: 0.6rem; }
 .ruler i { height: 1px; background: currentColor; }
 @media (max-width: 760px) {
-  .section { min-height: 85svh; grid-template-columns: 1fr; align-content: end; }
+  .section { min-height: 85svh; grid-template-columns: minmax(0, 1fr); align-content: end; }
+  .copy, .before, .after { min-width: 0; max-width: 100%; }
+  .before { font-size: clamp(2.3rem, 9.5vw, 4.5rem); }
+  .after { font-size: clamp(2.45rem, 10.5vw, 5rem); overflow-wrap: anywhere; }
   .ruler { grid-column: 1; }
 }

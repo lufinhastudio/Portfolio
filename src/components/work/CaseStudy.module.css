@@ -256,6 +256,9 @@
 
   .statementLarge {
     margin-left: 0;
+    max-width: 100%;
+    font-size: clamp(2.2rem, 9vw, 4.5rem);
+    overflow-wrap: anywhere;
   }
 
   .narrative,

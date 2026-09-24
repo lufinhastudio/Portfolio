@@ -12,8 +12,12 @@
 .profileContacts a { display: block; min-height: 2.8rem; padding: 0.8rem 0; overflow-wrap: anywhere; border-top: 1px solid rgb(246 247 242 / 0.3); }
 .link { display: flex; justify-content: space-between; margin-top: 4rem; padding: 1.2rem 0; border-bottom: 1px solid currentColor; }
 @media (max-width: 760px) {
-  .intro, .person { grid-template-columns: 1fr; }
+  .section { padding-block: 5rem; }
+  .intro, .person { grid-template-columns: minmax(0, 1fr); }
+  .intro > div { min-width: 0; }
+  .title { max-width: 100%; font-size: clamp(2.45rem, 10.5vw, 4.5rem); overflow-wrap: anywhere; }
   .person { gap: 1.25rem; }
+  .people { margin-top: 4rem; }
   .portrait { width: min(72vw, 21rem); }
   .profileContacts { margin-top: 1.5rem; }
 }

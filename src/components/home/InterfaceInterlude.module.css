@@ -14,7 +14,7 @@
 .uruguai img { object-fit: contain; background: #394736; }
 @media (max-width: 760px) {
   .section { min-height: 100svh; padding-block: 8rem; }
-  .title { margin-left: 0; font-size: 16vw; }
+  .title { max-width: 100%; margin-left: 0; font-size: clamp(2.4rem, 12vw, 5rem); overflow-wrap: anywhere; }
   .body { margin: 3rem 0 0; max-width: 24rem; }
   .fragment { opacity: 0.55; }
   .mayma { width: 30vw; height: 45vw; right: -7%; }
