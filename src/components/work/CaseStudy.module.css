@@ -46,8 +46,10 @@
 .siteLink {
   justify-self: end;
   display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
   gap: 1rem;
-  padding-bottom: 0.5rem;
+  padding: 0.5rem 0;
   border-bottom: 1px solid currentColor;
 }
 
@@ -115,13 +117,15 @@
   min-height: 70svh;
   overflow: hidden;
 }
+.galleryMain { background: var(--case-bg); }
 
 .fullImage { position: relative; height: min(100svh, 68rem); overflow: hidden; background: var(--case-bg); }
 .fullImage img { object-fit: contain; padding: clamp(2rem, 6vw, 7rem); }
 
 .galleryMain img,
 .galleryDetail img {
-  object-fit: cover;
+  object-fit: contain;
+  padding: clamp(1.5rem, 4vw, 5rem);
 }
 
 .galleryDetail {

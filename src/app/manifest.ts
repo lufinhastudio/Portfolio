@@ -11,5 +11,6 @@ export default function manifest(): MetadataRoute.Manifest {
     background_color: siteConfig.theme.background,
     theme_color: siteConfig.theme.background,
     lang: siteConfig.defaultLocale,
+    icons: [{ src: "/icon.png", sizes: "any", type: "image/png" }],
   };
 }

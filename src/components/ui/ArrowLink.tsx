@@ -17,7 +17,7 @@ export function ArrowLink({ href, children, className, external }: ArrowLinkProp
 
   if (external) {
     return (
-      <a className={className} href={href} target="_blank" rel="noreferrer">
+      <a className={className} href={href}>
         {content}
       </a>
     );

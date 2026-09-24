@@ -40,7 +40,7 @@
   display: grid;
   grid-template-columns: 0.65fr 1.35fr;
   gap: 2rem;
-  margin-bottom: clamp(4rem, 9vw, 8rem);
+  margin-bottom: clamp(3rem, 7vw, 6rem);
 }
 
 .teamTitle {
@@ -50,26 +50,41 @@
 }
 
 .people {
-  border-top: 1px solid var(--site-line);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(2rem, 5vw, 6rem);
 }
 
 .person {
   display: grid;
-  grid-template-columns: 0.7fr 0.9fr 1.4fr;
-  gap: 2rem;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1fr);
+  gap: 1.5rem clamp(1.25rem, 3vw, 3rem);
   align-items: start;
-  min-height: 17rem;
-  padding: 2rem 0;
-  border-bottom: 1px solid var(--site-line);
+  padding: 1.4rem 0 2rem;
+  border-top: 1px solid var(--site-line);
 }
 
+.person > span:first-child { grid-column: 1 / -1; color: var(--site-signal); }
+
+.personPortrait {
+  position: relative;
+  width: min(100%, 22rem);
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: #35453f;
+}
+
+.personPortrait img { object-fit: cover; }
+
 .personName {
-  font-size: clamp(3.2rem, 7vw, 7rem);
+  grid-column: 1 / -1;
+  font-size: clamp(4rem, 7vw, 7rem);
   line-height: 0.85;
 }
 
 .personDetails {
   min-width: 0;
+  align-self: end;
 }
 
 .personNote {
@@ -89,6 +104,7 @@
   grid-template-columns: 6.5rem minmax(0, 1fr) auto;
   align-items: center;
   gap: 1rem;
+  min-height: 2.75rem;
   padding: 0.8rem 0;
   border-bottom: 1px solid var(--site-line);
 }
@@ -164,7 +180,7 @@
 
   .title {
     max-width: 9ch;
-    font-size: clamp(3.35rem, 17vw, 5.25rem);
+    font-size: clamp(2.8rem, 12vw, 4.5rem);
     line-height: 0.82;
   }
 
@@ -184,6 +200,8 @@
   .personName {
     font-size: clamp(3.75rem, 21vw, 6rem);
   }
+
+  .personPortrait { width: min(72vw, 21rem); }
 
   .personContact {
     grid-template-columns: minmax(0, 1fr) auto;

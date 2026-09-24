@@ -4,8 +4,7 @@ export const studioContent = {
   es: {
     navigation: { home: "Inicio", work: "Trabajo", studio: "Estudio", contact: "Contacto", menu: "Menú", close: "Cerrar" },
     hero: {
-      eyebrow: "Creative development · Ecommerce · Digital experiences",
-      description: "Diseñamos y desarrollamos productos digitales donde la identidad no es una capa: es el sistema.",
+      description: "Desarrollamos software, sistemas y soluciones digitales a medida para equipos que necesitan algo propio.",
       scroll: "Ver el trabajo",
     },
     manifesto: {
@@ -16,7 +15,7 @@ export const studioContent = {
     work: {
       eyebrow: "Trabajo seleccionado / 05",
       title: "Cinco marcas. Cinco formas de moverse.",
-      live: "Sitio real",
+      live: "Vista del proyecto",
       open: "Abrir caso",
       visit: "Visitar web",
     },
@@ -33,8 +32,8 @@ export const studioContent = {
     },
     studio: {
       eyebrow: "El estudio",
-      title: "Dos personas. Una práctica digital cercana.",
-      body: "Luca y Rafa forman Lufinha. Trabajamos junto a cada marca desde la estructura y el contenido hasta el desarrollo, la interacción y la salida a producción.",
+      title: "Somos Luca y Rafa. Trabajamos con vos.",
+      body: "En Lufinha nos involucramos de principio a fin: escuchamos el problema, diseñamos la solución y la llevamos a producción. Vas a hablar directamente con quienes hacen el trabajo.",
       people: "Las personas detrás del trabajo",
     },
     contact: {
@@ -48,8 +47,7 @@ export const studioContent = {
   en: {
     navigation: { home: "Home", work: "Work", studio: "Studio", contact: "Contact", menu: "Menu", close: "Close" },
     hero: {
-      eyebrow: "Creative development · Ecommerce · Digital experiences",
-      description: "We design and build digital products where identity is not a layer: it is the system.",
+      description: "We build custom software, systems and digital solutions for teams that need something of their own.",
       scroll: "See the work",
     },
     manifesto: {
@@ -60,7 +58,7 @@ export const studioContent = {
     work: {
       eyebrow: "Selected work / 05",
       title: "Five brands. Five ways to move.",
-      live: "Live website",
+      live: "Project preview",
       open: "Open case",
       visit: "Visit website",
     },
@@ -77,8 +75,8 @@ export const studioContent = {
     },
     studio: {
       eyebrow: "The studio",
-      title: "Two people. One close digital practice.",
-      body: "Luca and Rafa are Lufinha. We work alongside each brand from structure and content to development, interaction and launch.",
+      title: "We're Luca and Rafa. We work with you.",
+      body: "At Lufinha we stay involved from start to finish: we understand the problem, design the solution and bring it to production. You'll speak directly with the people doing the work.",
       people: "The people behind the work",
     },
     contact: {

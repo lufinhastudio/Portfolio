@@ -74,8 +74,6 @@ export function WhatsAppFloat() {
               className={styles.contact}
               href={contact.href}
               key={contact.name}
-              target="_blank"
-              rel="noreferrer"
               tabIndex={open ? 0 : -1}
               aria-label={`${content.contact} ${contact.name} ${locale === "es" ? "por" : "via"} WhatsApp`}
             >

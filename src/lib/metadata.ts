@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { siteConfig } from "@/config/site";
 import type { Locale } from "@/types/project";
+import { switchLocalePath } from "@/lib/locale";
 
 type MetadataInput = { title?: string; description?: string; path?: string; image?: string; locale?: Locale };
 
@@ -9,8 +10,8 @@ export function createMetadata({ title, description, path = "/", image = "/work/
   const resolvedTitle = title ?? siteConfig.seo.defaultTitle[locale];
   const canonical = new URL(path, siteConfig.url).toString();
   const imageUrl = new URL(image, siteConfig.url).toString();
-  const esPath = path.replace(/^\/en(?=\/|$)/, "") || "/";
-  const enPath = `/en${esPath === "/" ? "" : esPath}`;
+  const esPath = switchLocalePath(path, "es");
+  const enPath = switchLocalePath(path, "en");
   return {
     title: title ? resolvedTitle : { absolute: resolvedTitle },
     description: resolvedDescription,

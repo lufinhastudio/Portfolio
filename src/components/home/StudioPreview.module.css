@@ -3,14 +3,17 @@
 .title { max-width: 12ch; font-size: clamp(3.2rem, 7vw, 7.4rem); line-height: 0.9; }
 .body { max-width: 42rem; margin-top: 2.5rem; font-size: clamp(1.05rem, 1.8vw, 1.5rem); line-height: 1.55; }
 .people { margin-top: clamp(7rem, 12vw, 12rem); border-top: 1px solid var(--site-line); }
-.person { display: grid; grid-template-columns: 0.55fr 0.9fr 1.45fr; gap: 2rem; align-items: start; padding: 2rem 0; border-bottom: 1px solid var(--site-line); }
+.person { display: grid; grid-template-columns: 0.25fr 0.8fr 1.3fr; gap: clamp(1.5rem, 4vw, 4rem); align-items: start; padding: 2rem 0; border-bottom: 1px solid var(--site-line); }
+.portrait { position: relative; width: min(100%, 24rem); aspect-ratio: 1; overflow: hidden; background: #35453f; }
+.portrait img { object-fit: cover; }
 .name { font-size: clamp(4rem, 8vw, 8rem); line-height: 0.8; }
-.profileContacts { display: flex; flex-wrap: wrap; gap: 0.7rem 1.2rem; max-width: 29rem; margin-top: 2rem; color: rgb(246 247 242 / 0.68); font-family: "IBM Plex Mono", monospace; font-size: 0.68rem; line-height: 1.5; }
-.profileContacts a { overflow-wrap: anywhere; border-bottom: 1px solid rgb(246 247 242 / 0.3); }
+.profile > p { margin-top: 1.25rem; }
+.profileContacts { display: grid; max-width: 29rem; margin-top: 2rem; color: var(--site-fg); font-family: "IBM Plex Mono", monospace; font-size: 0.68rem; line-height: 1.5; }
+.profileContacts a { display: block; min-height: 2.8rem; padding: 0.8rem 0; overflow-wrap: anywhere; border-top: 1px solid rgb(246 247 242 / 0.3); }
 .link { display: flex; justify-content: space-between; margin-top: 4rem; padding: 1.2rem 0; border-bottom: 1px solid currentColor; }
 @media (max-width: 760px) {
   .intro, .person { grid-template-columns: 1fr; }
   .person { gap: 1.25rem; }
-  .profileContacts { display: grid; gap: 0.65rem; margin-top: 1rem; }
-  .profileContacts a { width: fit-content; max-width: 100%; }
+  .portrait { width: min(72vw, 21rem); }
+  .profileContacts { margin-top: 1.5rem; }
 }

@@ -8,6 +8,6 @@ export function getNavigation(locale: Locale) {
     { label: labels.home, href: localePath(locale, "/") },
     { label: labels.work, href: localePath(locale, "/work") },
     { label: labels.studio, href: localePath(locale, "/studio") },
-    { label: labels.contact, href: `${localePath(locale, "/")}#contact` },
+    { label: labels.contact, href: localePath(locale, locale === "es" ? "/contacto" : "/contact") },
   ];
 }

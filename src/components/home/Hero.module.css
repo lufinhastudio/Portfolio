@@ -4,7 +4,7 @@
   position: relative;
   min-height: 100svh;
   display: grid;
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: 1fr auto;
   align-items: center;
   padding: calc(var(--header-height) + 1.5rem) var(--page-gutter) 1.5rem;
   overflow: hidden;
@@ -12,7 +12,6 @@
   background: var(--site-bg);
 }
 
-.topline,
 .bottomline {
   position: relative;
   z-index: 5;
@@ -22,36 +21,12 @@
   gap: 1rem;
 }
 
-.topline {
-  align-items: flex-start;
-}
-
-.eyebrow {
-  max-width: 26rem;
-  line-height: 1.45;
-}
-
-.edition {
-  text-align: right;
-}
-
 .stage {
   position: relative;
   width: 100%;
   height: min(66vh, 46rem);
   display: grid;
   align-items: center;
-}
-
-.studioTag {
-  position: absolute;
-  z-index: 4;
-  right: 1.25rem;
-  bottom: 13%;
-  padding: 0.55rem 0.7rem;
-  color: var(--site-ink);
-  background: var(--site-fg);
-  transform: rotate(-3deg);
 }
 
 .reelMask {
@@ -130,8 +105,8 @@
 }
 
 .description {
-  max-width: 34rem;
-  font-size: clamp(0.95rem, 1.5vw, 1.25rem);
+  max-width: 43rem;
+  font-size: clamp(1rem, 1.6vw, 1.35rem);
   line-height: 1.5;
 }
 
@@ -165,10 +140,6 @@
     padding-bottom: 1rem;
   }
 
-  .edition {
-    display: none;
-  }
-
   .stage {
     height: 57vh;
   }
@@ -187,8 +158,6 @@
     margin-left: -0.04em;
     font-size: 20.4vw;
   }
-
-  .studioTag { right: 0; bottom: 11%; }
 
   .bottomline {
     align-items: flex-start;

@@ -57,7 +57,7 @@ export function SelectedWork({ projects, locale }: { projects: LocalizedProject[
           <span className={`${styles.direction} mono`} aria-hidden="true">Scroll →</span>
         </header>
 
-        {projects.map((project, projectIndex) => (
+        {projects.map((project) => (
           <article
             className={styles.project}
             key={project.slug}
@@ -76,7 +76,7 @@ export function SelectedWork({ projects, locale }: { projects: LocalizedProject[
             <h3 className={`${styles.name} display`}>{project.name}</h3>
             <div className={styles.preview} data-cursor={locale === "es" ? "VER" : "VIEW"}>
               <Link className={styles.previewLink} href={localePath(locale, `/work/${project.slug}`)} aria-label={`${content.work.open}: ${project.client}`}>
-                <LiveBrowserPreview url={project.url} title={project.client} fallback={project.cover} label={content.work.live} priority={projectIndex === 0} />
+                <LiveBrowserPreview title={project.client} fallback={project.cover} label={content.work.live} />
               </Link>
               {project.gallery[0] ? (
                 <div className={styles.detail} aria-hidden="true">
@@ -88,7 +88,7 @@ export function SelectedWork({ projects, locale }: { projects: LocalizedProject[
               <p>{project.description}</p>
               <div className={styles.links}>
                 <Link href={localePath(locale, `/work/${project.slug}`)}>{content.work.open} ↗</Link>
-                <a href={project.url} target="_blank" rel="noreferrer">{content.work.visit} ↗</a>
+                <a href={project.url}>{content.work.visit} ↗</a>
               </div>
             </div>
           </article>

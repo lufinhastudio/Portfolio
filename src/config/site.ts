@@ -10,8 +10,8 @@ export const siteConfig = {
   locales: ["es", "en"] as Locale[],
   localeMap: { es: "es_AR", en: "en_US" },
   description: {
-    es: "Estudio digital independiente de diseño, ecommerce y creative development. Creamos experiencias web con identidad, interacción y resultados.",
-    en: "Independent digital studio for design, ecommerce and creative development. We build web experiences with identity, interaction and purpose.",
+    es: "Estudio de desarrollo de software, sistemas y soluciones digitales a medida.",
+    en: "Studio for custom software, systems and digital solutions.",
   },
   contact: {
     email: "lufinhastudio@gmail.com",
@@ -30,17 +30,13 @@ export const siteConfig = {
     instagram: null as string | null,
     github: null as string | null,
     location: "Entre Ríos, Argentina",
-    availability: {
-      es: "Disponible para proyectos seleccionados",
-      en: "Available for selected projects",
-    },
   },
   team: [
     {
       name: "Luca",
       role: null as string | null,
       bio: null as string | null,
-      photo: null as string | null,
+      photo: "/luca.jpeg",
       links: [
         {
           label: "LinkedIn",
@@ -52,7 +48,7 @@ export const siteConfig = {
       name: "Rafa",
       role: null as string | null,
       bio: null as string | null,
-      photo: null as string | null,
+      photo: "/rafa.jpg",
       links: [
         {
           label: "LinkedIn",
@@ -82,8 +78,8 @@ export const siteConfig = {
   seo: {
     titleTemplate: "%s — Lufinha Studio",
     defaultTitle: {
-      es: "Lufinha Studio — Diseño & Creative Development",
-      en: "Lufinha Studio — Design & Creative Development",
+      es: "Lufinha Studio — Software y sistemas a medida",
+      en: "Lufinha Studio — Custom software and systems",
     },
     twitterCard: "summary_large_image" as const,
   },

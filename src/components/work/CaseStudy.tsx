@@ -25,12 +25,12 @@ export function CaseStudy({ project, locale }: { project: LocalizedProject; loca
       <section className={styles.hero}>
         <div className={`${styles.top} mono`}><Link href={localePath(locale, "/work")}>← {content.allProjects}</Link><span>{project.category}</span><span className={styles.services}>{project.services.join(" · ")}</span></div>
         <div className={styles.titleWrap}><h1 className={`${styles.title} display`}>{project.name}</h1></div>
-        <div className={styles.bottom}><span className="mono">{project.index} / {project.year}</span><p className={styles.statement}>{project.description}</p><a className={`${styles.siteLink} mono`} href={project.url} target="_blank" rel="noreferrer">{content.visitSite} ↗</a></div>
+        <div className={styles.bottom}><span className="mono">{project.index} / {project.year}</span><p className={styles.statement}>{project.description}</p><a className={`${styles.siteLink} mono`} href={project.url}>{content.visitSite} ↗</a></div>
       </section>
       <div className={styles.cover}><Image data-parallax src={project.cover.src} alt={project.cover.alt} fill priority sizes="100vw" style={{ objectPosition: project.cover.position ?? "center" }} /></div>
-      <section className={styles.liveSection} aria-label={`${project.client} live preview`}>
-        <div className={styles.liveHeader}><p className="mono">LIVE / {project.url.replace(/^https?:\/\//, "").replace(/\/$/, "")}</p><p>{project.description}</p></div>
-        <div className={styles.liveBrowser} data-cursor={locale === "es" ? "VISITAR" : "VISIT"}><a href={project.url} target="_blank" rel="noreferrer" aria-label={`${content.visitSite}: ${project.client}`}><LiveBrowserPreview url={project.url} title={project.client} fallback={project.cover} label="Live website" /></a></div>
+      <section className={styles.liveSection} aria-label={`${project.client} ${locale === "es" ? "sitio web" : "website"}`}>
+        <div className={styles.liveHeader}><p className="mono">{locale === "es" ? "SITIO" : "SITE"} / {project.url.replace(/^https?:\/\//, "").replace(/\/$/, "")}</p><p>{project.description}</p></div>
+        <div className={styles.liveBrowser} data-cursor={locale === "es" ? "VISITAR" : "VISIT"}><a href={project.url} aria-label={`${content.visitSite}: ${project.client}`}><LiveBrowserPreview title={project.client} fallback={project.cover} label={locale === "es" ? "Vista del proyecto" : "Project preview"} /></a></div>
       </section>
       <section className={styles.story}>
         <h2 className={`${styles.statementLarge} display`} data-reveal>{project.caseStudy.statement}</h2>

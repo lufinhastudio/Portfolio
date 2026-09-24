@@ -1,6 +1,8 @@
+import Image from "next/image";
+import Link from "next/link";
 import type { Locale } from "@/types/project";
 import { getStudioContent } from "@/content";
-import { siteConfig } from "@/config/site";
+import { localePath, siteConfig } from "@/config/site";
 import styles from "@/app/studio/studio.module.css";
 
 const principles = {
@@ -18,7 +20,6 @@ const principles = {
 
 export function StudioPage({ locale }: { locale: Locale }) {
   const content = getStudioContent(locale).studio;
-  const projectEmailHref = `mailto:${siteConfig.contact.email}?subject=${encodeURIComponent(locale === "es" ? "Nuevo proyecto para Lufinha Studio" : "New project for Lufinha Studio")}`;
 
   return (
     <main className={styles.page} lang={locale}>
@@ -28,31 +29,31 @@ export function StudioPage({ locale }: { locale: Locale }) {
         <div className={styles.foot}><span className="mono">Luca + Rafa</span><p>{content.body}</p></div>
       </section>
       <section className={styles.team} aria-labelledby="team-title">
-        <div className={styles.teamHeader}><p className="mono" data-reveal>{content.people}</p><h2 className={`${styles.teamTitle} display`} id="team-title" data-reveal>{locale === "es" ? "Pequeño a propósito. Cercano por diseño." : "Small on purpose. Close by design."}</h2></div>
+        <div className={styles.teamHeader}><p className="mono" data-reveal>{content.people}</p><h2 className={`${styles.teamTitle} display`} id="team-title" data-reveal>{locale === "es" ? "Conocé a quienes van a trabajar en tu proyecto." : "Meet the people who will work on your project."}</h2></div>
         <div className={styles.people}>
           {siteConfig.team.map((person, index) => {
             const whatsapp = siteConfig.contact.whatsapp.find((contact) => contact.name === person.name);
             const contacts = [
-              { label: "Email", value: siteConfig.contact.email, href: `mailto:${siteConfig.contact.email}`, external: false },
-              ...(whatsapp ? [{ label: "WhatsApp", value: whatsapp.phone, href: whatsapp.href, external: true }] : []),
+              { label: "Email", value: siteConfig.contact.email, href: `mailto:${siteConfig.contact.email}` },
+              ...(whatsapp ? [{ label: "WhatsApp", value: whatsapp.phone, href: whatsapp.href }] : []),
               ...person.links.map((link) => ({
                 label: link.label,
                 value: locale === "es" ? "Ver perfil" : "View profile",
                 href: link.href,
-                external: true,
               })),
             ];
 
             return (
-              <article className={styles.person} key={person.name} data-reveal>
+              <article className={styles.person} key={person.name}>
                 <span className="mono">0{index + 1}</span>
                 <h3 className={`${styles.personName} display`}>{person.name}</h3>
+                {person.photo ? <div className={styles.personPortrait}><Image src={person.photo} alt={`${locale === "es" ? "Retrato de" : "Portrait of"} ${person.name}`} fill sizes="(max-width: 760px) 72vw, (max-width: 1100px) 35vw, 22rem" style={{ objectPosition: person.name === "Luca" ? "center 40%" : "center" }} /></div> : null}
                 <div className={styles.personDetails}>
                   <p className="mono">{person.role ?? "Lufinha Studio"}</p>
                   {person.bio ? <p className={styles.personNote}>{person.bio}</p> : null}
                   <div className={styles.personContacts} aria-label={`${locale === "es" ? "Contacto de" : "Contact details for"} ${person.name}`}>
                     {contacts.map((contact) => (
-                      <a className={styles.personContact} href={contact.href} key={`${person.name}-${contact.label}`} target={contact.external ? "_blank" : undefined} rel={contact.external ? "noreferrer" : undefined}>
+                      <a className={styles.personContact} href={contact.href} key={`${person.name}-${contact.label}`}>
                         <span className={styles.contactLabel}>{contact.label}</span>
                         <span className={styles.contactValue}>{contact.value}</span>
                         <span className={styles.contactArrow} aria-hidden="true">↗</span>
@@ -67,7 +68,7 @@ export function StudioPage({ locale }: { locale: Locale }) {
       </section>
       <section className={styles.principles} aria-label={locale === "es" ? "Principios del estudio" : "Studio principles"}>
         <div className={styles.principlesGrid}>{principles[locale].map((principle, index) => <article className={styles.principle} key={principle.title} data-reveal><span className="mono">{locale === "es" ? "Principio" : "Principle"} 0{index + 1}</span><div><h2>{principle.title}</h2><p>{principle.text}</p></div></article>)}</div>
-        <a className={styles.contactLink} href={projectEmailHref}>{locale === "es" ? "Empezar un proyecto" : "Start a project"}<span>↗</span></a>
+        <Link className={styles.contactLink} href={localePath(locale, locale === "es" ? "/contacto" : "/contact")}>{locale === "es" ? "Empezar un proyecto" : "Start a project"}<span>↗</span></Link>
       </section>
     </main>
   );

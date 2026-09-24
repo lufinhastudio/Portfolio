@@ -11,7 +11,6 @@ type HeroStyle = CSSProperties & { "--hero-width"?: number; "--hero-shift"?: str
 
 export function Hero({ locale, projects }: { locale: Locale; projects: LocalizedProject[] }) {
   const content = getStudioContent(locale);
-  const currentYear = new Date().getFullYear();
   const reel = [...projects, ...projects];
 
   function handlePointerMove(event: PointerEvent<HTMLElement>) {
@@ -33,10 +32,6 @@ export function Hero({ locale, projects }: { locale: Locale; projects: Localized
       }}
       aria-labelledby="hero-title"
     >
-      <div className={styles.topline}>
-        <p className={`${styles.eyebrow} mono`}>{content.hero.eyebrow}</p>
-        <p className={`${styles.edition} mono`}>Independent studio<br />Argentina · {currentYear}</p>
-      </div>
       <div className={styles.stage}>
         <div className={styles.reelMask} aria-hidden="true">
           <div className={styles.reel}>
@@ -51,7 +46,6 @@ export function Hero({ locale, projects }: { locale: Locale; projects: Localized
         <h1 className={styles.wordmark} id="hero-title" aria-label="Lufinha">
           {"LUFINHA".split("").map((letter, index) => <span className={styles.letter} key={`${letter}-${index}`}>{letter}</span>)}
         </h1>
-        <span className={`${styles.studioTag} mono`}>Digital studio</span>
       </div>
       <div className={styles.bottomline}>
         <p className={styles.description}>{content.hero.description}</p>
