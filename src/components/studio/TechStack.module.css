@@ -1,0 +1,94 @@
+.section {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(4.5rem, 8vw, 7rem) var(--page-gutter);
+  color: var(--site-ink);
+  background: var(--site-paper);
+}
+
+.section > :not([data-aura]) { position: relative; z-index: 1; }
+
+.eyebrow {
+  margin-bottom: clamp(2rem, 4vw, 3.5rem);
+  color: var(--site-accent);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(18rem, .72fr) minmax(32rem, 1.28fr);
+  gap: clamp(3rem, 7vw, 7rem);
+  align-items: center;
+}
+
+.copy { min-width: 0; }
+.title { max-width: 10ch; font-size: clamp(2.8rem, 5vw, 5rem); line-height: .95; }
+.description { max-width: 34rem; margin-top: 1.25rem; color: rgb(23 25 22 / .7); font-size: clamp(1rem, 1.25vw, 1.15rem); line-height: 1.55; }
+
+.sceneStage {
+  position: relative;
+  min-height: 10.5rem;
+  margin-top: clamp(2.5rem, 4vw, 4rem);
+  border-top: 1px solid var(--site-line);
+}
+
+.scene {
+  position: absolute;
+  inset: 1.35rem 0 auto;
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+  transition: opacity 420ms var(--ease-out), transform 420ms var(--ease-out);
+}
+
+.sceneActive { opacity: 1; transform: translateY(0); }
+.scene h3 { max-width: 18ch; font-size: clamp(1.6rem, 2.4vw, 2.35rem); line-height: 1.05; }
+.scene p { max-width: 33rem; margin-top: .7rem; color: rgb(23 25 22 / .66); font-size: .95rem; line-height: 1.55; }
+
+.visual {
+  position: relative;
+  min-width: 0;
+  height: clamp(29rem, 42vw, 38rem);
+  border-top: 1px solid var(--site-line);
+  border-bottom: 1px solid var(--site-line);
+  isolation: isolate;
+  background: var(--site-paper);
+}
+
+.techAura { transition: opacity 650ms ease; }
+.canvas { position: relative; z-index: 1; display: block; width: 100%; height: 100%; }
+.visualLabel { position: absolute; z-index: 2; right: 0; bottom: .8rem; color: rgb(23 25 22 / .46); font-size: .58rem; }
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 980px) {
+  .layout { grid-template-columns: minmax(0, 1fr); gap: 2.5rem; }
+  .title { max-width: 13ch; }
+  .description { max-width: 42rem; }
+  .sceneStage { max-width: 42rem; min-height: 9.5rem; margin-top: 2.25rem; }
+  .visual { height: clamp(25rem, 62vw, 34rem); }
+}
+
+@media (max-width: 520px) {
+  .section { padding-block: 4rem; }
+  .eyebrow { margin-bottom: 1.5rem; }
+  .title { font-size: clamp(2.6rem, 12vw, 3.5rem); }
+  .sceneStage { min-height: 11.5rem; }
+  .scene h3 { font-size: clamp(1.65rem, 8vw, 2.15rem); }
+  .visual { height: clamp(19rem, 90vw, 22.5rem); }
+  .visualLabel { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scene, .techAura { transition: none; }
+  .scene { transform: none; }
+}

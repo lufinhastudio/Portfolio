@@ -17,23 +17,22 @@
   width: 3.6rem;
   min-height: 3.6rem;
   padding: 0.45rem;
-  border: 1px solid rgb(255 255 255 / 0.24);
+  border: 1px solid rgb(23 25 22 / 0.16);
   border-radius: 999px;
-  color: #fff;
-  background: #1faa59;
-  box-shadow: 0 0.75rem 2rem rgb(0 0 0 / 0.22);
+  color: var(--site-paper);
+  background: var(--site-signal);
   cursor: pointer;
   pointer-events: auto;
   transition: transform 220ms var(--ease-out), background-color 220ms ease;
 }
 
-.trigger:hover {
-  transform: translateY(-0.2rem);
-  background: #168f4a;
+@media (hover: hover) and (pointer: fine) {
+  .trigger:hover { transform: translateY(-0.2rem); background: var(--site-accent); }
 }
 
 .triggerOpen {
   background: var(--site-ink);
+  color: var(--site-paper);
 }
 
 .icon {
@@ -42,7 +41,7 @@
   height: 2.7rem;
   place-items: center;
   border-radius: 50%;
-  background: rgb(255 255 255 / 0.12);
+  background: rgb(250 249 246 / 0.28);
 }
 
 .icon svg {
@@ -63,8 +62,8 @@
   padding: 1.35rem;
   color: var(--site-ink);
   background: var(--site-paper);
-  border: 1px solid rgb(23 26 22 / 0.2);
-  box-shadow: 0 1.5rem 4rem rgb(0 0 0 / 0.28);
+  border: 1px solid var(--site-line);
+  box-shadow: 0 0.75rem 2.5rem rgb(23 25 22 / 0.14);
   opacity: 0;
   transform: translateY(0.8rem) scale(0.98);
   transform-origin: bottom right;
@@ -87,11 +86,12 @@
 .panelHeader h2 {
   max-width: 12ch;
   margin-top: 1.25rem;
-  font-family: "Anybody Variable", sans-serif;
+  font-family: "Manrope Variable", sans-serif;
   font-size: 1.8rem;
-  font-variation-settings: "wdth" 96, "wght" 720;
-  letter-spacing: -0.055em;
-  line-height: 0.95;
+  font-variation-settings: "wght" 740;
+  font-weight: 740;
+  letter-spacing: -0.045em;
+  line-height: 1;
 }
 
 .panelHeader p {
@@ -101,7 +101,7 @@
 }
 
 .contacts {
-  border-top: 1px solid rgb(23 26 22 / 0.22);
+  border-top: 1px solid var(--site-line);
 }
 
 .contact {
@@ -110,13 +110,15 @@
   justify-content: space-between;
   gap: 1rem;
   padding: 0.95rem 0;
-  border-bottom: 1px solid rgb(23 26 22 / 0.22);
-  transition: padding 220ms var(--ease-out), color 220ms ease;
+  border-bottom: 1px solid var(--site-line);
+  transition: color 180ms ease;
 }
 
-.contact:hover {
-  padding-left: 0.4rem;
-  color: #168f4a;
+.contact:hover, .contact:focus-visible { color: var(--site-accent); }
+.contact svg { transition: transform 220ms var(--ease-out); }
+
+@media (hover: hover) and (pointer: fine) {
+  .contact:hover svg { transform: translate(2px, -2px); }
 }
 
 .contact > span:first-child {
@@ -137,7 +139,7 @@
 @media (max-width: 640px) {
   .widget {
     right: 1rem;
-    bottom: 1rem;
+    bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
   }
 
 }
@@ -148,4 +150,6 @@
   .contact {
     transition: none;
   }
+
+  .contact svg { transition: none; }
 }

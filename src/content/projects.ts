@@ -2,16 +2,17 @@ import type { Locale, LocalizedProject, Project, ProjectCopy } from "@/types/pro
 
 const copy = (es: ProjectCopy, en: ProjectCopy) => ({ es, en });
 
-export const projects: Project[] = [
+const projectEntries: Project[] = [
   {
-    slug: "mayma-bikinis", index: "01", name: "Mayma", client: "Mayma Bikinis", year: "2026",
+    slug: "mayma-bikinis", index: "01", name: "Mayma Bikinis", client: "Mayma Bikinis", year: "2026",
     url: "https://www.maymabikinis.com.ar/", featured: true,
     palette: { background: "#315757", foreground: "#fffdf9", accent: "#f0a298", muted: "#b8d9d5" },
-    cover: { src: "/work/mayma/cover.png", alt: "Bikini verde de Mayma flotando sobre el agua", width: 1920, height: 840 },
+    brandLogo: { src: "/work/mayma/brand-logo.png", alt: "Logo de Mayma Bikinis", width: 2042, height: 1274, contrast: "light" },
+    cover: { src: "/work/mayma/cover.png", alt: "Bikini verde de Mayma Bikinis flotando sobre el agua", width: 1920, height: 840 },
     gallery: [
-      { src: "/work/mayma/customizer.jpg", alt: "Bikini azul presentado en el personalizador Mayma", width: 1080, height: 1350 },
-      { src: "/work/mayma/product-04.jpg", alt: "Enteriza Mayma en una escena de verano", width: 1080, height: 1350 },
-      { src: "/work/mayma/detail.jpg", alt: "Detalle textil de un bikini Mayma", width: 900, height: 1600 },
+      { src: "/work/mayma/customizer.jpg", alt: "Bikini azul presentado en el personalizador Mayma Bikinis", width: 1080, height: 1350 },
+      { src: "/work/mayma/product-04.jpg", alt: "Enteriza Mayma Bikinis en una escena de verano", width: 1080, height: 1350 },
+      { src: "/work/mayma/detail.jpg", alt: "Detalle textil de un bikini Mayma Bikinis", width: 900, height: 1600 },
     ],
     copy: copy(
       {
@@ -20,7 +21,7 @@ export const projects: Project[] = [
         services: ["Dirección digital", "UX / UI", "Ecommerce", "Personalizador de producto"],
         caseStudy: {
           statement: "El verano como interfaz: liviano, combinable y siempre en movimiento.",
-          challenge: "Mayma necesitaba vender productos con múltiples combinaciones de talle, color y modelo sin convertir la compra en un formulario frío.",
+          challenge: "Mayma Bikinis necesitaba vender productos con múltiples combinaciones de talle, color y modelo sin convertir la compra en un formulario frío.",
           approach: "Construimos una experiencia visual donde catálogo y personalización conviven. La jerarquía editorial mantiene el producto al frente y la interfaz acompaña con decisiones claras.",
           highlights: [
             { title: "Catálogo flexible", text: "Variantes, stock y colecciones se presentan sin perder ritmo visual." },
@@ -36,7 +37,7 @@ export const projects: Project[] = [
         services: ["Digital direction", "UX / UI", "Ecommerce", "Product customiser"],
         caseStudy: {
           statement: "Summer as an interface: light, flexible and always in motion.",
-          challenge: "Mayma needed to sell products with multiple size, colour and model combinations without turning the purchase into a cold form.",
+          challenge: "Mayma Bikinis needed to sell products with multiple size, colour and model combinations without turning the purchase into a cold form.",
           approach: "We built a visual experience where catalogue and customisation coexist. Editorial hierarchy keeps the product forward while the interface supports clear choices.",
           highlights: [
             { title: "Flexible catalogue", text: "Variants, stock and collections keep their visual rhythm." },
@@ -49,7 +50,7 @@ export const projects: Project[] = [
     ),
   },
   {
-    slug: "cosas-de-casa", index: "02", name: "Cosas de Casa", client: "Cosas de Casa Juguetería", year: "2026",
+    slug: "cosas-de-casa", index: "05", name: "Cosas de Casa", client: "Cosas de Casa Juguetería", year: "2026",
     url: "https://www.cosasdecasajugueteria.com.ar/", featured: true,
     palette: { background: "#f7c9d8", foreground: "#4c4145", accent: "#c6f0de", muted: "#fff9f4" },
     cover: { src: "/work/cosas-de-casa/cover.png", alt: "Casa de muñecas y juguetes de Cosas de Casa", width: 2048, height: 1024 },
@@ -94,9 +95,10 @@ export const projects: Project[] = [
     ),
   },
   {
-    slug: "xeneize-regaleria", index: "03", name: "Xeneize", client: "Xeneize Regalería", year: "2026",
+    slug: "xeneize-regaleria", index: "06", name: "Xeneize", client: "Xeneize Regalería", year: "2026",
     url: "https://www.xeneizeregaleria.com.ar/", featured: true,
     palette: { background: "#fc2daf", foreground: "#18121d", accent: "#ffd666", muted: "#fff7fb" },
+    brandLogo: { src: "/work/xeneize/brand-logo.png", alt: "Logo de Xeneize Regalería", width: 1254, height: 1254, contrast: "dark" },
     cover: { src: "/work/xeneize/cover.jpg", alt: "Caja de regalo rosa con cinta dorada", width: 1600, height: 1067 },
     gallery: [
       { src: "/work/xeneize/logo-black.png", alt: "Wordmark de Xeneize Regalería", width: 1000, height: 1000 },
@@ -137,9 +139,29 @@ export const projects: Project[] = [
     ),
   },
   {
+    slug: "sistema-odontologico-completo", index: "03", name: "Sistema Odontológico Completo", client: "Sistema Odontológico Completo", year: "2026",
+    previewOnly: true, featured: true,
+    palette: { background: "#f3f8f8", foreground: "#171916", accent: "#087f7d", muted: "#526267" },
+    cover: { src: "/work/odontologia/cover-redacted.png", alt: "Captura del sistema odontológico en la pantalla de plan de tratamiento, con el DNI oculto", width: 1697, height: 927 },
+    gallery: [],
+    copy: copy(
+      {
+        category: "Sistema a medida / Odontología",
+        description: "Una herramienta de gestión clínica para organizar pacientes, tratamientos y el trabajo diario en un mismo lugar.",
+        services: [],
+      },
+      {
+        category: "Custom system / Dentistry",
+        description: "A clinical management tool that brings patient records, treatments and daily work into one place.",
+        services: [],
+      },
+    ),
+  },
+  {
     slug: "santa-dominga", index: "04", name: "Santa Dominga", client: "Estancia Santa Dominga", year: "2026",
     url: "https://arroz2.vercel.app/es#home", featured: true,
     palette: { background: "#173b28", foreground: "#f4ead4", accent: "#bfa36a", muted: "#b9c7b0" },
+    brandLogo: { src: "/work/santa-dominga/brand-logo.png", alt: "Logo de Santa Dominga", width: 1898, height: 829, contrast: "light" },
     cover: { src: "/work/santa-dominga/cover.webp", alt: "Cultivo de arroz de Santa Dominga en Entre Ríos", width: 1200, height: 1600, position: "center 58%" },
     gallery: [
       { src: "/work/santa-dominga/origin.webp", alt: "Arroz de Santa Dominga sostenido frente al campo", width: 960, height: 1280 },
@@ -182,10 +204,11 @@ export const projects: Project[] = [
     ),
   },
   {
-    slug: "uruguai-yerba-mate", index: "05", name: "Uruguaí", client: "Uruguaí Yerba Mate", year: "2026",
+    slug: "uruguai-yerba-mate", index: "02", name: "Uruguaí", client: "Uruguaí Yerba Mate", year: "2026",
     url: "https://yerbamateuruguai.com/", featured: true,
     palette: { background: "#394736", foreground: "#f7f1e2", accent: "#b99655", muted: "#c7c6a6" },
-    cover: { src: "/work/uruguai/cover.jpg", alt: "Mate Uruguaí durante el ritual compartido", width: 1067, height: 1600, position: "center 62%" },
+    brandLogo: { src: "/work/uruguai/brand-logo.png", alt: "Logo de Uruguaí Yerba Mate", width: 1916, height: 821, contrast: "light" },
+    cover: { src: "/work/uruguai/cover-portada.jpg", alt: "Paquetes de yerba mate Uruguaí sobre una mesa de madera", width: 2803, height: 1869 },
     gallery: [
       { src: "/work/uruguai/variety.webp", alt: "Paquete de yerba mate Uruguaí Tradicional", width: 800, height: 1000 },
       { src: "/work/uruguai/product.webp", alt: "Paquete de yerba mate Uruguaí Premium", width: 640, height: 1160 },
@@ -227,6 +250,10 @@ export const projects: Project[] = [
     ),
   },
 ];
+
+const projectOrder = ["mayma-bikinis", "uruguai-yerba-mate", "sistema-odontologico-completo", "santa-dominga", "cosas-de-casa", "xeneize-regaleria"];
+const projectOrderIndex = new Map(projectOrder.map((slug, index) => [slug, index]));
+export const projects = projectEntries.slice().sort((a, b) => (projectOrderIndex.get(a.slug) ?? Number.MAX_SAFE_INTEGER) - (projectOrderIndex.get(b.slug) ?? Number.MAX_SAFE_INTEGER));
 
 export const featuredProjects = projects.filter((project) => project.featured);
 

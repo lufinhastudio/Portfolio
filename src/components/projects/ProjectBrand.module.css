@@ -1,0 +1,61 @@
+.brand {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  isolation: isolate;
+}
+
+.brand::before {
+  position: absolute;
+  z-index: -1;
+  content: "";
+  pointer-events: none;
+}
+
+.cover {
+  position: absolute;
+  bottom: clamp(.8rem, 1.5vw, 1.35rem);
+  left: clamp(.8rem, 1.5vw, 1.35rem);
+  width: clamp(8rem, 16vw, 14rem);
+}
+
+.cover::before {
+  inset: -1.8rem -2.7rem -1.6rem -1.5rem;
+}
+
+.cover.light::before {
+  background: radial-gradient(ellipse at left bottom, rgb(10 12 10 / .48) 0%, rgb(10 12 10 / .2) 38%, transparent 72%);
+}
+
+.cover.dark::before {
+  background: radial-gradient(ellipse at left bottom, rgb(250 249 246 / .72) 0%, rgb(250 249 246 / .32) 40%, transparent 72%);
+}
+
+.intro {
+  width: clamp(7.5rem, 12vw, 12rem);
+  margin-bottom: clamp(1rem, 2vw, 1.5rem);
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 7rem;
+  object-fit: contain;
+  object-position: left center;
+}
+
+@media (max-width: 760px) {
+  .cover {
+    bottom: .85rem;
+    left: .85rem;
+    width: clamp(7.5rem, 40vw, 11rem);
+  }
+
+  .intro {
+    width: clamp(7.5rem, 38vw, 10.5rem);
+    margin-bottom: 1rem;
+  }
+}

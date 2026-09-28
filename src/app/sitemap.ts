@@ -10,7 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: path === "" || path === "/en" ? 1 : 0.8,
   }));
 
-  const workPages: MetadataRoute.Sitemap = projects.flatMap((project) => ["", "/en"].map((prefix) => ({
+  const workPages: MetadataRoute.Sitemap = projects.filter((project) => !project.previewOnly).flatMap((project) => ["", "/en"].map((prefix) => ({
     url: `${siteConfig.url}${prefix}/work/${project.slug}`,
     lastModified: new Date(`${project.year}-01-01`),
     changeFrequency: "yearly" as const,

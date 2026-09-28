@@ -14,9 +14,17 @@ export function SiteHeader() {
   const content = getStudioContent(locale);
   const navigation = getNavigation(locale);
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const [selectedLocale, setSelectedLocale] = useState<Locale>(locale);
   useEffect(() => setOpen(false), [pathname]);
   useEffect(() => setSelectedLocale(locale), [locale]);
+
+  useEffect(() => {
+    const updateScrollState = () => setScrolled(window.scrollY > 24);
+    updateScrollState();
+    window.addEventListener("scroll", updateScrollState, { passive: true });
+    return () => window.removeEventListener("scroll", updateScrollState);
+  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -28,15 +36,15 @@ export function SiteHeader() {
   }, [open]);
 
   return (
-    <header className={`${styles.header} ${open ? styles.mobileOpen : ""}`}>
-      <Link className={styles.brand} href={locale === "es" ? "/" : "/en"} onClick={() => setOpen(false)} aria-label={locale === "es" ? "Lufinha Studio — inicio" : "Lufinha Studio — home"}>
-        <span className={styles.brandLine}><strong>LUFINHA</strong><span>STUDIO</span></span>
-        <span className={styles.brandDescriptor}>{locale === "es" ? "Software y sistemas a medida" : "Custom software and systems"}</span>
+    <header className={`${styles.header} ${scrolled ? styles.scrolled : ""} ${open ? styles.mobileOpen : ""}`}>
+      <Link className={styles.brand} href={locale === "es" ? "/" : "/en"} scroll={false} onClick={() => setOpen(false)} aria-label={locale === "es" ? "Lufinha Studio — inicio" : "Lufinha Studio — home"}>
+        <span className={styles.brandLine}><strong>LUFINHA</strong><span className={styles.brandStudio}>STUDIO</span></span>
+        <span className={styles.brandDescriptor}>{locale === "es" ? "Diseño + desarrollo digital" : "Digital design + development"}</span>
       </Link>
       <nav className={styles.nav} id="site-navigation" aria-label={locale === "es" ? "Navegación principal" : "Main navigation"}>
         {navigation.map((item) => {
           const active = !item.href.includes("#") && (item.href === (locale === "es" ? "/" : "/en") ? pathname === item.href : pathname.startsWith(item.href));
-          return <Link className={`${styles.navLink} ${active ? styles.active : ""}`} href={item.href} key={item.href} aria-current={active ? "page" : undefined} onClick={() => setOpen(false)}>{item.label}</Link>;
+          return <Link className={`${styles.navLink} ${active ? styles.active : ""}`} href={item.href} scroll={false} key={item.href} aria-current={active ? "page" : undefined} onClick={() => setOpen(false)}>{item.label}</Link>;
         })}
       </nav>
       <div className={styles.tools}>
@@ -45,6 +53,7 @@ export function SiteHeader() {
             <Link
               className={`${styles.languageOption} ${selectedLocale === option ? styles.languageActive : ""}`}
               href={switchLocalePath(pathname, option)}
+              scroll={false}
               hrefLang={option}
               lang={option}
               aria-label={option === "es" ? "Español" : "English"}

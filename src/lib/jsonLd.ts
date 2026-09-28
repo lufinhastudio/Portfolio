@@ -20,7 +20,7 @@ export function studioJsonLd() {
 export function projectJsonLd(project: LocalizedProject, locale: Locale) {
   return {
     "@context": "https://schema.org", "@type": "CreativeWork", name: project.client,
-    headline: project.caseStudy.statement, description: project.description,
+    headline: project.caseStudy?.statement ?? project.name, description: project.description,
     url: new URL(localePath(locale, `/work/${project.slug}`), siteConfig.url).toString(),
     image: new URL(project.cover.src, siteConfig.url).toString(), dateCreated: project.year,
     creator: { "@type": "Organization", name: siteConfig.name, url: siteConfig.url },

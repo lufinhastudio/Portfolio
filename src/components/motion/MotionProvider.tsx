@@ -5,7 +5,6 @@ import type Lenis from "lenis";
 import { usePathname } from "next/navigation";
 import { siteConfig } from "@/config/site";
 import { localeFromPathname } from "@/lib/locale";
-import { CustomCursor } from "./CustomCursor";
 
 export function MotionProvider({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -30,6 +29,8 @@ export function MotionProvider({ children }: { children: React.ReactNode }) {
   useLayoutEffect(() => {
     if (window.location.hash) return;
     scrollToTop();
+    const afterNavigation = window.requestAnimationFrame(scrollToTop);
+    return () => window.cancelAnimationFrame(afterNavigation);
   }, [pathname, scrollToTop]);
 
   useEffect(() => {
@@ -71,35 +72,76 @@ export function MotionProvider({ children }: { children: React.ReactNode }) {
     if (!siteConfig.motion.enabled) return;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (siteConfig.motion.respectReducedMotion && reduced) return;
+    const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    const smooth = siteConfig.motion.smoothScroll && finePointer;
 
     let cleanup = () => {};
     let cancelled = false;
 
-    void Promise.all([import("gsap"), import("gsap/ScrollTrigger"), import("lenis")]).then(
+    void Promise.all([import("gsap"), import("gsap/ScrollTrigger"), smooth ? import("lenis") : Promise.resolve(null)]).then(
       ([gsapModule, triggerModule, lenisModule]) => {
         if (cancelled) return;
         const gsap = gsapModule.gsap;
         const ScrollTrigger = triggerModule.ScrollTrigger;
-        const LenisConstructor = lenisModule.default;
         gsap.registerPlugin(ScrollTrigger);
 
         const context = gsap.context(() => {
           gsap.utils.toArray<HTMLElement>("[data-reveal]").forEach((element) => {
-            gsap.fromTo(element, { y: 38, opacity: 0 }, {
-              y: 0, opacity: 1, duration: 1, ease: "power3.out",
+            gsap.fromTo(element, { y: 16, opacity: 0 }, {
+              y: 0, opacity: 1, duration: 0.45, ease: "power2.out",
               scrollTrigger: { trigger: element, start: "top 88%", once: true },
             });
           });
-          gsap.utils.toArray<HTMLElement>("[data-parallax]").forEach((element) => {
-            gsap.fromTo(element, { yPercent: -4, scale: 1.05 }, {
-              yPercent: 4, scale: 1, ease: "none",
-              scrollTrigger: { trigger: element.parentElement, start: "top bottom", end: "bottom top", scrub: 0.8 },
+          gsap.utils.toArray<HTMLElement>("[data-services-intro]").forEach((group) => {
+            const steps = gsap.utils.toArray<HTMLElement>(group.querySelectorAll("[data-services-step]"));
+            gsap.fromTo(steps, { y: 12, opacity: 0 }, {
+              y: 0, opacity: 1, duration: 0.45, stagger: 0.07, ease: "power2.out", clearProps: "opacity,transform",
+              scrollTrigger: { trigger: group, start: "top 85%", once: true },
             });
           });
+          gsap.utils.toArray<HTMLElement>("[data-services-item]").forEach((item) => {
+            gsap.fromTo(item, { y: 12, opacity: 0 }, {
+              y: 0, opacity: 1, duration: 0.45, ease: "power2.out", clearProps: "opacity,transform",
+              scrollTrigger: { trigger: item, start: "top 88%", once: true },
+            });
+          });
+          gsap.utils.toArray<HTMLElement>("[data-studio-intro], [data-studio-sequence]").forEach((group) => {
+            const steps = gsap.utils.toArray<HTMLElement>(group.querySelectorAll("[data-studio-step]"));
+            const timeline = gsap.timeline({ scrollTrigger: { trigger: group, start: "top 85%", once: true } });
+            timeline.fromTo(steps, { y: 14, opacity: 0 }, {
+              y: 0, opacity: 1, duration: 0.48, stagger: 0.075, ease: "power2.out", clearProps: "opacity,transform",
+            });
+
+            if (finePointer && group.hasAttribute("data-studio-sequence")) {
+              const portrait = group.querySelector<HTMLElement>("[data-studio-portrait]");
+              const image = portrait?.querySelector("img");
+              if (portrait && image) {
+                timeline.fromTo(portrait, { clipPath: "inset(0 0 100% 0)" }, {
+                  clipPath: "inset(0 0 0% 0)", duration: 0.6, ease: "power2.out", clearProps: "clipPath",
+                }, 0.08);
+                timeline.fromTo(image, { scale: 1.035 }, {
+                  scale: 1, duration: 0.65, ease: "power2.out", clearProps: "transform",
+                }, 0.08);
+              }
+            }
+          });
+          gsap.utils.toArray<HTMLElement>("[data-studio-ticker]").forEach((ticker) => {
+            gsap.fromTo(ticker, { y: 8, opacity: 0 }, {
+              y: 0, opacity: 1, duration: 0.42, ease: "power2.out", clearProps: "opacity,transform",
+              scrollTrigger: { trigger: ticker, start: "top 90%", once: true },
+            });
+          });
+          if (finePointer) {
+            gsap.utils.toArray<HTMLElement>("[data-parallax]").forEach((element) => {
+              gsap.fromTo(element, { yPercent: -4, scale: 1.05 }, {
+                yPercent: 4, scale: 1, ease: "none",
+                scrollTrigger: { trigger: element.parentElement, start: "top bottom", end: "bottom top", scrub: 0.8 },
+              });
+            });
+          }
         });
 
-        const smooth = siteConfig.motion.smoothScroll && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-        const lenis = smooth ? new LenisConstructor({ duration: 1.05, smoothWheel: true, wheelMultiplier: 0.9 }) : null;
+        const lenis = smooth && lenisModule ? new lenisModule.default({ duration: 1.05, smoothWheel: true, wheelMultiplier: 0.9 }) : null;
         lenisRef.current = lenis;
         let animationFrame = 0;
         if (lenis) {
@@ -127,5 +169,5 @@ export function MotionProvider({ children }: { children: React.ReactNode }) {
     };
   }, [pathname]);
 
-  return <><CustomCursor />{children}</>;
+  return children;
 }

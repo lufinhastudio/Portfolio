@@ -1,23 +1,57 @@
-.section { padding: clamp(7rem, 13vw, 13rem) var(--page-gutter); color: var(--site-fg); background: var(--site-bg); }
-.intro { display: grid; grid-template-columns: 0.55fr 1.45fr; gap: 2rem; }
-.title { max-width: 12ch; font-size: clamp(3.2rem, 7vw, 7.4rem); line-height: 0.9; }
-.body { max-width: 42rem; margin-top: 2.5rem; font-size: clamp(1.05rem, 1.8vw, 1.5rem); line-height: 1.55; }
-.people { margin-top: clamp(7rem, 12vw, 12rem); border-top: 1px solid var(--site-line); }
-.person { display: grid; grid-template-columns: 0.25fr 0.8fr 1.3fr; gap: clamp(1.5rem, 4vw, 4rem); align-items: start; padding: 2rem 0; border-bottom: 1px solid var(--site-line); }
-.portrait { position: relative; width: min(100%, 24rem); aspect-ratio: 1; overflow: hidden; background: #35453f; }
-.portrait img { object-fit: cover; }
-.name { font-size: clamp(4rem, 8vw, 8rem); line-height: 0.8; }
-.profile > p { margin-top: 1.25rem; }
-.profileContacts { display: grid; max-width: 29rem; margin-top: 2rem; color: var(--site-fg); font-family: "IBM Plex Mono", monospace; font-size: 0.68rem; line-height: 1.5; }
-.profileContacts a { display: block; min-height: 2.8rem; padding: 0.8rem 0; overflow-wrap: anywhere; border-top: 1px solid rgb(246 247 242 / 0.3); }
-.link { display: flex; justify-content: space-between; margin-top: 4rem; padding: 1.2rem 0; border-bottom: 1px solid currentColor; }
+.section { position: relative; isolation: isolate; overflow: hidden; padding: clamp(3.75rem, 6.5vw, 6rem) var(--page-gutter); color: var(--site-fg); background: var(--site-bg); }
+.section > :not([data-aura]) { position: relative; z-index: 1; }
+.intro { display: grid; grid-template-columns: minmax(150px, .5fr) minmax(0, 1.5fr); gap: clamp(2rem, 5vw, 5rem); }
+.intro > p { color: var(--site-signal); }
+.title { max-width: 15ch; font-size: clamp(2.5rem, 5vw, 5rem); line-height: 1; }
+.body { max-width: 42rem; margin-top: 1.2rem; font-size: clamp(1rem, 1.3vw, 1.2rem); line-height: 1.55; }
+.people { display: grid; grid-template-columns: minmax(0, 1fr); margin-top: clamp(2rem, 4vw, 3.5rem); border-top: 1px solid var(--site-line); border-left: 1px solid var(--site-line); }
+.person { min-width: 0; display: grid; grid-template-columns: minmax(2.5rem, 4rem) minmax(16rem, 24rem) minmax(0, 1fr); gap: clamp(1.25rem, 3vw, 3.5rem); align-items: start; padding: clamp(2rem, 3.5vw, 3.5rem) 1.25rem; border-bottom: 1px solid var(--site-line); }
+.personNumber { padding-top: .65rem; color: var(--site-signal); }
+.portraitStage { position: relative; isolation: isolate; width: min(100%, 24rem); }
+.personAura { left: -2.25rem; bottom: -1.25rem; opacity: .14; transition: opacity 350ms ease; }
+.portrait { position: relative; z-index: 1; width: 100%; aspect-ratio: 3 / 4; overflow: hidden; background: var(--site-paper); }
+.portrait img { object-fit: contain; object-position: center; transition: transform 450ms var(--ease-out), filter 300ms ease; }
+.personInfo { min-width: 0; padding-top: .15rem; }
+.personInfo h3 { font-size: clamp(4rem, 6vw, 6.5rem); line-height: .84; }
+.bio { max-width: 38rem; margin-top: clamp(1.2rem, 2vw, 1.75rem); font-size: clamp(.96rem, 1.05vw, 1.05rem); line-height: 1.55; }
+.contacts { display: grid; max-width: 40rem; margin-top: clamp(1.5rem, 2.5vw, 2.5rem); border-top: 1px solid var(--site-line); }
+.contacts a { display: grid; grid-template-columns: 5.5rem minmax(0, 1fr) auto; align-items: center; gap: 1rem; min-height: 3rem; padding: .7rem .5rem; border-bottom: 1px solid var(--site-line); font-family: "IBM Plex Mono", monospace; font-size: .75rem; transition: background-color 200ms ease; }
+.contacts a > span:first-child { color: var(--site-muted); transition: color 200ms ease; }
+.contacts a > span:nth-child(2) { min-width: 0; overflow-wrap: anywhere; }
+.contacts svg { transition: transform 200ms var(--ease-out), color 200ms ease; }
+.contacts a:focus-visible { background: rgb(23 25 22 / .035); }
+.contacts a:focus-visible > span:first-child, .contacts a:focus-visible svg { color: var(--site-accent); }
+.person:focus-within .personAura { opacity: .35; }
+.link { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-top: 2.4rem; padding: .9rem 0; border-top: 1px solid var(--site-line); border-bottom: 1px solid var(--site-line); font-size: .87rem; }
+.link svg { transition: transform 200ms ease; }
+@media (hover: hover) and (pointer: fine) {
+  .person:hover .personAura { opacity: .35; }
+  .portraitStage:hover .portrait img { transform: scale(1.025); filter: brightness(1.035) contrast(1.01); }
+  .contacts a:hover { background: rgb(23 25 22 / .035); }
+  .contacts a:hover > span:first-child, .contacts a:hover svg { color: var(--site-accent); }
+  .contacts a:hover svg { transform: translate(4px, -4px); }
+  .link:hover svg { transform: translate(3px, -3px); }
+}
+@media (max-width: 1100px) {
+  .person { grid-template-columns: 2.5rem minmax(15rem, 20rem) minmax(0, 1fr); gap: clamp(1.25rem, 3vw, 2.5rem); }
+  .portraitStage { width: min(100%, 20rem); }
+  .personInfo h3 { font-size: clamp(4rem, 7vw, 5.5rem); }
+}
 @media (max-width: 760px) {
-  .section { padding-block: 5rem; }
-  .intro, .person { grid-template-columns: minmax(0, 1fr); }
-  .intro > div { min-width: 0; }
-  .title { max-width: 100%; font-size: clamp(2.45rem, 10.5vw, 4.5rem); overflow-wrap: anywhere; }
-  .person { gap: 1.25rem; }
-  .people { margin-top: 4rem; }
-  .portrait { width: min(72vw, 21rem); }
-  .profileContacts { margin-top: 1.5rem; }
+  .intro { grid-template-columns: 1fr; gap: .85rem; }
+  .title { font-size: clamp(2.4rem, 9vw, 3.5rem); }
+  .people { margin-top: 2rem; border-left: 0; }
+  .person { grid-template-columns: minmax(0, 1fr); gap: 1rem; padding: 2rem 0; }
+  .personNumber { padding-top: 0; }
+  .portraitStage { width: min(72vw, 20rem); }
+  .personInfo h3 { font-size: clamp(3.5rem, 16vw, 4.75rem); }
+  .bio { margin-top: 1rem; }
+  .contacts { margin-top: 1.35rem; }
+}
+@media (max-width: 420px) {
+  .contacts a { grid-template-columns: 4.75rem minmax(0, 1fr) auto; gap: .5rem; font-size: .7rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .personAura, .portrait img, .contacts a, .contacts a > span:first-child, .contacts svg { transition: none; }
+  .portraitStage:hover .portrait img, .contacts a:hover svg { transform: none; }
 }

@@ -1,12 +1,36 @@
 :root {
-  --site-bg: #111410;
-  --site-fg: #f6f7f2;
-  --site-paper: #dde1da;
-  --site-ink: #171a16;
-  --site-signal: #b9d635;
-  --site-line: rgba(241, 240, 234, 0.2);
-  --page-gutter: clamp(1rem, 3vw, 3.25rem);
-  --header-height: 5rem;
+  --off-white: #fafafa;
+  --ink: #171916;
+  --olive: #5e6c43;
+  --terracotta: #a84f30;
+  --aura-coral: #ff6f61;
+  --aura-orange: #ff9b45;
+  --aura-yellow: #ffd84d;
+  --aura-pink: #ff9d9d;
+  --aura-coral-rgb: 255 111 97;
+  --aura-orange-rgb: 255 155 69;
+  --aura-yellow-rgb: 255 216 77;
+  --aura-pink-rgb: 255 157 157;
+  --site-bg: #ffffff;
+  --site-fg: var(--ink);
+  --site-paper: var(--off-white);
+  --site-ink: var(--ink);
+  --site-signal: var(--olive);
+  --site-accent: var(--terracotta);
+  --site-muted: #62645c;
+  --site-line: rgb(23 25 22 / 0.18);
+  --page-gutter: clamp(1rem, 4vw, 4rem);
+  --header-height: 4.25rem;
+  --space-xs: 0.5rem;
+  --space-sm: 0.875rem;
+  --space-md: 1.25rem;
+  --space-lg: clamp(2rem, 4vw, 3.5rem);
+  --space-xl: clamp(3.5rem, 7vw, 6rem);
+  --font-display: "Manrope Variable", "Helvetica Neue", sans-serif;
+  --font-body: "Manrope Variable", "Helvetica Neue", sans-serif;
+  --radius: 0.125rem;
+  --transition-fast: 200ms ease;
+  --transition-medium: 350ms ease;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -24,14 +48,13 @@ body {
   margin: 0;
   color: var(--site-fg);
   background: var(--site-bg);
-  font-family: "Manrope Variable", "Helvetica Neue", sans-serif;
+  font-family: var(--font-body);
   font-synthesis: none;
-  overflow-x: clip;
 }
 
 ::selection {
-  color: white;
-  background: var(--site-signal);
+  color: var(--off-white);
+  background: var(--terracotta);
 }
 
 a {
@@ -64,7 +87,7 @@ p {
 }
 
 :focus-visible {
-  outline: 2px solid var(--site-signal);
+  outline: 2px solid var(--terracotta);
   outline-offset: 4px;
 }
 
@@ -74,8 +97,8 @@ p {
   top: 0.75rem;
   left: 0.75rem;
   padding: 0.75rem 1rem;
-  color: var(--site-ink);
-  background: var(--site-paper);
+  color: var(--off-white);
+  background: var(--ink);
   transform: translateY(-160%);
   transition: transform 0.2s ease;
 }
@@ -93,9 +116,10 @@ p {
 }
 
 .display {
-  font-family: "Anybody Variable", "Arial Black", sans-serif;
-  font-variation-settings: "wdth" 92, "wght" 760;
-  letter-spacing: -0.055em;
+  font-family: var(--font-display);
+  font-variation-settings: "wght" 760;
+  letter-spacing: -0.05em;
+  font-weight: 760;
 }
 
 .page-shell {
@@ -115,13 +139,9 @@ p {
   border: 0;
 }
 
-[data-reveal] {
-  will-change: transform, opacity;
-}
-
-@media (max-width: 720px) {
+@media (max-width: 820px) {
   :root {
-    --header-height: 4.25rem;
+    --header-height: 3.75rem;
   }
 
   .page-shell {

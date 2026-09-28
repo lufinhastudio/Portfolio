@@ -4,7 +4,7 @@ import { getStudioContent } from "@/content";
 import styles from "./InterfaceInterlude.module.css";
 
 const fragments = [
-  { src: "/work/mayma/product-04.jpg", alt: "Producto Mayma", className: "mayma" },
+  { src: "/work/mayma/product-04.jpg", alt: "Producto Mayma Bikinis", className: "mayma" },
   { src: "/work/xeneize/logo-black.png", alt: "Identidad Xeneize", className: "xeneize" },
   { src: "/work/santa-dominga/product.webp", alt: "Producto Santa Dominga", className: "santa" },
   { src: "/work/uruguai/variety.webp", alt: "Producto Uruguaí", className: "uruguai" },

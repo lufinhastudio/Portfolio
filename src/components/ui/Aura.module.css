@@ -1,0 +1,192 @@
+.aura {
+  --aura-opacity: 0.16;
+  --aura-width: 44rem;
+  --aura-height: 24rem;
+  position: absolute;
+  z-index: 0;
+  display: block;
+  width: min(var(--aura-width), 115vw);
+  height: var(--aura-height);
+  overflow: hidden;
+  opacity: var(--aura-opacity);
+  pointer-events: none;
+}
+
+.layer {
+  position: absolute;
+  display: block;
+  border-radius: 50%;
+  filter: blur(clamp(28px, 4vw, 64px));
+  transform: translate3d(0, 0, 0);
+}
+
+.coral {
+  top: -22%;
+  left: -8%;
+  width: 54%;
+  height: 92%;
+  background: radial-gradient(ellipse at center, rgb(var(--aura-coral-rgb) / 0.94) 0%, rgb(var(--aura-coral-rgb) / 0.55) 35%, transparent 73%);
+}
+
+.orange {
+  top: -28%;
+  left: 28%;
+  width: 55%;
+  height: 102%;
+  background: radial-gradient(ellipse at center, rgb(var(--aura-orange-rgb) / 0.9) 0%, rgb(var(--aura-orange-rgb) / 0.52) 36%, transparent 74%);
+}
+
+.yellow {
+  top: -18%;
+  right: -10%;
+  width: 50%;
+  height: 90%;
+  background: radial-gradient(ellipse at center, rgb(var(--aura-yellow-rgb) / 0.88) 0%, rgb(var(--aura-yellow-rgb) / 0.48) 34%, transparent 72%);
+}
+
+.soft { --aura-opacity: 0.15; }
+.medium { --aura-opacity: 0.3; }
+.strong { --aura-opacity: 0.58; }
+
+.hero {
+  --aura-width: 116vw;
+  --aura-height: clamp(20rem, 42vw, 35rem);
+}
+
+.hero.animated {
+  animation: headerAuraDrift 14s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.hero .coral { left: 0; }
+.hero .orange { left: 31%; }
+.hero .yellow { right: 0; }
+
+.hero.animated .coral { animation: heroCoralDrift 12s ease-in-out infinite alternate; }
+.hero.animated .orange { animation: heroOrangeDrift 15s ease-in-out infinite alternate; }
+.hero.animated .yellow { animation: heroYellowDrift 13s ease-in-out infinite alternate; }
+
+.field {
+  --aura-width: 100%;
+  --aura-height: 100%;
+  inset: 0;
+}
+
+.field,
+.corner,
+.band,
+.accent { overflow: visible; }
+
+.field .layer { filter: blur(clamp(34px, 5vw, 74px)); }
+.field .coral { top: 1%; left: -16%; width: 64%; height: 66%; }
+.field .orange { top: 22%; left: 22%; width: 66%; height: 64%; }
+.field .yellow { top: -8%; right: -18%; width: 62%; height: 68%; }
+
+.corner {
+  --aura-width: clamp(24rem, 46vw, 45rem);
+  --aura-height: clamp(15rem, 27vw, 24rem);
+}
+
+.band {
+  --aura-width: min(72rem, 106vw);
+  --aura-height: clamp(7rem, 13vw, 11rem);
+}
+
+.band .layer { top: -74%; height: 180%; filter: blur(clamp(24px, 3.5vw, 48px)); }
+
+.accent {
+  --aura-width: clamp(16rem, 28vw, 26rem);
+  --aura-height: clamp(10rem, 17vw, 16rem);
+}
+
+.top-left { top: 0; left: 0; }
+.top-right { top: 0; right: 0; }
+.bottom-left { bottom: 0; left: 0; }
+.bottom-right { right: 0; bottom: 0; }
+.center { top: 50%; left: 50%; transform: translate(-50%, -50%); }
+
+.coral .orange,
+.coral .yellow,
+.orange .coral,
+.orange .yellow,
+.yellow .coral,
+.yellow .orange { opacity: 0.22; }
+
+.animated .coral { animation: auraCoralDrift 17s ease-in-out infinite alternate; }
+.animated .orange { animation: auraOrangeDrift 21s ease-in-out infinite alternate; }
+.animated .yellow { animation: auraYellowDrift 15s ease-in-out infinite alternate; }
+.animated .layer { will-change: transform; }
+
+@keyframes auraCoralDrift {
+  from { transform: translate3d(-1.5%, -1%, 0) scale(1); }
+  to { transform: translate3d(2.5%, 1.2%, 0) scale(1.035); }
+}
+
+@keyframes auraOrangeDrift {
+  from { transform: translate3d(1.5%, 0, 0) scale(1.025); }
+  to { transform: translate3d(-2%, 1.5%, 0) scale(0.985); }
+}
+
+@keyframes auraYellowDrift {
+  from { transform: translate3d(1%, -1%, 0) scale(1); }
+  to { transform: translate3d(-2.5%, 1%, 0) scale(1.04); }
+}
+
+@keyframes headerAuraDrift {
+  from { transform: translate3d(0, -0.5rem, 0) scale(1); }
+  to { transform: translate3d(0, 2.75rem, 0) scale(1.02); }
+}
+
+@keyframes headerAuraDriftMobile {
+  from { transform: translate3d(0, -0.3rem, 0) scale(1); }
+  to { transform: translate3d(0, 1.65rem, 0) scale(1.012); }
+}
+
+@keyframes heroCoralDrift {
+  from { transform: translate3d(-9%, -7%, 0) scale(0.96); }
+  to { transform: translate3d(22%, 23%, 0) scale(1.09); }
+}
+
+@keyframes heroOrangeDrift {
+  from { transform: translate3d(10%, -6%, 0) scale(1.045); }
+  to { transform: translate3d(-21%, 22%, 0) scale(0.98); }
+}
+
+@keyframes heroYellowDrift {
+  from { transform: translate3d(9%, -6%, 0) scale(0.98); }
+  to { transform: translate3d(-22%, 21%, 0) scale(1.08); }
+}
+
+@media (max-width: 600px) {
+  .aura { transform: scale(0.86); }
+  .hero { width: 145vw; height: 22rem; transform: none; }
+  .hero.animated { animation-name: headerAuraDriftMobile; animation-duration: 14s; }
+  .hero.animated .coral { animation-name: heroCoralDriftMobile; }
+  .hero.animated .orange { animation-name: heroOrangeDriftMobile; }
+  .hero.animated .yellow { animation-name: heroYellowDriftMobile; }
+  .field { inset: 0; width: 100%; height: 100%; transform: none; }
+  .strong { --aura-opacity: 0.48; }
+  .medium { --aura-opacity: 0.24; }
+  .soft { --aura-opacity: 0.12; }
+}
+
+@keyframes heroCoralDriftMobile {
+  from { transform: translate3d(-6%, -4%, 0) scale(0.97); }
+  to { transform: translate3d(18%, 20%, 0) scale(1.08); }
+}
+
+@keyframes heroOrangeDriftMobile {
+  from { transform: translate3d(8%, -4%, 0) scale(1.04); }
+  to { transform: translate3d(-17%, 18%, 0) scale(0.985); }
+}
+
+@keyframes heroYellowDriftMobile {
+  from { transform: translate3d(7%, -4%, 0) scale(0.98); }
+  to { transform: translate3d(-18%, 17%, 0) scale(1.075); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero.animated { animation: none; transform: none; will-change: auto; }
+  .hero.animated .layer { animation: none; }
+  .animated .layer { animation: none; will-change: auto; }
+}

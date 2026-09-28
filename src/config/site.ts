@@ -10,8 +10,8 @@ export const siteConfig = {
   locales: ["es", "en"] as Locale[],
   localeMap: { es: "es_AR", en: "en_US" },
   description: {
-    es: "Estudio de desarrollo de software, sistemas y soluciones digitales a medida.",
-    en: "Studio for custom software, systems and digital solutions.",
+    es: "Diseñamos y desarrollamos páginas web, tiendas online y sistemas digitales a medida.",
+    en: "We design and build websites, online stores and custom digital systems.",
   },
   contact: {
     email: "lufinhastudio@gmail.com",
@@ -36,7 +36,7 @@ export const siteConfig = {
       name: "Rafa",
       role: null as string | null,
       bio: null as string | null,
-      photo: "/rafa.jpg",
+      photo: "/rafa-fotorafa.jpg",
       links: [
         {
           label: "LinkedIn",
@@ -58,22 +58,24 @@ export const siteConfig = {
     },
   ],
   stack: [
-    "Next.js", "React", "TypeScript", "Node.js", "PostgreSQL",
-    "Neon", "Vercel", "Cloudinary", "Mercado Pago", "Resend",
+    "React", "React Native", "TypeScript", "JavaScript", "Next.js",
+    "Node.js", "PostgreSQL", "Neon", "APIs / REST", "Vercel",
+    "Docker", "Cloudinary", "Git", "GitHub",
   ],
   theme: {
-    background: "#111410",
-    foreground: "#f6f7f2",
-    paper: "#dde1da",
-    ink: "#171a16",
-    signal: "#b9d635",
-    line: "rgba(246, 247, 242, 0.2)",
+    background: "#FFFFFF",
+    foreground: "#171916",
+    paper: "#FAFAFA",
+    ink: "#171916",
+    signal: "#5E6C43",
+    accent: "#A84F30",
+    line: "rgba(23, 25, 22, 0.18)",
   },
   motion: {
     enabled: true,
     respectReducedMotion: true,
-    pointerWordmark: true,
-    smoothScroll: true,
+    pointerWordmark: false,
+    smoothScroll: false,
   },
   seo: {
     titleTemplate: "%s — Lufinha Studio",

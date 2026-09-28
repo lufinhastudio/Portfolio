@@ -31,6 +31,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     "--site-paper": siteConfig.theme.paper,
     "--site-ink": siteConfig.theme.ink,
     "--site-signal": siteConfig.theme.signal,
+    "--site-accent": siteConfig.theme.accent,
     "--site-line": siteConfig.theme.line,
   } as React.CSSProperties;
 

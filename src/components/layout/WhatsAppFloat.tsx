@@ -61,6 +61,8 @@ export function WhatsAppFloat() {
     };
   }, [open]);
 
+  if (pathname === "/contacto" || pathname === "/en/contact") return null;
+
   return (
     <aside className={styles.widget} ref={widgetRef} aria-label={content.label}>
       <div className={`${styles.panel} ${open ? styles.panelOpen : ""}`} id="whatsapp-contacts" aria-hidden={!open}>

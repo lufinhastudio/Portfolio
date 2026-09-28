@@ -6,13 +6,16 @@ import { getLocalizedProjects, getStudioContent } from "@/content";
 import { localePath } from "@/config/site";
 import { projectJsonLd } from "@/lib/jsonLd";
 import { LiveBrowserPreview } from "@/components/projects/LiveBrowserPreview";
+import { ProjectBrand } from "@/components/projects/ProjectBrand";
 import { ArrowLeft, ArrowUpRight } from "@/components/ui/Icons";
+import { Aura } from "@/components/ui/Aura";
 import styles from "./CaseStudy.module.css";
 
 type CaseStyle = CSSProperties & Record<`--${string}`, string>;
 
 export function CaseStudy({ project, locale }: { project: LocalizedProject; locale: Locale }) {
-  const projects = getLocalizedProjects(locale);
+  if (project.previewOnly || !project.url || !project.caseStudy) return null;
+  const projects = getLocalizedProjects(locale).filter((item) => !item.previewOnly);
   const currentIndex = projects.findIndex((item) => item.slug === project.slug);
   const nextProject = projects[(currentIndex + 1) % projects.length];
   const content = getStudioContent(locale).common;
@@ -25,10 +28,10 @@ export function CaseStudy({ project, locale }: { project: LocalizedProject; loca
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(projectJsonLd(project, locale)) }} />
       <section className={styles.hero}>
         <div className={`${styles.top} mono`}><Link href={localePath(locale, "/work")}><ArrowLeft size="0.9em" /> {content.allProjects}</Link><span>{project.category}</span><span className={styles.services}>{project.services.join(" · ")}</span></div>
-        <div className={styles.titleWrap}><h1 className={`${styles.title} display`}>{project.name}</h1></div>
+        <div className={styles.titleWrap}><ProjectBrand logo={project.brandLogo} placement="intro" /><h1 className={`${styles.title} display`}>{project.name}</h1></div>
         <div className={styles.bottom}><span className="mono">{project.index} / {project.year}</span><p className={styles.statement}>{project.description}</p><a className={`${styles.siteLink} mono`} href={project.url}>{content.visitSite} <ArrowUpRight size="0.9em" /></a></div>
       </section>
-      <div className={styles.cover}><Image data-parallax src={project.cover.src} alt={project.cover.alt} fill priority sizes="100vw" style={{ objectPosition: project.cover.position ?? "center" }} /></div>
+      <div className={styles.cover}><Image data-parallax src={project.cover.src} alt={project.cover.alt} fill priority sizes="100vw" style={{ objectPosition: project.cover.position ?? "center" }} /><ProjectBrand logo={project.brandLogo} placement="cover" /></div>
       <section className={styles.liveSection} aria-label={`${project.client} ${locale === "es" ? "sitio web" : "website"}`}>
         <div className={styles.liveHeader}><p className="mono">{locale === "es" ? "SITIO" : "SITE"} / {project.url.replace(/^https?:\/\//, "").replace(/\/$/, "")}</p><p>{project.description}</p></div>
         <div className={styles.liveBrowser} data-cursor={locale === "es" ? "VISITAR" : "VISIT"}><a href={project.url} aria-label={`${content.visitSite}: ${project.client}`}><LiveBrowserPreview title={project.client} fallback={project.cover} label={locale === "es" ? "Vista del proyecto" : "Project preview"} /></a></div>
@@ -46,6 +49,7 @@ export function CaseStudy({ project, locale }: { project: LocalizedProject; loca
       </section>
       {project.gallery[2] ? <div className={styles.fullImage}><Image src={project.gallery[2].src} alt={project.gallery[2].alt} fill sizes="100vw" /></div> : null}
       <section className={styles.highlights}>
+        <Aura variant="accent" intensity="soft" position="bottom-right" />
         <div className={styles.highlightsHeader}><p className="mono" data-reveal>{labels.decisions}</p><h2 className={`${styles.highlightsTitle} display`} data-reveal>{labels.system}</h2></div>
         <div className={styles.highlightGrid}>{project.caseStudy.highlights.map((highlight, index) => <article className={styles.highlight} key={highlight.title} data-reveal><span className="mono">{labels.decisions} 0{index + 1}</span><h3>{highlight.title}</h3><p>{highlight.text}</p></article>)}</div>
         <div className={styles.outcome}><p className="mono" data-reveal>{labels.result}</p><p className="display" data-reveal>{project.caseStudy.outcome}</p></div>

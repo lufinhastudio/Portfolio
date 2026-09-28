@@ -15,6 +15,10 @@ export type ProjectImage = {
   position?: string;
 };
 
+export type ProjectBrandLogo = ProjectImage & {
+  contrast: "light" | "dark";
+};
+
 export type ProjectHighlight = {
   title: string;
   text: string;
@@ -24,7 +28,7 @@ export type ProjectCopy = {
   category: string;
   description: string;
   services: string[];
-  caseStudy: {
+  caseStudy?: {
     statement: string;
     challenge: string;
     approach: string;
@@ -39,8 +43,10 @@ export type Project = {
   name: string;
   client: string;
   year: string;
-  url: string;
+  url?: string;
+  previewOnly?: boolean;
   palette: ProjectPalette;
+  brandLogo?: ProjectBrandLogo;
   cover: ProjectImage;
   gallery: ProjectImage[];
   featured: boolean;
