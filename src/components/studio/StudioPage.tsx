@@ -23,7 +23,7 @@ const principles = {
 
 const spanishBios = {
   Rafa: [
-    "Soy curiosa, creativa y bastante obsesiva con los detalles. Me gusta entender cómo funcionan las cosas, buscar ideas nuevas y encontrar maneras simples de resolver problemas.",
+    "Soy analista de sistemas, curiosa, creativa y bastante obsesiva con los detalles. Me gusta entender cómo funcionan las cosas, buscar ideas nuevas y encontrar maneras simples de resolver problemas.",
     "Lo que más disfruto de Lufinha es todo el proceso: pensar una idea con Luca, darle forma, probar, cambiar cosas y terminar viendo un proyecto real que antes solo existía en nuestra cabeza.",
     "Mi fuerte está en bajar ideas a tierra, entender lo que necesita cada cliente y encontrar ese equilibrio entre que algo se vea lindo y que también funcione de verdad.",
   ],
@@ -36,7 +36,7 @@ const spanishBios = {
 
 const englishBios = {
   Rafa: [
-    "I'm curious, creative and a little obsessive about details. I like understanding how things work, looking for new ideas and finding simple ways to solve problems.",
+    "I'm a systems analyst: curious, creative and a little obsessive about details. I like understanding how things work, looking for new ideas and finding simple ways to solve problems.",
     "What I enjoy most about Lufinha is the whole process: thinking up an idea with Luca, shaping it, testing it, changing things and seeing a real project that used to exist only in our heads.",
     "My strength is turning ideas into something tangible, understanding what each client needs and finding the balance between a good look and something that truly works.",
   ],

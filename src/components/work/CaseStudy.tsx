@@ -9,12 +9,15 @@ import { LiveBrowserPreview } from "@/components/projects/LiveBrowserPreview";
 import { ProjectBrand } from "@/components/projects/ProjectBrand";
 import { ArrowLeft, ArrowUpRight } from "@/components/ui/Icons";
 import { Aura } from "@/components/ui/Aura";
+import { ProductCaseStudy } from "@/components/work/ProductCaseStudy";
 import styles from "./CaseStudy.module.css";
 
 type CaseStyle = CSSProperties & Record<`--${string}`, string>;
 
 export function CaseStudy({ project, locale }: { project: LocalizedProject; locale: Locale }) {
-  if (project.previewOnly || !project.url || !project.caseStudy) return null;
+  if (project.previewOnly || (!project.caseStudy && !project.productCaseStudy)) return null;
+  if (project.productCaseStudy) return <ProductCaseStudy project={project} locale={locale} />;
+  if (!project.url || !project.caseStudy) return null;
   const projects = getLocalizedProjects(locale).filter((item) => !item.previewOnly);
   const currentIndex = projects.findIndex((item) => item.slug === project.slug);
   const nextProject = projects[(currentIndex + 1) % projects.length];

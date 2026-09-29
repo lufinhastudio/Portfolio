@@ -47,24 +47,31 @@
 .soft { --aura-opacity: 0.15; }
 .medium { --aura-opacity: 0.3; }
 .strong { --aura-opacity: 0.58; }
+.hero.strong { --aura-opacity: 0.68; }
 
 .hero {
   --aura-width: 116vw;
   --aura-height: clamp(20rem, 42vw, 35rem);
 }
 
-.hero.animated {
-  animation: headerAuraDrift 14s ease-in-out infinite alternate;
-  will-change: transform;
-}
-
 .hero .coral { left: 0; }
 .hero .orange { left: 31%; }
 .hero .yellow { right: 0; }
 
-.hero.animated .coral { animation: heroCoralDrift 12s ease-in-out infinite alternate; }
-.hero.animated .orange { animation: heroOrangeDrift 15s ease-in-out infinite alternate; }
-.hero.animated .yellow { animation: heroYellowDrift 13s ease-in-out infinite alternate; }
+/* Let each fixed-blur color layer drift far enough for the light to read as moving. */
+.hero.animated .layer { will-change: transform; }
+.hero.animated .coral {
+  transform: translate3d(-9%, -7%, 0) scale(0.96);
+  animation: heroCoralDrift 10s linear infinite;
+}
+.hero.animated .orange {
+  transform: translate3d(10%, -6%, 0) scale(1.045);
+  animation: heroOrangeDrift 12s linear infinite;
+}
+.hero.animated .yellow {
+  transform: translate3d(9%, -6%, 0) scale(0.98);
+  animation: heroYellowDrift 13s linear infinite;
+}
 
 .field {
   --aura-width: 100%;
@@ -132,61 +139,142 @@
   to { transform: translate3d(-2.5%, 1%, 0) scale(1.04); }
 }
 
-@keyframes headerAuraDrift {
-  from { transform: translate3d(0, -0.5rem, 0) scale(1); }
-  to { transform: translate3d(0, 2.75rem, 0) scale(1.02); }
-}
-
-@keyframes headerAuraDriftMobile {
-  from { transform: translate3d(0, -0.3rem, 0) scale(1); }
-  to { transform: translate3d(0, 1.65rem, 0) scale(1.012); }
-}
-
 @keyframes heroCoralDrift {
-  from { transform: translate3d(-9%, -7%, 0) scale(0.96); }
-  to { transform: translate3d(22%, 23%, 0) scale(1.09); }
+  0%, 100% { transform: translate3d(-21%, -11%, 0) scale(0.96); opacity: 1; }
+  6.25% { transform: translate3d(-16.45%, -10.24%, 0) scale(0.9623); opacity: 0.987; }
+  12.5% { transform: translate3d(-12.59%, -8.08%, 0) scale(0.9688); opacity: 0.949; }
+  18.75% { transform: translate3d(-10.01%, -4.85%, 0) scale(0.9785); opacity: 0.891; }
+  25% { transform: translate3d(-9%, -1%, 0) scale(0.99); opacity: 0.82; }
+  31.25% { transform: translate3d(-10.01%, 2.85%, 0) scale(1.0015); opacity: 0.749; }
+  37.5% { transform: translate3d(-12.59%, 6.08%, 0) scale(1.0112); opacity: 0.691; }
+  43.75% { transform: translate3d(-16.45%, 8.24%, 0) scale(1.0177); opacity: 0.653; }
+  50% { transform: translate3d(-21%, 9%, 0) scale(1.02); opacity: 0.64; }
+  56.25% { transform: translate3d(-25.55%, 8.24%, 0) scale(1.0177); opacity: 0.653; }
+  62.5% { transform: translate3d(-29.41%, 6.08%, 0) scale(1.0112); opacity: 0.691; }
+  68.75% { transform: translate3d(-31.99%, 2.85%, 0) scale(1.0015); opacity: 0.749; }
+  75% { transform: translate3d(-33%, -1%, 0) scale(0.99); opacity: 0.82; }
+  81.25% { transform: translate3d(-31.99%, -4.85%, 0) scale(0.9785); opacity: 0.891; }
+  87.5% { transform: translate3d(-29.41%, -8.08%, 0) scale(0.9688); opacity: 0.949; }
+  93.75% { transform: translate3d(-25.55%, -10.24%, 0) scale(0.9623); opacity: 0.987; }
 }
 
 @keyframes heroOrangeDrift {
-  from { transform: translate3d(10%, -6%, 0) scale(1.045); }
-  to { transform: translate3d(-21%, 22%, 0) scale(0.98); }
+  0%, 100% { transform: translate3d(24%, -10%, 0) scale(1.045); opacity: 1; }
+  6.25% { transform: translate3d(28.55%, -9.24%, 0) scale(1.0427); opacity: 0.983; }
+  12.5% { transform: translate3d(32.41%, -7.08%, 0) scale(1.0362); opacity: 0.933; }
+  18.75% { transform: translate3d(34.99%, -3.85%, 0) scale(1.0265); opacity: 0.859; }
+  25% { transform: translate3d(36%, 0%, 0) scale(1.015); opacity: 0.775; }
+  31.25% { transform: translate3d(34.99%, 3.85%, 0) scale(1.0035); opacity: 0.691; }
+  37.5% { transform: translate3d(32.41%, 7.08%, 0) scale(0.9938); opacity: 0.617; }
+  43.75% { transform: translate3d(28.55%, 9.24%, 0) scale(0.9873); opacity: 0.567; }
+  50% { transform: translate3d(24%, 10%, 0) scale(0.985); opacity: 0.55; }
+  56.25% { transform: translate3d(19.45%, 9.24%, 0) scale(0.9873); opacity: 0.567; }
+  62.5% { transform: translate3d(15.59%, 7.08%, 0) scale(0.9938); opacity: 0.617; }
+  68.75% { transform: translate3d(13.01%, 3.85%, 0) scale(1.0035); opacity: 0.691; }
+  75% { transform: translate3d(12%, 0%, 0) scale(1.015); opacity: 0.775; }
+  81.25% { transform: translate3d(13.01%, -3.85%, 0) scale(1.0265); opacity: 0.859; }
+  87.5% { transform: translate3d(15.59%, -7.08%, 0) scale(1.0362); opacity: 0.933; }
+  93.75% { transform: translate3d(19.45%, -9.24%, 0) scale(1.0427); opacity: 0.983; }
 }
 
 @keyframes heroYellowDrift {
-  from { transform: translate3d(9%, -6%, 0) scale(0.98); }
-  to { transform: translate3d(-22%, 21%, 0) scale(1.08); }
+  0%, 100% { transform: translate3d(24%, -10%, 0) scale(0.98); opacity: 1; }
+  6.25% { transform: translate3d(19.45%, -9.24%, 0) scale(0.983); opacity: 0.988; }
+  12.5% { transform: translate3d(15.59%, -7.08%, 0) scale(0.9917); opacity: 0.957; }
+  18.75% { transform: translate3d(13.01%, -3.85%, 0) scale(1.0047); opacity: 0.908; }
+  25% { transform: translate3d(12%, 0%, 0) scale(1.02); opacity: 0.85; }
+  31.25% { transform: translate3d(13.01%, 3.85%, 0) scale(1.0353); opacity: 0.792; }
+  37.5% { transform: translate3d(15.59%, 7.08%, 0) scale(1.0483); opacity: 0.743; }
+  43.75% { transform: translate3d(19.45%, 9.24%, 0) scale(1.057); opacity: 0.712; }
+  50% { transform: translate3d(24%, 10%, 0) scale(1.06); opacity: 0.7; }
+  56.25% { transform: translate3d(28.55%, 9.24%, 0) scale(1.057); opacity: 0.712; }
+  62.5% { transform: translate3d(32.41%, 7.08%, 0) scale(1.0483); opacity: 0.743; }
+  68.75% { transform: translate3d(34.99%, 3.85%, 0) scale(1.0353); opacity: 0.792; }
+  75% { transform: translate3d(36%, 0%, 0) scale(1.02); opacity: 0.85; }
+  81.25% { transform: translate3d(34.99%, -3.85%, 0) scale(1.0047); opacity: 0.908; }
+  87.5% { transform: translate3d(32.41%, -7.08%, 0) scale(0.9917); opacity: 0.957; }
+  93.75% { transform: translate3d(28.55%, -9.24%, 0) scale(0.983); opacity: 0.988; }
+}
+
+@media (max-width: 600px) {
+  @keyframes heroCoralDriftMobile {
+    0%, 100% { transform: translate3d(-6.00%, -7.60%, 0) scale(0.97); opacity: 1.000; }
+    6.25% { transform: translate3d(-3.12%, -7.09%, 0) scale(0.9719); opacity: 0.991; }
+    12.5% { transform: translate3d(-0.70%, -5.66%, 0) scale(0.9773); opacity: 0.968; }
+    18.75% { transform: translate3d(0.92%, -3.53%, 0) scale(0.9854); opacity: 0.933; }
+    25% { transform: translate3d(1.50%, -1.00%, 0) scale(0.995); opacity: 0.891; }
+    31.25% { transform: translate3d(0.92%, 1.53%, 0) scale(1.0046); opacity: 0.849; }
+    37.5% { transform: translate3d(-0.70%, 3.66%, 0) scale(1.0127); opacity: 0.814; }
+    43.75% { transform: translate3d(-3.12%, 5.09%, 0) scale(1.0181); opacity: 0.791; }
+    50% { transform: translate3d(-6.00%, 5.60%, 0) scale(1.02); opacity: 0.782; }
+    56.25% { transform: translate3d(-8.88%, 5.09%, 0) scale(1.0181); opacity: 0.791; }
+    62.5% { transform: translate3d(-11.30%, 3.66%, 0) scale(1.0127); opacity: 0.814; }
+    68.75% { transform: translate3d(-12.92%, 1.53%, 0) scale(1.0046); opacity: 0.849; }
+    75% { transform: translate3d(-13.50%, -1.00%, 0) scale(0.995); opacity: 0.891; }
+    81.25% { transform: translate3d(-12.92%, -3.53%, 0) scale(0.9854); opacity: 0.933; }
+    87.5% { transform: translate3d(-11.30%, -5.66%, 0) scale(0.9773); opacity: 0.968; }
+    93.75% { transform: translate3d(-8.88%, -7.09%, 0) scale(0.9719); opacity: 0.991; }
+  }
+
+  @keyframes heroOrangeDriftMobile {
+    0%, 100% { transform: translate3d(8.00%, -7.60%, 0) scale(1.04); opacity: 1.000; }
+    6.25% { transform: translate3d(10.88%, -7.09%, 0) scale(1.0381); opacity: 0.990; }
+    12.5% { transform: translate3d(13.30%, -5.66%, 0) scale(1.0327); opacity: 0.962; }
+    18.75% { transform: translate3d(14.92%, -3.53%, 0) scale(1.0246); opacity: 0.919; }
+    25% { transform: translate3d(15.50%, -1.00%, 0) scale(1.015); opacity: 0.870; }
+    31.25% { transform: translate3d(14.92%, 1.53%, 0) scale(1.0054); opacity: 0.820; }
+    37.5% { transform: translate3d(13.30%, 3.66%, 0) scale(0.9973); opacity: 0.777; }
+    43.75% { transform: translate3d(10.88%, 5.09%, 0) scale(0.9919); opacity: 0.749; }
+    50% { transform: translate3d(8.00%, 5.60%, 0) scale(0.99); opacity: 0.739; }
+    56.25% { transform: translate3d(5.12%, 5.09%, 0) scale(0.9919); opacity: 0.749; }
+    62.5% { transform: translate3d(2.70%, 3.66%, 0) scale(0.9973); opacity: 0.777; }
+    68.75% { transform: translate3d(1.08%, 1.53%, 0) scale(1.0054); opacity: 0.820; }
+    75% { transform: translate3d(0.50%, -1.00%, 0) scale(1.015); opacity: 0.870; }
+    81.25% { transform: translate3d(1.08%, -3.53%, 0) scale(1.0246); opacity: 0.919; }
+    87.5% { transform: translate3d(2.70%, -5.66%, 0) scale(1.0327); opacity: 0.962; }
+    93.75% { transform: translate3d(5.12%, -7.09%, 0) scale(1.0381); opacity: 0.990; }
+  }
+
+  @keyframes heroYellowDriftMobile {
+    0%, 100% { transform: translate3d(7.00%, -7.60%, 0) scale(0.98); opacity: 1.000; }
+    6.25% { transform: translate3d(4.12%, -7.09%, 0) scale(0.9819); opacity: 0.993; }
+    12.5% { transform: translate3d(1.70%, -5.66%, 0) scale(0.9873); opacity: 0.972; }
+    18.75% { transform: translate3d(0.08%, -3.53%, 0) scale(0.9954); opacity: 0.942; }
+    25% { transform: translate3d(-0.50%, -1.00%, 0) scale(1.005); opacity: 0.906; }
+    31.25% { transform: translate3d(0.08%, 1.53%, 0) scale(1.0146); opacity: 0.870; }
+    37.5% { transform: translate3d(1.70%, 3.66%, 0) scale(1.0227); opacity: 0.839; }
+    43.75% { transform: translate3d(4.12%, 5.09%, 0) scale(1.0281); opacity: 0.819; }
+    50% { transform: translate3d(7.00%, 5.60%, 0) scale(1.03); opacity: 0.811; }
+    56.25% { transform: translate3d(9.88%, 5.09%, 0) scale(1.0281); opacity: 0.819; }
+    62.5% { transform: translate3d(12.30%, 3.66%, 0) scale(1.0227); opacity: 0.839; }
+    68.75% { transform: translate3d(13.92%, 1.53%, 0) scale(1.0146); opacity: 0.870; }
+    75% { transform: translate3d(14.50%, -1.00%, 0) scale(1.005); opacity: 0.906; }
+    81.25% { transform: translate3d(13.92%, -3.53%, 0) scale(0.9954); opacity: 0.942; }
+    87.5% { transform: translate3d(12.30%, -5.66%, 0) scale(0.9873); opacity: 0.972; }
+    93.75% { transform: translate3d(9.88%, -7.09%, 0) scale(0.9819); opacity: 0.993; }
+  }
 }
 
 @media (max-width: 600px) {
   .aura { transform: scale(0.86); }
   .hero { width: 145vw; height: 22rem; transform: none; }
-  .hero.animated { animation-name: headerAuraDriftMobile; animation-duration: 14s; }
-  .hero.animated .coral { animation-name: heroCoralDriftMobile; }
-  .hero.animated .orange { animation-name: heroOrangeDriftMobile; }
-  .hero.animated .yellow { animation-name: heroYellowDriftMobile; }
+.hero.animated .coral { transform: translate3d(-6%, -4%, 0) scale(0.97); animation-name: heroCoralDriftMobile; }
+  .hero.animated .orange { transform: translate3d(8%, -4%, 0) scale(1.04); animation-name: heroOrangeDriftMobile; }
+  .hero.animated .yellow { transform: translate3d(7%, -4%, 0) scale(0.98); animation-name: heroYellowDriftMobile; }
   .field { inset: 0; width: 100%; height: 100%; transform: none; }
-  .strong { --aura-opacity: 0.48; }
+  .hero.strong { --aura-opacity: 0.58; }
   .medium { --aura-opacity: 0.24; }
   .soft { --aura-opacity: 0.12; }
 }
 
-@keyframes heroCoralDriftMobile {
-  from { transform: translate3d(-6%, -4%, 0) scale(0.97); }
-  to { transform: translate3d(18%, 20%, 0) scale(1.08); }
-}
 
-@keyframes heroOrangeDriftMobile {
-  from { transform: translate3d(8%, -4%, 0) scale(1.04); }
-  to { transform: translate3d(-17%, 18%, 0) scale(0.985); }
-}
 
-@keyframes heroYellowDriftMobile {
-  from { transform: translate3d(7%, -4%, 0) scale(0.98); }
-  to { transform: translate3d(-18%, 17%, 0) scale(1.075); }
-}
+
 
 @media (prefers-reduced-motion: reduce) {
   .hero.animated { animation: none; transform: none; will-change: auto; }
-  .hero.animated .layer { animation: none; }
+  .hero.animated .coral,
+  .hero.animated .orange,
+  .hero.animated .yellow { animation: none; will-change: auto; }
   .animated .layer { animation: none; will-change: auto; }
 }

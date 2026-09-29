@@ -24,10 +24,42 @@ export type ProjectHighlight = {
   text: string;
 };
 
+export type ProductCaseStudySection = {
+  eyebrow: string;
+  title: string;
+  text: string;
+  image?: ProjectImage;
+  images?: ProjectImage[];
+  caption?: string;
+  points?: string[];
+  layout?: "split" | "wide";
+};
+
+export type ProductCaseStudyLink = {
+  label: string;
+  href: string;
+};
+
+export type ProductCaseStudy = {
+  heroImage?: ProjectImage;
+  lead: string;
+  role: string;
+  challengeTitle: string;
+  challenge: string;
+  sections: ProductCaseStudySection[];
+  modulesLabel: string;
+  modules: string[];
+  technologyLabel: string;
+  technologies: string[];
+  closing: string;
+  links?: ProductCaseStudyLink[];
+};
+
 export type ProjectCopy = {
   category: string;
   description: string;
   services: string[];
+  productCaseStudy?: ProductCaseStudy;
   caseStudy?: {
     statement: string;
     challenge: string;

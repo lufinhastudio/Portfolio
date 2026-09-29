@@ -75,7 +75,7 @@ export const studioContent = {
       body: "Somos un estudio de diseño y desarrollo. Vas a hablar directamente con quienes piensan y hacen el trabajo.",
       people: "Las personas detrás del trabajo",
       shortBios: {
-        Rafa: "Soy curiosa, creativa y obsesiva con los detalles. Bajo ideas a tierra y busco ese equilibrio entre que algo se vea lindo y funcione de verdad.",
+        Rafa: "Soy analista de sistemas, curiosa, creativa y obsesiva con los detalles. Bajo ideas a tierra y busco ese equilibrio entre que algo se vea lindo y funcione de verdad.",
         Luca: "Estudio Sistemas y disfruto crear cosas desde cero. Me interesan el desarrollo, la tecnología y especialmente la ciberseguridad.",
       },
     },
@@ -175,7 +175,7 @@ export const studioContent = {
       body: "We're a design and development studio. You'll speak directly with the people thinking through and doing the work.",
       people: "The people behind the work",
       shortBios: {
-        Rafa: "I'm curious, creative and focused on details. I turn ideas into something real and look for the balance between a good look and a good result.",
+        Rafa: "I'm a systems analyst, curious, creative and focused on details. I turn ideas into something real and look for the balance between a good look and a good result.",
         Luca: "I study systems and enjoy building things from scratch. I'm interested in development, technology and especially cybersecurity.",
       },
     },
