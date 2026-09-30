@@ -38,6 +38,14 @@
   padding: clamp(3.4rem, 7vw, 6.5rem) 0 clamp(2.5rem, 5vw, 4rem);
 }
 
+.productLed .heading {
+  max-width: 62rem;
+  padding-block: clamp(2.75rem, 5vw, 4.5rem) clamp(2rem, 3.5vw, 3rem);
+}
+
+.productLed .title { font-size: clamp(3rem, 5.6vw, 5.2rem); }
+.productLed .lead { max-width: 46rem; }
+
 .eyebrow,
 .sectionLabel {
   color: var(--product-accent);
@@ -77,6 +85,7 @@
 .metadata div { min-width: 0; }
 .metadata dt { color: var(--site-muted); font-size: .62rem; letter-spacing: .07em; text-transform: uppercase; }
 .metadata dd { margin-top: .4rem; font-size: .93rem; line-height: 1.45; }
+.mobileDetails { display: none; }
 
 .visit {
   display: inline-flex;
@@ -105,6 +114,26 @@
 .figure > a { position: relative; display: block; width: 100%; overflow: hidden; }
 .figure img { object-fit: contain; }
 
+.responsiveFigure { min-width: 0; }
+
+.responsiveFrame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: var(--desktop-ratio);
+  overflow: hidden;
+  border: 1px solid var(--site-line);
+  border-radius: 2px;
+  background: var(--product-paper);
+}
+
+.responsiveFrame picture {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+.responsiveFrame img { object-fit: contain; }
+
 .heroImage {
   position: relative;
   overflow: hidden;
@@ -121,6 +150,7 @@
   color: var(--site-muted);
   font-size: .72rem;
   line-height: 1.5;
+  background: var(--site-bg);
 }
 
 .figure figcaption .mono { flex: none; color: var(--product-accent); font-size: .62rem; text-transform: uppercase; }
@@ -177,6 +207,9 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(1rem, 2vw, 1.75rem);
 }
+
+.editorialGrid { grid-template-columns: minmax(0, 1.22fr) minmax(18rem, .78fr); }
+.supportingFigure { align-self: end; width: 88%; justify-self: end; }
 
 .moduleImage > a { aspect-ratio: 1.7; outline-offset: 4px; }
 .moduleImage img { padding: clamp(.5rem, 1.3vw, 1.1rem); }
@@ -254,18 +287,32 @@
 .next:hover svg { transform: translate(3px, -3px); color: var(--product-accent); }
 
 @media (max-width: 760px) {
-  .hero { padding-top: calc(var(--header-height) + .9rem); }
-  .top { align-items: flex-start; flex-direction: column; gap: .3rem; padding-bottom: .5rem; }
-  .top a { min-height: 2.5rem; }
-  .top > span { padding-bottom: .35rem; }
-  .heading { padding: 2.8rem 0 2rem; }
-  .title { max-width: 12ch; margin-top: .7rem; font-size: clamp(2.8rem, 12vw, 4.25rem); }
-  .lead { margin-top: 1rem; font-size: 1.16rem; }
-  .metadata { grid-template-columns: 1fr; gap: .9rem; margin-top: 1.5rem; padding: .9rem 0; }
+  .hero { padding-top: calc(var(--header-height) + .75rem); }
+  .top { align-items: center; flex-direction: row; gap: 1rem; padding-bottom: .65rem; }
+  .top a { min-height: 2.75rem; }
+  .top > span { max-width: 45%; padding-bottom: 0; font-size: .58rem; text-align: right; }
+  .heading { padding: 2rem 0 1.35rem; }
+  .productLed .heading { padding: 1.75rem 0 1.25rem; }
+  .productLed .title { font-size: clamp(2.4rem, 10vw, 3.25rem); }
+  .eyebrow { display: none; }
+  .title { max-width: 13ch; margin-top: 0; font-size: clamp(2.55rem, 10.5vw, 3.75rem); }
+  .lead { max-width: 34rem; margin-top: .85rem; font-size: clamp(1.03rem, 4.6vw, 1.14rem); line-height: 1.48; }
+  .desktopMetadata { display: none; }
+  .metadata { grid-template-columns: 1fr; gap: .9rem; margin-top: 0; padding: 1rem 0 0; border-bottom: 0; }
   .metadata dd { margin-top: .25rem; font-size: .88rem; }
-  .heroImage > a { aspect-ratio: 1.45; }
-  .moduleImage > a { aspect-ratio: 1.45; }
-  .moduleMediaGrid { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
+  .visitLinks { margin-top: 1.35rem; }
+  .visit { min-height: 2.75rem; margin-top: 0; }
+  .heroImage > a,
+  .moduleImage > a { aspect-ratio: 16 / 9; }
+  .responsiveFrame { aspect-ratio: var(--mobile-ratio); }
+  .mobileDetails { display: block; margin-top: 1rem; border-top: 1px solid var(--site-line); border-bottom: 1px solid var(--site-line); }
+  .mobileDetails summary { display: flex; justify-content: space-between; align-items: center; min-height: 3.25rem; color: var(--site-muted); font-size: .78rem; font-weight: 650; cursor: pointer; list-style: none; }
+  .mobileDetails summary::-webkit-details-marker { display: none; }
+  .mobileDetails summary span { font-size: 1.1rem; font-weight: 400; transition: transform 180ms ease; }
+  .mobileDetails[open] summary span { transform: rotate(45deg); }
+  .moduleMediaGrid,
+  .editorialGrid { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
+  .supportingFigure { width: 100%; justify-self: stretch; }
   .figure figcaption { align-items: flex-start; flex-direction: column; gap: .2rem; font-size: .68rem; }
   .figure figcaption .mono { font-size: .58rem; }
   .challenge,

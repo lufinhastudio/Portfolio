@@ -138,10 +138,13 @@
 
 @media (max-width: 640px) {
   .widget {
-    right: 1rem;
-    bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+    right: max(.8rem, env(safe-area-inset-right, 0px));
+    bottom: calc(.8rem + env(safe-area-inset-bottom, 0px));
   }
-
+  .trigger { width: 3.25rem; min-height: 3.25rem; padding: .4rem; }
+  .icon { width: 2.35rem; height: 2.35rem; }
+  .icon svg { width: 1.35rem; }
+  .panel { width: min(21rem, calc(100vw - 1.6rem)); max-height: calc(100svh - var(--header-height) - 5rem); overflow-y: auto; }
 }
 
 @media (prefers-reduced-motion: reduce) {

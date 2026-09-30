@@ -34,7 +34,7 @@
 }
 
 .intro {
-  width: clamp(7.5rem, 12vw, 12rem);
+  width: clamp(9rem, 16vw, 15rem);
   margin-bottom: clamp(1rem, 2vw, 1.5rem);
 }
 
@@ -55,7 +55,7 @@
   }
 
   .intro {
-    width: clamp(7.5rem, 38vw, 10.5rem);
+    width: clamp(9rem, 46vw, 12rem);
     margin-bottom: 1rem;
   }
 }

@@ -239,10 +239,16 @@
   .mobileOpen .navLink::after { bottom: 0; width: 2rem; }
 }
 
-@media (max-width: 360px) {
+@media (max-width: 430px) {
+  .header { gap: .2rem; }
   .brandDescriptor { display: none; }
+  .languageOption { min-width: 2rem; min-height: 2.75rem; padding-inline: .3rem; }
+  .menuButton { width: 2.75rem; gap: 0; }
+  .menuButton > span:first-child { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); }
+}
+
+@media (max-width: 360px) {
   .menuButton { gap: 0.25rem; }
-  .menuButton > span:first-child { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {

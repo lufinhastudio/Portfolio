@@ -31,7 +31,7 @@ export function CaseStudy({ project, locale }: { project: LocalizedProject; loca
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(projectJsonLd(project, locale)) }} />
       <section className={styles.hero}>
         <div className={`${styles.top} mono`}><Link href={localePath(locale, "/work")}><ArrowLeft size="0.9em" /> {content.allProjects}</Link><span>{project.category}</span><span className={styles.services}>{project.services.join(" · ")}</span></div>
-        <div className={styles.titleWrap}><ProjectBrand logo={project.brandLogo} placement="intro" /><h1 className={`${styles.title} display`}>{project.name}</h1></div>
+        <div className={styles.titleWrap}><ProjectBrand logo={project.brandLogo} placement="intro" /><h1 className={project.brandLogo ? "sr-only" : `${styles.title} display`}>{project.name}</h1></div>
         <div className={styles.bottom}><span className="mono">{project.index} / {project.year}</span><p className={styles.statement}>{project.description}</p><a className={`${styles.siteLink} mono`} href={project.url}>{content.visitSite} <ArrowUpRight size="0.9em" /></a></div>
       </section>
       <div className={styles.cover}><Image data-parallax src={project.cover.src} alt={project.cover.alt} fill priority sizes="100vw" style={{ objectPosition: project.cover.position ?? "center" }} /><ProjectBrand logo={project.brandLogo} placement="cover" /></div>

@@ -78,10 +78,10 @@ function StudioPerson({ person, number, locale }: { person: StudioPersonData; nu
   ];
   return (
     <article className={styles.person} data-studio-sequence>
+      <Aura className={styles.personSectionAura} variant="corner" intensity="soft" position={person.name === "Rafa" ? "top-right" : "bottom-left"} tone={person.name === "Rafa" ? "coral" : "orange"} />
       <span className={`mono ${styles.personNumber}`} data-studio-step>{String(number).padStart(2, "0")}</span>
       {person.photo ? <div className={styles.portraitStage} data-studio-step>
-        <Aura className={styles.personAura} variant="accent" intensity="soft" position="bottom-left" tone={person.name === "Rafa" ? "coral" : "orange"} />
-        <div className={styles.personPortrait} data-studio-portrait><Image src={person.photo} alt={`${person.name} — Lufinha Studio`} fill sizes="(max-width: 760px) 72vw, (max-width: 1050px) 280px, 320px" style={{ objectPosition: person.name === "Luca" ? "center 40%" : "center" }} /></div>
+        <div className={styles.personPortrait} data-studio-portrait><Image src={person.photo} alt={`${person.name} — Lufinha Studio`} fill loading={person.name === "Rafa" ? "eager" : "lazy"} sizes="(max-width: 760px) 72vw, (max-width: 1050px) 280px, 320px" style={{ objectPosition: person.name === "Luca" ? "center 40%" : "center" }} /></div>
       </div> : null}
       <div className={styles.personDetails}>
         <h3 className={`${styles.personName} display`} data-studio-step>{person.name}</h3>

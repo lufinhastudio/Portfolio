@@ -19,6 +19,13 @@ export type ProjectBrandLogo = ProjectImage & {
   contrast: "light" | "dark";
 };
 
+export type ResponsiveProjectImage = {
+  desktop: ProjectImage;
+  mobile: ProjectImage;
+  caption?: string;
+  treatment?: "primary" | "supporting";
+};
+
 export type ProjectHighlight = {
   title: string;
   text: string;
@@ -30,6 +37,7 @@ export type ProductCaseStudySection = {
   text: string;
   image?: ProjectImage;
   images?: ProjectImage[];
+  responsiveImages?: ResponsiveProjectImage[];
   caption?: string;
   points?: string[];
   layout?: "split" | "wide";
@@ -42,6 +50,8 @@ export type ProductCaseStudyLink = {
 
 export type ProductCaseStudy = {
   heroImage?: ProjectImage;
+  heroMedia?: ResponsiveProjectImage;
+  presentation?: "default" | "product-led";
   lead: string;
   role: string;
   challengeTitle: string;
@@ -53,6 +63,7 @@ export type ProductCaseStudy = {
   technologies: string[];
   closing: string;
   links?: ProductCaseStudyLink[];
+  cta?: ProductCaseStudyLink;
 };
 
 export type ProjectCopy = {

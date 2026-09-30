@@ -82,17 +82,11 @@ export function ContactPage({ locale }: { locale: Locale }) {
   return (
     <main className={styles.page} lang={locale}>
       <Aura variant="field" intensity="medium" position="center" />
-      <div className={styles.kicker}><span>{t.label}</span><span>{siteConfig.contact.location}</span></div>
+      <div className={styles.kicker}><span>{siteConfig.contact.location}</span><span>{t.label}</span></div>
       <div className={styles.grid}>
         <div className={styles.intro}>
           <h1 className={`${styles.title} display`}>{t.title}</h1>
           <p className={styles.description}>{t.intro}</p>
-          <div className={styles.direct}>
-            <span className="mono">{t.direct}</span>
-            <a href={`mailto:${siteConfig.contact.email}`}>Email <span>{siteConfig.contact.email}</span><ArrowUpRight size="0.9em" /></a>
-            {whatsappContacts.map((contact) => <a href={contact.href} key={contact.name} target="_blank" rel="noopener noreferrer">WhatsApp · {contact.name}<span>{contact.phone}</span><ArrowUpRight size="0.9em" /></a>)}
-            <small>{t.response}</small>
-          </div>
         </div>
         <form className={styles.form} id="contact-form" onSubmit={handleSubmit}>
           <div className={styles.row}>
@@ -104,6 +98,12 @@ export function ContactPage({ locale }: { locale: Locale }) {
           <label className={styles.trap} aria-hidden="true">Website<input name="website" type="text" tabIndex={-1} autoComplete="off" /></label>
           <div className={styles.submitRow}><button className={styles.submit} type="submit" disabled={status === "sending"}><span>{status === "sending" ? t.sending : t.send}</span><span aria-hidden="true"><ArrowUpRight size="1.2em" /></span></button><p className={`${styles.feedback} ${status === "error" ? styles.error : ""}`} role="status" aria-live="polite">{feedback}</p></div>
         </form>
+        <div className={styles.direct}>
+          <span className={styles.directTitle}>{locale === "es" ? "¿Preferís escribirnos directamente?" : "Would you rather contact us directly?"}</span>
+          <a href={`mailto:${siteConfig.contact.email}`}><span className={styles.directLabel}>Email</span><span>{siteConfig.contact.email}</span><ArrowUpRight size="0.9em" /></a>
+          {whatsappContacts.map((contact) => <a href={contact.href} key={contact.name} target="_blank" rel="noopener noreferrer"><span className={styles.directLabel}>WhatsApp · {contact.name}</span><span>{contact.phone}</span><ArrowUpRight size="0.9em" /></a>)}
+          <small>{t.response}</small>
+        </div>
       </div>
     </main>
   );
