@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { siteConfig } from "@/config/site";
+import { renderContactEmail } from "@/lib/contactEmail";
 
 export const runtime = "nodejs";
 
@@ -38,6 +39,7 @@ export async function POST(request: Request) {
   }
 
   try {
+    const content = renderContactEmail({ name, email, phone, company, message });
     const response = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
@@ -46,7 +48,8 @@ export async function POST(request: Request) {
         to: [process.env.CONTACT_TO_EMAIL?.trim() || siteConfig.contact.email],
         reply_to: email,
         subject: `Nuevo proyecto — ${name.replace(/[\r\n]/g, " ").slice(0, 80)}`,
-        text: `Nombre: ${name}\nEmail: ${email}\nTeléfono: ${phone}\nEmpresa / proyecto: ${company || "No indicado"}\n\nMensaje:\n${message || "No indicado"}`,
+        html: content.html,
+        text: content.text,
       }),
       cache: "no-store",
     });
