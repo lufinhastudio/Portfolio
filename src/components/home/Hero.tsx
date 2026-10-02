@@ -58,9 +58,6 @@ export function Hero({ locale }: { locale: Locale }) {
           </Link>
         </div>
       </div>
-      <div className={styles.bottomline}>
-        <span className="mono">01 — 05 / {locale === "es" ? "Trabajo seleccionado" : "Selected work"}</span>
-      </div>
 
       {isIntroMounted && (
         <div className={styles.introOverlay} aria-hidden="true">

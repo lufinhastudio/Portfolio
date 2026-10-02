@@ -20,7 +20,6 @@ export function WorkIndex({ locale }: { locale: Locale }) {
       <Aura variant="corner" intensity="soft" position="top-right" />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }} />
       <header className={styles.hero}>
-        <p className="mono">{content.work.eyebrow}</p>
         <h1 className={`${styles.title} display`}>{locale === "es" ? "Trabajo." : "Work."}</h1>
         <div className={styles.heroFoot}><p>{locale === "es" ? "Una selección de páginas, tiendas y sistemas que diseñamos y desarrollamos." : "A selection of websites, stores and systems we designed and built."}</p><span className="mono">{String(projects.length).padStart(2, "0")} {content.work.count}</span></div>
       </header>

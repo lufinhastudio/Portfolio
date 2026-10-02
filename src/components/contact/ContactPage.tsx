@@ -10,8 +10,8 @@ import styles from "@/app/contacto/contact.module.css";
 const copy = {
   es: {
     label: "Contacto",
-    title: "Contanos qué tenés en mente.",
-    intro: "No hace falta que tengas todo definido. Contanos la idea y la pensamos juntos.",
+    title: "Hablemos de tu proyecto.",
+    intro: "Dejanos tu consulta o mensaje y te responderemos personalmente.",
     name: "Nombre", email: "Email", phone: "Teléfono", company: "Empresa / proyecto", message: "Mensaje",
     companyHint: "Opcional", namePlaceholder: "Tu nombre", emailPlaceholder: "tu@email.com",
     phonePlaceholder: "+54 9 11 1234 5678", companyPlaceholder: "Nombre de tu empresa o proyecto", messagePlaceholder: "¿Qué necesitás resolver? Contanos el contexto, la idea o el desafío.",
@@ -22,8 +22,8 @@ const copy = {
   },
   en: {
     label: "Contact",
-    title: "Tell us what you have in mind.",
-    intro: "You don't need to have it all figured out. Share the idea and we'll think it through together.",
+    title: "Let's talk about your project.",
+    intro: "Leave us your enquiry or message and we'll reply personally.",
     name: "Name", email: "Email", phone: "Phone", company: "Company / project", message: "Message",
     companyHint: "Optional", namePlaceholder: "Your name", emailPlaceholder: "you@email.com",
     phonePlaceholder: "+1 555 123 4567", companyPlaceholder: "Company or project name", messagePlaceholder: "What do you need to solve? Tell us about the context, idea or challenge.",

@@ -11,7 +11,6 @@
 }
 
 .topline { position: relative; z-index: 1; display: flex; justify-content: flex-end; gap: 1rem; color: var(--site-muted); font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; }
-.bottomline { position: relative; z-index: 1; display: flex; justify-content: space-between; gap: 1rem; color: var(--site-muted); font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; padding-top: 1rem; border-top: 1px solid var(--site-line); }
 .main { position: relative; z-index: 1; width: min(100%, 1260px); display: grid; grid-template-columns: minmax(0, 1fr); justify-items: center; gap: clamp(1.25rem, 3vh, 2rem); align-items: center; margin-inline: auto; padding-block: clamp(2.5rem, 5vh, 4rem); text-align: center; }
 .title { width: 100%; max-width: 74rem; font-size: clamp(3.5rem, 6.9vw, 6.25rem); line-height: .96; letter-spacing: -.055em; }
 .aside { max-width: 42rem; padding-bottom: .15rem; }
@@ -126,8 +125,7 @@
 .introPlaying .title,
 .introPlaying .aside,
 .introPlaying .workLink,
-.introPlaying .barWrap,
-.introPlaying .bottomline {
+.introPlaying .barWrap {
   opacity: 0;
   transform: translateY(14px);
 }
@@ -142,10 +140,6 @@
 
 .introPlaying .aside {
   animation: heroItemReveal 0.55s var(--ease-out) 1.22s forwards;
-}
-
-.introPlaying .bottomline {
-  animation: heroItemReveal 0.5s var(--ease-out) 1.30s forwards;
 }
 
 .introPlaying .workLink {
@@ -231,21 +225,6 @@
     font-size: 0.78rem;
     gap: 0.4rem;
   }
-
-  .bottomline {
-    display: flex;
-    justify-content: center;
-    border-top: 1px solid var(--site-line);
-    padding-top: 0.85rem;
-    font-size: 0.62rem;
-    letter-spacing: 0.08em;
-  }
-  .bottomline span:first-child {
-    display: inline-block;
-  }
-  .bottomline span:last-child {
-    display: inline-block;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -256,8 +235,7 @@
   .introPlaying .title,
   .introPlaying .aside,
   .introPlaying .workLink,
-  .introPlaying .barWrap,
-  .introPlaying .bottomline {
+  .introPlaying .barWrap {
     opacity: 1 !important;
     transform: none !important;
     animation: none !important;

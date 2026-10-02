@@ -102,7 +102,7 @@ export function StudioPage({ locale }: { locale: Locale }) {
     <main className={styles.page} lang={locale}>
       <section className={styles.hero} data-studio-intro>
         <Aura variant="corner" intensity="medium" position="top-right" />
-        <div className={styles.eyebrow} data-studio-step><span className="mono">{locale === "es" ? "El estudio / Entre Ríos, Argentina" : "The studio / Entre Ríos, Argentina"}</span><span className="mono">Lufinha Studio</span></div>
+        <div className={styles.eyebrow} data-studio-step><span className="mono">Lufinha Studio</span></div>
         <div className={styles.heroCopy}><h1 className={`${styles.title} display`} data-studio-step>{content.title}</h1><p data-studio-step>{locale === "es" ? "Somos un estudio de diseño y desarrollo. Vas a hablar directamente con quienes piensan, diseñan y construyen tu proyecto." : "We are a design and development studio. You'll speak directly with the people who think through, design and build your project."}</p></div>
         <div className={styles.heroFoot}><span className="mono">{locale === "es" ? "Dos personas, un mismo estudio." : "Two people, one studio."}</span><span className="mono">{locale === "es" ? "Diseño · desarrollo · proyectos reales" : "Design · development · real projects"}</span></div>
       </section>

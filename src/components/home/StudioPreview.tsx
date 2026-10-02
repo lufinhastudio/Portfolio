@@ -1,8 +1,7 @@
 import Image from "next/image";
-import Link from "next/link";
 import type { Locale } from "@/types/project";
 import { getStudioContent } from "@/content";
-import { localePath, siteConfig } from "@/config/site";
+import { siteConfig } from "@/config/site";
 import { ArrowUpRight } from "@/components/ui/Icons";
 import { Aura } from "@/components/ui/Aura";
 import styles from "./StudioPreview.module.css";
@@ -13,7 +12,6 @@ export function StudioPreview({ locale }: { locale: Locale }) {
     <section className={styles.section} aria-labelledby="studio-preview-title">
       <Aura variant="accent" intensity="soft" position="top-left" />
       <header className={styles.intro} data-studio-intro>
-        <p className="mono" data-studio-step>{content.eyebrow} / {locale === "es" ? siteConfig.contact.location : "Argentina"}</p>
         <div>
           <h2 className={`${styles.title} display`} id="studio-preview-title" data-studio-step>{locale === "es" ? "Rafa y Luca, de principio a fin." : "Rafa and Luca, from start to finish."}</h2>
           <p className={styles.body} data-studio-step>{content.body}</p>
@@ -46,7 +44,6 @@ export function StudioPreview({ locale }: { locale: Locale }) {
           );
         })}
       </div>
-      <Link className={styles.link} href={localePath(locale, "/studio")}>{content.people}<ArrowUpRight size="1em" aria-hidden="true" /></Link>
     </section>
   );
 }

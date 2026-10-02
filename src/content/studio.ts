@@ -17,7 +17,7 @@ export const studioContent = {
       after: "Construimos sitios para recorrer, elegir y recordar.",
     },
     work: {
-      eyebrow: "Proyectos / 06",
+      eyebrow: "Trabajo seleccionado / 06",
       title: "Algunos proyectos que hicimos.",
       description: "Páginas, tiendas y sistemas hechos para resolver necesidades reales.",
       live: "Vista del proyecto",
@@ -117,7 +117,7 @@ export const studioContent = {
       after: "We build sites to explore, choose and remember.",
     },
     work: {
-      eyebrow: "Work / 06",
+      eyebrow: "Selected work / 06",
       title: "Some projects we've made.",
       description: "Websites, stores and systems made to solve real needs.",
       live: "Project preview",
