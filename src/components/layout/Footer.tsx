@@ -14,29 +14,36 @@ export function Footer() {
   const locale = localeFromPathname(pathname);
   const content = getStudioContent(locale).contact;
   const links = getSocialLinks();
+  const footerLinks = links.filter((link) => link.kind !== "whatsapp");
   const isContactPage = pathname === "/contacto" || pathname === "/en/contact";
+
   return (
     <footer className={styles.footer} id="contact">
       <Aura variant="band" intensity="soft" position="bottom-left" />
-      {!isContactPage ? <section className={styles.contact} aria-labelledby="footer-contact-title">
-        <div className={`${styles.eyebrow} mono`}>
-          <span>{content.eyebrow}</span>
-          <span>{siteConfig.contact.location}</span>
-        </div>
-        <div className={styles.callout}>
-          <h2 className={`${styles.title} display`} id="footer-contact-title" data-reveal>{content.title}</h2>
-          <p>{content.body}</p>
-        </div>
-        <Link className={styles.mail} href={localePath(locale, locale === "es" ? "/contacto" : "/contact")}>
-          <span>{content.cta}</span>
-          <span className={styles.address}>{siteConfig.contact.email}</span>
-          <span className={styles.arrow} aria-hidden="true"><ArrowUpRight size="1.1em" /></span>
-        </Link>
-      </section> : null}
+      {!isContactPage ? (
+        <section className={styles.contact} aria-labelledby="footer-contact-title">
+          <div className={styles.callout}>
+            <h2 className={`${styles.title} display`} id="footer-contact-title" data-reveal>
+              {content.title}
+            </h2>
+            <p>{content.body}</p>
+          </div>
+          <Link className={styles.mail} href={localePath(locale, locale === "es" ? "/contacto" : "/contact")}>
+            <span>{content.cta}</span>
+            <span className={styles.address}>{siteConfig.contact.email}</span>
+            <span className={styles.arrow} aria-hidden="true">
+              <ArrowUpRight size="1.1em" />
+            </span>
+          </Link>
+        </section>
+      ) : null}
       <div className={`${styles.bottom} mono`}>
-        <span>© {new Date().getFullYear()} Lufinha Studio</span>
+        <div className={styles.credits}>
+          <ArgentinaFlag size={16} />
+          <span>© {new Date().getFullYear()} Lufinha Studio</span>
+        </div>
         <nav className={styles.socials} aria-label={locale === "es" ? "Canales de contacto" : "Contact channels"}>
-          {links.map((link) => (
+          {footerLinks.map((link) => (
             <a
               className={styles.socialLink}
               key={link.label}
@@ -50,12 +57,7 @@ export function Footer() {
             </a>
           ))}
         </nav>
-        <span className={styles.countryTag}>
-          <ArgentinaFlag size={18} />
-          <span>{locale === "es" ? "Argentina — Estudio digital" : "Argentina — Digital studio"}</span>
-        </span>
       </div>
     </footer>
   );
 }
-
