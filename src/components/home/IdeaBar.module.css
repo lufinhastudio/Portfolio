@@ -1,0 +1,462 @@
+/* ── Root container ── */
+.root {
+  width: 100%;
+  margin-inline: auto;
+  transition: max-width 320ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.collapsed {
+  max-width: 29rem;
+}
+
+.open {
+  max-width: 52rem;
+}
+
+/* ── Form ── */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ── Phase 1: idea input row ── */
+.phase1 {
+  display: flex;
+  align-items: center;
+  border-radius: 3rem;
+  cursor: text;
+  transition: height 280ms cubic-bezier(0.2, 0.8, 0.2, 1),
+              background-color 260ms ease,
+              border-color 260ms ease,
+              box-shadow 260ms ease,
+              transform 180ms ease,
+              padding 260ms ease;
+}
+
+/* Collapsed resting state: compact black write field */
+.collapsed .phase1 {
+  height: 3.35rem;
+  padding: 0 0.45rem 0 1.4rem;
+  background: var(--site-ink, #171916);
+  border: 1px solid rgba(23, 25, 22, 0.1);
+  box-shadow: 0 4px 18px rgb(23 25 22 / 0.14);
+}
+
+.collapsed .phase1:hover {
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 26px rgb(23 25 22 / 0.2);
+  transform: translateY(-1px);
+}
+
+/* Open active state: full editorial canvas */
+.open .phase1 {
+  height: 4rem;
+  padding: 0 0.5rem 0 1.5rem;
+  background: #fff;
+  border: 1px solid rgb(23 25 22 / 0.24);
+  box-shadow: 0 4px 22px rgb(23 25 22 / 0.07);
+}
+
+.open .phase1:hover,
+.open:focus-within .phase1 {
+  border-color: rgb(23 25 22 / 0.45);
+}
+
+/* ── Input field ── */
+.ideaInput {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  line-height: 1;
+  outline: none;
+  transition: color 240ms ease, font-size 240ms ease;
+}
+
+.collapsed .ideaInput {
+  color: #fff;
+  font-size: 0.94rem;
+}
+
+.collapsed .ideaInput::placeholder {
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.open .ideaInput {
+  color: var(--site-fg, #171916);
+  font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+}
+
+.open .ideaInput::placeholder {
+  color: rgb(23 25 22 / 0.38);
+}
+
+.ideaInput:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+/* ── Close button (revealed when open) ── */
+.closeBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--site-muted);
+  cursor: pointer;
+  overflow: hidden;
+  transition: opacity 220ms ease,
+              width 220ms ease,
+              margin 220ms ease,
+              background-color 180ms ease,
+              color 180ms ease;
+}
+
+.collapsed .closeBtn {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  margin: 0;
+  pointer-events: none;
+}
+
+.open .closeBtn {
+  opacity: 1;
+  width: 2.25rem;
+  height: 2.25rem;
+  margin-right: 0.25rem;
+  pointer-events: auto;
+}
+
+.closeBtn:hover {
+  background: rgb(23 25 22 / 0.08);
+  color: var(--site-ink);
+}
+
+.closeBtn:active {
+  transform: scale(0.92);
+}
+
+.closeBtn:focus-visible {
+  outline: 2px solid var(--terracotta, #a84f30);
+  outline-offset: 2px;
+}
+
+/* ── Arrow action button ── */
+.arrowBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: width 260ms ease,
+              height 260ms ease,
+              background-color 200ms ease,
+              transform 180ms ease;
+}
+
+.collapsed .arrowBtn {
+  width: 2.45rem;
+  height: 2.45rem;
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+}
+
+.collapsed .arrowBtn:hover {
+  background: var(--olive, #5e6c43);
+  transform: translate(2px, -2px);
+}
+
+.open .arrowBtn {
+  width: 2.75rem;
+  height: 2.75rem;
+  background: var(--site-ink, #171916);
+  color: #fff;
+}
+
+.open .arrowBtn:hover:not(:disabled) {
+  background: var(--olive, #5e6c43);
+  transform: translate(2px, -2px);
+}
+
+.open .arrowBtn:disabled {
+  background: rgb(23 25 22 / 0.18);
+  cursor: default;
+}
+
+.arrowBtn:focus-visible {
+  outline: 2px solid var(--terracotta, #a84f30);
+  outline-offset: 3px;
+}
+
+/* ── Phase 2: email input & send ── */
+.phase2 {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows 300ms cubic-bezier(0.22, 1, 0.36, 1),
+              opacity 240ms ease;
+  pointer-events: none;
+}
+
+.expanded .phase2 {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.phase2Content {
+  overflow: hidden;
+  padding-top: 0.65rem;
+}
+
+.emailRow {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.75rem;
+}
+
+.emailLabel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+.emailLabel > span {
+  color: var(--site-muted);
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+}
+
+.emailInput {
+  flex: 1;
+  min-width: 0;
+  height: 3.25rem;
+  padding: 0 1.25rem;
+  border: 1px solid rgb(23 25 22 / 0.22);
+  border-radius: 2rem;
+  background: #fff;
+  color: var(--site-fg);
+  font: inherit;
+  font-size: 0.92rem;
+  transition: border-color 180ms ease;
+  outline: none;
+}
+
+.emailInput:hover,
+.emailInput:focus {
+  border-color: var(--olive, #5e6c43);
+}
+
+.emailInput:focus-visible {
+  outline: 2px solid var(--terracotta, #a84f30);
+  outline-offset: 2px;
+}
+
+.sendBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  height: 3.25rem;
+  padding: 0 1.35rem;
+  border: 1px solid var(--site-ink);
+  border-radius: 2rem;
+  background: var(--site-ink);
+  color: #fff;
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 200ms ease, border-color 200ms ease, transform 180ms ease;
+}
+
+.sendBtn:hover:not(:disabled) {
+  background: var(--olive, #5e6c43);
+  border-color: var(--olive, #5e6c43);
+  transform: translateY(-1px);
+}
+
+.sendBtn:active {
+  transform: translateY(0);
+}
+
+.sendBtn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.sendBtn:focus-visible {
+  outline: 2px solid var(--terracotta, #a84f30);
+  outline-offset: 3px;
+}
+
+.sendBtnBusy {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+.errorMsg {
+  margin-top: 0.5rem;
+  color: #a53f28;
+  font-size: 0.82rem;
+}
+
+/* ── Success state ── */
+.successState {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  height: 4rem;
+  padding: 0 1.5rem;
+  border: 1px solid rgb(94 108 67 / 0.45);
+  border-radius: 3rem;
+  background: rgb(94 108 67 / 0.07);
+}
+
+.successMsg {
+  font-size: 0.95rem;
+  color: var(--olive, #5e6c43);
+  font-weight: 600;
+}
+
+.successActions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.resetBtn {
+  padding: 0 0.9rem;
+  height: 2.25rem;
+  border: 1px solid rgb(23 25 22 / 0.22);
+  border-radius: 2rem;
+  background: transparent;
+  color: var(--site-muted);
+  font: inherit;
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: border-color 180ms ease, color 180ms ease;
+}
+
+.resetBtn:hover {
+  border-color: var(--site-ink);
+  color: var(--site-ink);
+}
+
+/* ── Hint ── */
+.hint {
+  text-align: center;
+  color: var(--site-muted);
+  font-size: 0.72rem;
+  line-height: 1.4;
+  transition: opacity 250ms ease, max-height 250ms ease, margin 250ms ease;
+}
+
+.collapsed .hint {
+  opacity: 0;
+  max-height: 0;
+  margin: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.open .hint {
+  opacity: 1;
+  max-height: 3rem;
+  margin-top: 0.75rem;
+}
+
+/* ── Honeypot ── */
+.trap {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* ── Mobile ── */
+@media (max-width: 600px) {
+  .collapsed {
+    max-width: 100%;
+  }
+
+  .collapsed .phase1 {
+    height: 3.2rem;
+    padding: 0 0.4rem 0 1.15rem;
+  }
+
+  .open .phase1 {
+    height: 3.5rem;
+    padding: 0 0.4rem 0 1.1rem;
+  }
+
+  .collapsed .ideaInput,
+  .open .ideaInput {
+    font-size: 0.9rem;
+  }
+
+  .closeBtn {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .collapsed .arrowBtn {
+    width: 2.3rem;
+    height: 2.3rem;
+  }
+
+  .open .arrowBtn {
+    width: 2.45rem;
+    height: 2.45rem;
+  }
+
+  .emailRow {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.55rem;
+  }
+
+  .sendBtn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .successState {
+    height: auto;
+    padding: 1rem 1.1rem;
+    border-radius: 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.65rem;
+  }
+
+  .successActions {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .root,
+  .phase1,
+  .ideaInput,
+  .arrowBtn,
+  .closeBtn,
+  .hint,
+  .phase2 {
+    transition: none !important;
+  }
+}

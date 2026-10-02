@@ -26,21 +26,22 @@
 
 .sceneStage {
   position: relative;
-  min-height: 10.5rem;
+  display: grid;
+  grid-template-columns: 1fr;
   margin-top: clamp(2.5rem, 4vw, 4rem);
+  padding-top: 1.35rem;
   border-top: 1px solid var(--site-line);
 }
 
 .scene {
-  position: absolute;
-  inset: 1.35rem 0 auto;
+  grid-area: 1 / 1;
   opacity: 0;
   transform: translateY(8px);
   pointer-events: none;
   transition: opacity 420ms var(--ease-out), transform 420ms var(--ease-out);
 }
 
-.sceneActive { opacity: 1; transform: translateY(0); }
+.sceneActive { opacity: 1; transform: translateY(0); pointer-events: auto; }
 .scene h3 { max-width: 18ch; font-size: clamp(1.6rem, 2.4vw, 2.35rem); line-height: 1.05; }
 .scene p { max-width: 33rem; margin-top: .7rem; color: rgb(23 25 22 / .66); font-size: .95rem; line-height: 1.55; }
 
@@ -71,22 +72,43 @@
 }
 
 @media (max-width: 980px) {
-  .layout { grid-template-columns: minmax(0, 1fr); gap: 2.5rem; }
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.25rem;
+  }
   .title { max-width: 13ch; }
   .description { max-width: 42rem; }
-  .sceneStage { max-width: 42rem; min-height: 9.5rem; margin-top: 2.25rem; }
-  .visual { height: clamp(25rem, 62vw, 34rem); }
+  .sceneStage {
+    max-width: 42rem;
+    margin-top: 2rem;
+    padding-top: 1.25rem;
+  }
+  .visual {
+    height: clamp(22rem, 58vw, 30rem);
+    border-top: none;
+    border-bottom: none;
+  }
 }
 
 @media (max-width: 520px) {
-  .section { padding-block: 4rem; }
-  .eyebrow { margin-bottom: 1.5rem; }
-  .title { font-size: clamp(2.6rem, 12vw, 3.5rem); }
-  .sceneStage { min-height: 11.5rem; }
-  .scene h3 { font-size: clamp(1.65rem, 8vw, 2.15rem); }
-  .visual { height: clamp(19rem, 90vw, 22.5rem); }
+  .section { padding-block: 3.5rem; }
+  .eyebrow { margin-bottom: 1.25rem; }
+  .layout { gap: 0.75rem; }
+  .title { font-size: clamp(2.4rem, 11vw, 3.2rem); }
+  .sceneStage {
+    margin-top: 1.5rem;
+    padding-top: 1.15rem;
+  }
+  .scene h3 { font-size: clamp(1.4rem, 6.5vw, 1.85rem); }
+  .scene p { margin-top: 0.45rem; font-size: 0.9rem; line-height: 1.5; }
+  .visual {
+    height: clamp(18rem, 85vw, 22rem);
+    border-top: none;
+    border-bottom: none;
+  }
   .visualLabel { display: none; }
 }
+
 
 @media (prefers-reduced-motion: reduce) {
   .scene, .techAura { transition: none; }

@@ -29,7 +29,7 @@
 .moreLink svg { transition: transform 200ms ease, color 200ms ease; }
 .moreLink:hover svg { color: var(--site-accent); transform: translate(3px, -3px); }
 @media (max-width: 760px) {
-  .section { padding-top: 2.75rem; }
+  .section { padding-top: clamp(3rem, 7vh, 4.5rem); }
   .header { align-items: flex-start; flex-direction: column; gap: 1rem; margin-bottom: 1.25rem; }
   .title { max-width: 15ch; font-size: clamp(2.35rem, 9vw, 3.5rem); }
   .grid { grid-template-columns: 1fr; gap: 2rem; }

@@ -78,6 +78,12 @@
   font-size: 0.75rem;
 }
 
+.countryTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 .socials {
   display: flex;
   flex-wrap: wrap;
@@ -96,6 +102,7 @@
 
 .socialLink:hover,
 .socialLink:focus-visible { color: var(--site-accent); }
+
 
 @media (max-width: 760px) {
   .contact { gap: 3rem; }

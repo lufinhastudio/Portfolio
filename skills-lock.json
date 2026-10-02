@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "skills": {
+    "animate": {
+      "source": "emilkowalski/skills",
+      "sourceType": "github",
+      "skillPath": "skills/animate/SKILL.md",
+      "computedHash": "7598d33e7f60dd5c24531eaaa897621cc3bdb48e8050324211627973bc59c4ce"
+    },
+    "design-taste-frontend": {
+      "source": "Leonxlnx/taste-skill",
+      "sourceType": "github",
+      "skillPath": "skills/taste-skill/SKILL.md",
+      "computedHash": "6d838b246d0e35d0b53f4f23f98ba7a1dd561937e64f7d0c7553b0928e376c3e"
+    },
+    "impeccable": {
+      "source": "pbakaus/impeccable",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/impeccable/SKILL.md",
+      "computedHash": "f7c4e03bef91154273d2dc3b62aff829cf4ab1b1f16e6b98c8c6a31be4405318"
+    }
+  }
+}

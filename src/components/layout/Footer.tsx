@@ -5,7 +5,7 @@ import Link from "next/link";
 import { localePath, siteConfig } from "@/config/site";
 import { getSocialLinks, getStudioContent } from "@/content";
 import { localeFromPathname } from "@/lib/locale";
-import { ArrowUpRight } from "@/components/ui/Icons";
+import { ArrowUpRight, ArgentinaFlag } from "@/components/ui/Icons";
 import { Aura } from "@/components/ui/Aura";
 import styles from "./Footer.module.css";
 
@@ -50,8 +50,12 @@ export function Footer() {
             </a>
           ))}
         </nav>
-        <span>{locale === "es" ? "Argentina — Estudio digital" : "Argentina — Digital studio"}</span>
+        <span className={styles.countryTag}>
+          <ArgentinaFlag size={18} />
+          <span>{locale === "es" ? "Argentina — Estudio digital" : "Argentina — Digital studio"}</span>
+        </span>
       </div>
     </footer>
   );
 }
+
