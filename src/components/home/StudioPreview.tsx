@@ -37,7 +37,7 @@ export function StudioPreview({ locale }: { locale: Locale }) {
                 <h3 className="display" data-studio-step>{person.name}</h3>
                 <p className={styles.bio} data-studio-step>{content.shortBios[person.name]}</p>
                 <div className={styles.contacts} data-studio-step aria-label={`${locale === "es" ? "Contacto de" : "Contact details for"} ${person.name}`}>
-                  {contacts.map((contact) => <a href={contact.href} key={`${person.name}-${contact.label}`} target={contact.label === "WhatsApp" || contact.label === "LinkedIn" ? "_blank" : undefined} rel={contact.label === "WhatsApp" || contact.label === "LinkedIn" ? "noopener noreferrer" : undefined}><span>{contact.label}</span><span>{contact.value}</span><ArrowUpRight size=".85rem" aria-hidden="true" /></a>)}
+                  {contacts.map((contact) => <a href={contact.href} aria-label={`${contact.label}: ${contact.value}`} key={`${person.name}-${contact.label}`} target={contact.label === "WhatsApp" || contact.label === "LinkedIn" ? "_blank" : undefined} rel={contact.label === "WhatsApp" || contact.label === "LinkedIn" ? "noopener noreferrer" : undefined}><span>{contact.label}</span><ArrowUpRight size=".85rem" aria-hidden="true" /></a>)}
                 </div>
               </div>
             </article>

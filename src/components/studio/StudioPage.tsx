@@ -89,7 +89,7 @@ function StudioPerson({ person, number, locale }: { person: StudioPersonData; nu
           {biography.map((paragraph, index) => <p key={`${person.name}-${index}`}>{index === 0 ? <><strong>{locale === "es" ? `Soy ${person.name}.` : `I'm ${person.name}.`}</strong> {paragraph}</> : paragraph}</p>)}
         </div>
         <div className={styles.personContacts} data-studio-step aria-label={`${locale === "es" ? "Contacto de" : "Contact details for"} ${person.name}`}>
-          {contacts.map((contact) => <a className={styles.personContact} href={contact.href} key={`${person.name}-${contact.label}`} target={contact.label === "WhatsApp" || contact.label === "LinkedIn" ? "_blank" : undefined} rel={contact.label === "WhatsApp" || contact.label === "LinkedIn" ? "noopener noreferrer" : undefined}><span>{contact.label}</span><span>{contact.value}</span><ArrowUpRight size=".85rem" aria-hidden="true" /></a>)}
+          {contacts.map((contact) => <a className={styles.personContact} href={contact.href} aria-label={`${contact.label}: ${contact.value}`} key={`${person.name}-${contact.label}`} target={contact.label === "WhatsApp" || contact.label === "LinkedIn" ? "_blank" : undefined} rel={contact.label === "WhatsApp" || contact.label === "LinkedIn" ? "noopener noreferrer" : undefined}><span>{contact.label}</span><ArrowUpRight size=".85rem" aria-hidden="true" /></a>)}
         </div>
       </div>
     </article>

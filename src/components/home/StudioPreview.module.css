@@ -15,9 +15,8 @@
 .personInfo h3 { font-size: clamp(4rem, 6vw, 6.5rem); line-height: .84; }
 .bio { max-width: 38rem; margin-top: clamp(1.2rem, 2vw, 1.75rem); font-size: clamp(.96rem, 1.05vw, 1.05rem); line-height: 1.55; }
 .contacts { display: grid; max-width: 40rem; margin-top: clamp(1.5rem, 2.5vw, 2.5rem); border-top: 1px solid var(--site-line); }
-.contacts a { display: grid; grid-template-columns: 5.5rem minmax(0, 1fr) auto; align-items: center; gap: 1rem; min-height: 3rem; padding: .7rem .5rem; border-bottom: 1px solid var(--site-line); font-family: "IBM Plex Mono", monospace; font-size: .75rem; transition: background-color 200ms ease; }
+.contacts a { display: flex; justify-content: space-between; align-items: center; gap: 1rem; min-height: 3rem; padding: .7rem .5rem; border-bottom: 1px solid var(--site-line); font-family: "IBM Plex Mono", monospace; font-size: .75rem; transition: background-color 200ms ease; }
 .contacts a > span:first-child { color: var(--site-muted); transition: color 200ms ease; }
-.contacts a > span:nth-child(2) { min-width: 0; overflow-wrap: anywhere; }
 .contacts svg { transition: transform 200ms var(--ease-out), color 200ms ease; }
 .contacts a:focus-visible { background: rgb(23 25 22 / .035); }
 .contacts a:focus-visible > span:first-child, .contacts a:focus-visible svg { color: var(--site-accent); }
@@ -46,10 +45,19 @@
   .portraitStage { width: min(72vw, 20rem); }
   .personInfo h3 { font-size: clamp(3.5rem, 16vw, 4.75rem); }
   .bio { margin-top: 1rem; }
-  .contacts { margin-top: 1.35rem; }
+  .contacts { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .5rem; max-width: 32rem; margin-top: 1.35rem; border-top: 0; }
+  .contacts a { display: flex; justify-content: space-between; gap: .25rem; min-height: 3rem; padding: .75rem .65rem; border: 1px solid var(--site-line); border-radius: var(--radius); background: var(--site-paper); font-family: inherit; font-size: clamp(.69rem, 2.7vw, .82rem); font-weight: 700; transition: color 200ms ease, background-color 200ms ease, border-color 200ms ease; }
+  .contacts a > span:first-child { color: inherit; }
+  .contacts a:focus-visible { color: var(--site-paper); background: var(--site-ink); border-color: var(--site-ink); }
+  .contacts a:focus-visible > span:first-child, .contacts a:focus-visible svg { color: inherit; }
+  .contacts a:active { background: var(--site-ink); color: var(--site-paper); }
 }
 @media (max-width: 420px) {
-  .contacts a { grid-template-columns: 4.75rem minmax(0, 1fr) auto; gap: .5rem; font-size: .7rem; }
+  .contacts a { padding-inline: .5rem; }
+}
+@media (max-width: 760px) and (hover: hover) and (pointer: fine) {
+  .contacts a:hover { color: var(--site-paper); background: var(--site-ink); border-color: var(--site-ink); }
+  .contacts a:hover > span:first-child, .contacts a:hover svg { color: inherit; }
 }
 @media (prefers-reduced-motion: reduce) {
   .personAura, .portrait img, .contacts a, .contacts a > span:first-child, .contacts svg { transition: none; }

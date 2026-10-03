@@ -27,9 +27,8 @@
 .personNote strong { font-weight: 750; }
 .personNote p + p { margin-top: 1rem; }
 .personContacts { display: grid; max-width: 43rem; margin-top: clamp(1.75rem, 3vw, 2.25rem); border-top: 1px solid var(--site-line); }
-.personContact { display: grid; grid-template-columns: 5.2rem minmax(0, 1fr) auto; align-items: center; gap: .4rem; min-height: 2.75rem; padding: .55rem .5rem; border-bottom: 1px solid var(--site-line); font-family: "IBM Plex Mono", monospace; font-size: .75rem; transition: background-color 200ms ease, color 200ms ease; }
+.personContact { display: flex; justify-content: space-between; align-items: center; gap: .4rem; min-height: 2.75rem; padding: .55rem .5rem; border-bottom: 1px solid var(--site-line); font-family: "IBM Plex Mono", monospace; font-size: .75rem; transition: background-color 200ms ease, color 200ms ease; }
 .personContact > span:first-child { color: var(--site-muted); transition: color 200ms ease; }
-.personContact > span:nth-child(2) { min-width: 0; overflow-wrap: anywhere; }
 .personContact svg { transition: transform 200ms var(--ease-out), color 200ms ease; }
 .personContact:focus-visible { background: rgb(23 25 22 / .035); }
 .personContact:focus-visible > span:first-child, .personContact:focus-visible svg { color: var(--site-accent); }
@@ -86,17 +85,23 @@
   .personDetails { max-width: 40rem; }
   .personName { margin-bottom: 1rem; font-size: clamp(2.65rem, 11vw, 3.35rem); }
   .personNote { font-size: 1rem; line-height: 1.58; }
-  .personContacts { gap: .15rem; margin-top: 1.75rem; padding-top: .25rem; border-top: 0; }
-  .personContact { grid-template-columns: 5rem minmax(0, 1fr) auto; min-height: 3.4rem; padding: .65rem 0; font-family: inherit; font-size: .82rem; }
-  .personContact > span:first-child { font-size: .72rem; font-weight: 650; }
-  .personContact > span:nth-child(2) { font-weight: 600; }
+  .personContacts { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .5rem; max-width: 32rem; margin-top: 1.75rem; padding-top: 0; border-top: 0; }
+  .personContact { display: flex; justify-content: space-between; gap: .25rem; min-height: 3rem; padding: .75rem .65rem; border: 1px solid var(--site-line); border-radius: var(--radius); background: var(--site-paper); font-family: inherit; font-size: clamp(.69rem, 2.7vw, .82rem); font-weight: 700; transition: color 200ms ease, background-color 200ms ease, border-color 200ms ease; }
+  .personContact > span:first-child { color: inherit; }
+  .personContact:focus-visible { color: var(--site-paper); background: var(--site-ink); border-color: var(--site-ink); }
+  .personContact:focus-visible > span:first-child, .personContact:focus-visible svg { color: inherit; }
+  .personContact:active { color: var(--site-paper); background: var(--site-ink); }
   .principlesGrid { grid-template-columns: 1fr; }
   .principle { min-height: 13rem; }
   .principle + .principle { border-top: 1px solid var(--site-line); border-left: 0; }
 }
 @media (max-width: 420px) {
   .eyebrow { flex-direction: column; }
-  .personContact { grid-template-columns: 4.5rem minmax(0, 1fr) auto; font-size: .78rem; }
+  .personContact { padding-inline: .5rem; }
+}
+@media (max-width: 760px) and (hover: hover) and (pointer: fine) {
+  .personContact:hover { color: var(--site-paper); background: var(--site-ink); border-color: var(--site-ink); }
+  .personContact:hover > span:first-child, .personContact:hover svg { color: inherit; }
 }
 @media (prefers-reduced-motion: reduce) {
   .ticker { overflow: visible; }
