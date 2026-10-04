@@ -7,6 +7,7 @@ import { localePath } from "@/config/site";
 import { projectJsonLd } from "@/lib/jsonLd";
 import { ProjectBrand } from "@/components/projects/ProjectBrand";
 import { ArrowLeft, ArrowUpRight } from "@/components/ui/Icons";
+import { ReadingProgress } from "./ReadingProgress";
 import styles from "./ProductCaseStudy.module.css";
 
 type ProductCaseStudyProps = {
@@ -29,7 +30,7 @@ function ResponsiveFigure({ media, caption, index, priority = false, sizes }: Re
   } as CSSProperties;
 
   return (
-    <figure className={`${styles.responsiveFigure} ${styles.figure} ${media.treatment === "supporting" ? styles.supportingFigure : ""}`}>
+    <figure className={`${styles.responsiveFigure} ${styles.figure} ${media.treatment === "supporting" ? styles.supportingFigure : ""}`} data-reveal-item>
       <div className={styles.responsiveFrame} style={frameStyle}>
         <picture>
           <source media="(max-width: 760px)" srcSet={media.mobile.src} />
@@ -70,6 +71,9 @@ export function ProductCaseStudy({ project, locale }: ProductCaseStudyProps) {
         next: "Siguiente proyecto",
         enlarge: "Abrir captura en tamaño completo",
         imageLabel: "Captura real del producto",
+        services: "Qué hicimos",
+        type: "Qué es",
+        summary: "El proyecto en breve",
       }
     : {
         back: "Back to projects",
@@ -83,6 +87,9 @@ export function ProductCaseStudy({ project, locale }: ProductCaseStudyProps) {
         next: "Next project",
         enlarge: "Open full-size capture",
         imageLabel: "Real product capture",
+        services: "What we did",
+        type: "What it is",
+        summary: "The project at a glance",
       };
   const style = {
     "--product-accent": project.palette.accent,
@@ -92,6 +99,8 @@ export function ProductCaseStudy({ project, locale }: ProductCaseStudyProps) {
   const hasBrandLogo = Boolean(project.brandLogo);
   const projectMetadata = (
     <dl className={styles.metadata}>
+      <div><dt className="mono">{labels.type}</dt><dd>{project.category.split(" / ").join(" · ")}</dd></div>
+      <div><dt className="mono">{labels.services}</dt><dd>{project.services.join(" · ")}</dd></div>
       <div><dt className="mono">{labels.role}</dt><dd>{story.role}</dd></div>
       <div><dt className="mono">{labels.year}</dt><dd>{project.year}</dd></div>
       <div><dt className="mono">{story.technologyLabel}</dt><dd>{story.technologies.slice(0, 4).join(" · ")}</dd></div>
@@ -101,29 +110,38 @@ export function ProductCaseStudy({ project, locale }: ProductCaseStudyProps) {
   return (
     <main className={`${styles.page} ${story.presentation === "product-led" ? styles.productLed : ""}`} lang={locale} style={style}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(projectJsonLd(project, locale)) }} />
+      <ReadingProgress />
+
+      {/* ── Hero: marca, título, resumen y datos clave ── */}
       <section className={styles.hero}>
+        <span className={styles.heroWash} aria-hidden="true" />
         <nav className={styles.top} aria-label={locale === "es" ? "Navegación del proyecto" : "Project navigation"}>
           <Link href={localePath(locale, "/work")}><ArrowLeft size="0.9em" aria-hidden="true" /> {labels.back}</Link>
           <span className="mono">{project.category}</span>
         </nav>
         <div className={styles.heading}>
-          <ProjectBrand logo={project.brandLogo} placement="intro" />
-          <p className={`${styles.eyebrow} mono`}>{project.index} / {project.year} <span aria-hidden="true">·</span> {project.services.join(" · ")}</p>
-          <h1 className={hasBrandLogo ? "sr-only" : `${styles.title} display`}>{project.name}</h1>
-          <p className={styles.lead}>{story.lead}</p>
-          <div className={styles.desktopMetadata}>{projectMetadata}</div>
+          <div className={styles.headingMain}>
+            <div className={styles.rise} style={{ "--d": "0.05s" } as CSSProperties}><ProjectBrand logo={project.brandLogo} placement="intro" /></div>
+            <p className={`${styles.eyebrow} ${styles.rise} mono`} style={{ "--d": "0.1s" } as CSSProperties}>{project.index} / {project.year} <span aria-hidden="true">·</span> {project.category}</p>
+            <h1 className={hasBrandLogo ? "sr-only" : `${styles.title} ${styles.rise} display`} style={{ "--d": "0.15s" } as CSSProperties}>{project.name}</h1>
+            <p className={`${styles.lead} ${styles.rise}`} style={{ "--d": "0.25s" } as CSSProperties}>{story.lead}</p>
+          </div>
+          <div className={`${styles.desktopMetadata} ${styles.rise}`} style={{ "--d": "0.4s" } as CSSProperties}>
+            <p className={`${styles.summaryLabel} mono`}>{labels.summary}</p>
+            {projectMetadata}
+          </div>
           {projectLinks.length ? (
-            <div className={styles.visitLinks}>
+            <div className={`${styles.visitLinks} ${styles.rise}`} style={{ "--d": "0.5s" } as CSSProperties}>
               {projectLinks.map((link) => <a className={styles.visit} href={link.href} target="_blank" rel="noreferrer" key={link.href}>{link.label}<ArrowUpRight size=".9em" aria-hidden="true" /></a>)}
             </div>
           ) : null}
         </div>
         {story.heroMedia ? (
-          <div className={styles.heroImage}>
+          <div className={`${styles.heroImage} ${styles.riseMedia}`}>
             <ResponsiveFigure media={story.heroMedia} caption={story.heroMedia.caption ?? story.heroMedia.desktop.alt} priority sizes="(max-width: 760px) calc(100vw - 2 * var(--page-gutter)), 92vw" />
           </div>
         ) : story.heroImage ? (
-          <figure className={`${styles.heroImage} ${styles.figure}`}>
+          <figure className={`${styles.heroImage} ${styles.figure} ${styles.riseMedia}`}>
             <a href={story.heroImage.src} target="_blank" rel="noreferrer" aria-label={`${labels.enlarge}: ${story.heroImage.alt}`}>
               <Image src={story.heroImage.src} alt={story.heroImage.alt} fill priority sizes="(max-width: 760px) 100vw, 92vw" />
             </a>
@@ -136,11 +154,27 @@ export function ProductCaseStudy({ project, locale }: ProductCaseStudyProps) {
         </details>
       </section>
 
-      <section className={styles.challenge} aria-labelledby="product-challenge-title">
-        <p className={`${styles.sectionLabel} mono`}>{labels.challenge}</p>
+      {/* ── Índice: de un vistazo, qué partes tiene el proyecto ── */}
+      <nav className={styles.toc} aria-label={labels.index} data-reveal-group>
+        <p className={`${styles.tocLabel} mono`} data-reveal-item>{labels.index}</p>
+        <ol>
+          {story.sections.map((section, index) => (
+            <li key={`toc-${section.title}`} data-reveal-item>
+              <a href={`#seccion-${index + 1}`}>
+                <span className="mono">{String(index + 1).padStart(2, "0")}</span>
+                <span>{section.eyebrow.includes("/") ? section.eyebrow.split("/").pop()?.trim() : section.eyebrow}</span>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </nav>
+
+      {/* ── El desafío ── */}
+      <section className={styles.challenge} aria-labelledby="product-challenge-title" data-reveal-group>
+        <p className={`${styles.sectionLabel} mono`} data-reveal-item>{labels.challenge}</p>
         <div>
-          <h2 className="display" id="product-challenge-title">{story.challengeTitle}</h2>
-          <p>{story.challenge}</p>
+          <h2 className="display" id="product-challenge-title" data-reveal-item>{story.challengeTitle}</h2>
+          <p data-reveal-item>{story.challenge}</p>
         </div>
       </section>
 
@@ -151,15 +185,15 @@ export function ProductCaseStudy({ project, locale }: ProductCaseStudyProps) {
           const hasMedia = media.length > 0 || responsiveMedia.length > 0;
           const hasSupportingMedia = responsiveMedia.some((item) => item.treatment === "supporting");
           return (
-          <section className={`${styles.module} ${section.layout === "wide" ? styles.wide : ""} ${!story.heroImage && !story.heroMedia && !hasMedia ? styles.textOnly : ""}`} key={`${section.eyebrow}-${section.title}`}>
-            <div className={styles.moduleCopy}>
-              <p className={`${styles.sectionLabel} mono`}>{section.eyebrow}</p>
-              <h2 className="display">{section.title}</h2>
-              <p className={styles.moduleText}>{section.text}</p>
-              {section.points?.length ? <ul className={styles.points}>{section.points.map((point) => <li key={point}>{point}</li>)}</ul> : null}
+          <section id={`seccion-${index + 1}`} className={`${styles.module} ${section.layout === "wide" ? styles.wide : ""} ${!story.heroImage && !story.heroMedia && !hasMedia ? styles.textOnly : ""}`} key={`${section.eyebrow}-${section.title}`}>
+            <div className={styles.moduleCopy} data-reveal-group>
+              <p className={`${styles.sectionLabel} mono`} data-reveal-item>{section.eyebrow}</p>
+              <h2 className="display" data-reveal-item>{section.title}</h2>
+              <p className={styles.moduleText} data-reveal-item>{section.text}</p>
+              {section.points?.length ? <ul className={styles.points} data-reveal-item>{section.points.map((point) => <li key={point}>{point}</li>)}</ul> : null}
             </div>
             {responsiveMedia.length ? (
-              <div className={`${styles.moduleMedia} ${responsiveMedia.length > 1 ? styles.moduleMediaGrid : ""} ${hasSupportingMedia ? styles.editorialGrid : ""}`}>
+              <div className={`${styles.moduleMedia} ${responsiveMedia.length > 1 ? styles.moduleMediaGrid : ""} ${hasSupportingMedia ? styles.editorialGrid : ""}`} data-reveal-group>
                 {responsiveMedia.map((responsiveImage, mediaIndex) => (
                   <ResponsiveFigure
                     media={responsiveImage}
@@ -171,9 +205,9 @@ export function ProductCaseStudy({ project, locale }: ProductCaseStudyProps) {
                 ))}
               </div>
             ) : media.length ? (
-              <div className={`${styles.moduleMedia} ${media.length > 1 ? styles.moduleMediaGrid : ""}`}>
+              <div className={`${styles.moduleMedia} ${media.length > 1 ? styles.moduleMediaGrid : ""}`} data-reveal-group>
                 {media.map((image, mediaIndex) => (
-                  <figure className={`${styles.moduleImage} ${styles.figure}`} key={image.src}>
+                  <figure className={`${styles.moduleImage} ${styles.figure}`} key={image.src} data-reveal-item>
                     <a href={image.src} target="_blank" rel="noreferrer" aria-label={`${labels.enlarge}: ${image.alt}`}>
                       <Image src={image.src} alt={image.alt} fill sizes={media.length > 1 ? "(max-width: 760px) 100vw, 45vw" : "(max-width: 760px) 100vw, 60vw"} />
                     </a>
@@ -188,15 +222,16 @@ export function ProductCaseStudy({ project, locale }: ProductCaseStudyProps) {
         )})}
       </div>
 
+      {/* ── Cierre: qué construimos + tecnologías ── */}
       <section className={styles.scope} aria-labelledby="product-scope-title">
-        <div className={styles.scopeHeader}>
-          <p className={`${styles.sectionLabel} mono`}>{labels.close}</p>
-          <h2 className="display" id="product-scope-title">{story.closing}</h2>
+        <div className={styles.scopeHeader} data-reveal-group>
+          <p className={`${styles.sectionLabel} mono`} data-reveal-item>{labels.close}</p>
+          <h2 className="display" id="product-scope-title" data-reveal-item>{story.closing}</h2>
         </div>
-        <div className={styles.scopeLists}>
+        <div className={styles.scopeLists} data-reveal>
           <div>
             <h3 className="mono">{story.modulesLabel}</h3>
-            <ul className={styles.moduleList}>{story.modules.map((module) => <li key={module}>{module}</li>)}</ul>
+            <ul className={styles.moduleList}>{story.modules.map((module, moduleIndex) => <li key={module}><span className="mono">{String(moduleIndex + 1).padStart(2, "0")}</span>{module}</li>)}</ul>
           </div>
           <div>
             <h3 className="mono">{story.technologyLabel}</h3>
@@ -210,7 +245,7 @@ export function ProductCaseStudy({ project, locale }: ProductCaseStudyProps) {
               {story.cta ? <Link className={styles.visit} href={localePath(locale, story.cta.href)}>{story.cta.label}<ArrowUpRight size=".9em" aria-hidden="true" /></Link> : null}
             </div>
           ) : <span className={styles.privateProject}>{locale === "es" ? "Proyecto privado · sin enlace público" : "Private project · no public link"}</span>}
-          <Link href={localePath(locale, `/work/${nextProject.slug}`)} className={styles.next}><span className="mono">{labels.next}</span><span className="display">{nextProject.name}<ArrowUpRight size=".7em" aria-hidden="true" /></span></Link>
+          <Link href={localePath(locale, `/work/${nextProject.slug}`)} className={styles.next} style={{ "--next-accent": nextProject.palette.accent } as CSSProperties}><span className="mono">{labels.next}</span><span className="display">{nextProject.name}<ArrowUpRight size=".7em" aria-hidden="true" /></span></Link>
         </div>
       </section>
     </main>

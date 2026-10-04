@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { getNavigation, getStudioContent } from "@/content";
 import type { Locale } from "@/types/project";
 import { localeFromPathname, switchLocalePath } from "@/lib/locale";
+import { BrandMark } from "@/components/ui/BrandMark";
 import styles from "./SiteHeader.module.css";
 
 export function SiteHeader() {
@@ -54,7 +55,8 @@ export function SiteHeader() {
         onClick={() => setOpen(false)}
         aria-label={locale === "es" ? "Lufinha Studio — inicio" : "Lufinha Studio — home"}
       >
-        <span className={styles.brandBadge} aria-hidden="true">L</span>
+        {/* Monograma del favicon sobre un disco de vidrio translúcido */}
+        <span className={styles.brandBadge} aria-hidden="true"><BrandMark className={styles.brandMark} /></span>
         <span className={styles.brandName}>LUFINHA</span>
       </Link>
 

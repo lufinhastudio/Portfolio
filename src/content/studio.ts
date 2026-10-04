@@ -4,7 +4,7 @@ export const studioContent = {
   es: {
     navigation: { home: "Inicio", work: "Trabajo", studio: "Estudio", contact: "Contacto", menu: "Menú", close: "Cerrar" },
     hero: {
-      eyebrow: "Estudio independiente · Entre Ríos",
+      eyebrow: "Estudio independiente",
       title: "Diseñamos y construimos lo que tu negocio necesita.",
       description: "Somos Rafa y Luca. Creamos páginas web, tiendas online y sistemas a medida, acompañándote desde la idea hasta que está funcionando de verdad.",
       primaryCta: "Ver nuestro trabajo",
@@ -104,7 +104,7 @@ export const studioContent = {
   en: {
     navigation: { home: "Home", work: "Work", studio: "Studio", contact: "Contact", menu: "Menu", close: "Close" },
     hero: {
-      eyebrow: "Independent studio · Entre Ríos",
+      eyebrow: "Independent studio",
       title: "We design and build what your business needs.",
       description: "We're Rafa and Luca. We make websites, online stores and custom systems, guiding you from the first idea to something that is working for real.",
       primaryCta: "See our work",

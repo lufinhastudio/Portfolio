@@ -83,13 +83,22 @@
 }
 
 .open .phase1:hover {
-  border-color: rgb(23 25 22 / 0.48);
+  border-color: rgb(23 25 22 / 0.3);
 }
 
-/* Foco: anillo terracota suave alrededor de todo el campo */
+/* Foco: borde un poco más marcado + halo neutro muy suave + sombra que
+   "levanta" el campo. Sin bordes negros duros. */
 .open:focus-within .phase1 {
-  border-color: var(--site-ink);
-  box-shadow: var(--shadow-sm), 0 0 0 4px rgb(168 79 48 / 0.14);
+  border-color: rgb(23 25 22 / 0.42);
+  box-shadow:
+    0 0 0 4px rgb(23 25 22 / 0.05),
+    0 10px 28px -10px rgb(23 25 22 / 0.22);
+}
+
+/* Mientras se completa el email, el campo de idea vuelve a reposo */
+.expanded:focus-within .phase1:not(:focus-within) {
+  border-color: var(--site-line-strong);
+  box-shadow: var(--shadow-sm);
 }
 
 /* Campo */
@@ -242,7 +251,8 @@
 
 .phase2Content {
   overflow: hidden;
-  padding-top: var(--space-3);
+  padding: var(--space-3) var(--space-2) 0; /* el overflow no recorta el halo del foco */
+  margin-inline: calc(var(--space-2) * -1);
 }
 
 /* El contenido de la fase 2 sube levemente mientras se abre */
@@ -257,6 +267,7 @@
   display: flex;
   align-items: flex-end;
   gap: var(--space-3);
+  padding: var(--space-1) 0 var(--space-3); /* aire para que la sombra no se corte */
 }
 
 .emailLabel {
@@ -274,7 +285,8 @@
 }
 
 .emailInput {
-  flex: 1;
+  flex: none; /* en la columna del label, flex:1 aplastaba la altura */
+  width: 100%;
   min-width: 0;
   height: 3.25rem;
   padding: 0 var(--space-5);
@@ -282,21 +294,27 @@
   border-radius: var(--radius-pill);
   background: #fff;
   color: var(--site-fg);
+  box-shadow: var(--shadow-sm);
   font: inherit;
   font-size: var(--text-sm);
   outline: none;
   transition:
     border-color var(--dur-fast) var(--ease-out),
-    box-shadow var(--dur-fast) var(--ease-out);
+    box-shadow var(--dur-base) var(--ease-out);
 }
+
+.emailInput::placeholder { color: rgb(23 25 22 / 0.38); }
 
 .emailInput:hover {
-  border-color: rgb(23 25 22 / 0.48);
+  border-color: rgb(23 25 22 / 0.3);
 }
 
+.emailInput:focus,
 .emailInput:focus-visible {
-  border-color: var(--site-ink);
-  box-shadow: 0 0 0 4px rgb(168 79 48 / 0.14);
+  border-color: rgb(23 25 22 / 0.42);
+  box-shadow:
+    0 0 0 4px rgb(23 25 22 / 0.05),
+    0 10px 28px -10px rgb(23 25 22 / 0.22);
 }
 
 .sendBtn {

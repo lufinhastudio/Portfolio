@@ -86,19 +86,46 @@
   color: var(--site-ink);
 }
 
+/* Monograma blanco sobre disco de tinta (como el favicon), rodeado por un
+   aro de vidrio translúcido estilo Apple. */
 .brandBadge {
+  position: relative;
   display: grid;
   place-items: center;
-  width: var(--inner-h);
-  height: var(--inner-h);
+  overflow: hidden;
+  width: calc(var(--inner-h) - 6px);
+  height: calc(var(--inner-h) - 6px);
+  margin: 3px;
   border-radius: 50%;
   color: #fff;
-  background: var(--site-ink);
-  font-family: var(--font-brand);
-  font-size: 1rem;
-  font-variation-settings: "wdth" 110, "wght" 850;
-  line-height: 1;
-  transition: transform var(--dur-base) var(--ease-out), background-color var(--dur-fast) var(--ease-out);
+  background:
+    radial-gradient(120% 80% at 50% 0%, rgb(255 255 255 / 0.18), transparent 55%),
+    var(--site-ink);
+  box-shadow:
+    0 0 0 3px rgb(255 255 255 / 0.6),
+    0 0 0 4px rgb(23 25 22 / 0.08),
+    inset 0 1px 0 rgb(255 255 255 / 0.22),
+    0 4px 10px -2px rgb(23 25 22 / 0.25);
+  transition: transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out);
+}
+
+/* Reflejo que cruza el vidrio al pasar el mouse */
+.brandBadge::after {
+  position: absolute;
+  inset: -20%;
+  background: linear-gradient(115deg, transparent 35%, rgb(255 255 255 / 0.35) 50%, transparent 65%);
+  content: "";
+  transform: translateX(-120%);
+  transition: transform 700ms var(--ease-out-expo);
+  pointer-events: none;
+}
+
+.brandMark {
+  position: relative;
+  z-index: 1;
+  width: 50%;
+  height: 50%;
+  transition: transform var(--dur-base) var(--ease-out);
 }
 
 .brandName {
@@ -232,9 +259,16 @@
   }
 
   .brand:hover .brandBadge {
-    background: var(--site-accent);
-    transform: rotate(-8deg);
+    transform: scale(1.06);
+    box-shadow:
+      0 0 0 3px rgb(255 255 255 / 0.85),
+      0 0 0 4px rgb(23 25 22 / 0.1),
+      inset 0 1px 0 rgb(255 255 255 / 0.22),
+      0 8px 18px -4px rgb(23 25 22 / 0.3);
   }
+
+  .brand:hover .brandBadge::after { transform: translateX(120%); }
+  .brand:hover .brandMark { transform: scale(0.94); }
 
   .navLink:hover:not(.active) {
     color: var(--site-ink);
@@ -344,6 +378,8 @@
   .languageOption,
   .menuButton,
   .brandBadge,
+  .brandBadge::after,
+  .brandMark,
   .menuGlyph i,
   .mobileNavLink {
     transition: none !important;

@@ -84,7 +84,7 @@ export function ContactPage({ locale }: { locale: Locale }) {
   return (
     <main className={styles.page} lang={locale}>
       <Aura variant="field" intensity="medium" position="center" />
-      <div className={styles.kicker}><span>{siteConfig.contact.location}</span><span>{t.label}</span></div>
+      <div className={styles.kicker}><span>Lufinha Studio</span><span>{t.label}</span></div>
       <div className={styles.grid}>
         <div className={styles.intro}>
           <h1 className={`${styles.title} display`}>{t.title}</h1>

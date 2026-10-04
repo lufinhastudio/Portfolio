@@ -63,11 +63,6 @@ export function Hero({ locale }: { locale: Locale }) {
       {/* ── Fondo vivo: reacciona al mouse, al click y al scroll ── */}
       <ReactiveAura className={styles.background} />
 
-      {/* ── Línea superior ── */}
-      <div className={styles.topline}>
-        <span className="mono">{locale === "es" ? "Diseño + desarrollo" : "Design + development"}</span>
-      </div>
-
       {/* ── Contenido principal ── */}
       <div className={styles.main}>
         <h1 className={`${styles.title} display`} id="home-title">

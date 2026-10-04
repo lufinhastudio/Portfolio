@@ -25,7 +25,6 @@ export function SelectedWork({ projects, locale }: { projects: LocalizedProject[
       {/* ── Encabezado de sección ── */}
       <header className={styles.header} data-reveal-group>
         <div>
-          <p className={`${styles.eyebrow} mono`} data-reveal-item>{content.work.eyebrow}</p>
           <h2 className={`${styles.title} display`} id="selected-work-title" data-reveal-item>{content.work.title}</h2>
           <p className={styles.supportingCopy} data-reveal-item>{locale === "es" ? "Diseñamos cada proyecto según la marca, el negocio y lo que realmente necesita resolver." : "We shape every project around the brand, the business and what it really needs to solve."}</p>
         </div>
