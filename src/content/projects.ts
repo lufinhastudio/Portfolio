@@ -57,7 +57,7 @@ const projectEntries: Project[] = [
     url: "https://www.maymabikinis.com.ar/", featured: true,
     palette: { background: "#315757", foreground: "#fffdf9", accent: "#f0a298", muted: "#b8d9d5" },
     brandLogo: { src: "/work/mayma/brand-logo.png", alt: "Logo de Mayma Bikinis", width: 2042, height: 1274, contrast: "light" },
-    cover: { src: "/work/mayma/cover.png", alt: "Bikini verde de Mayma Bikinis flotando sobre el agua", width: 1920, height: 840 },
+    cover: { src: "/work/mayma/home-banner-2.jpg", alt: "Bikini a rayas de Mayma Bikinis flotando sobre el agua", width: 1916, height: 821, position: "78% center" },
     gallery: [
       { src: "/work/mayma/customizer.jpg", alt: "Bikini azul presentado en el personalizador Mayma Bikinis", width: 1080, height: 1350 },
       { src: "/work/mayma/product-04.jpg", alt: "Enteriza Mayma Bikinis en una escena de verano", width: 1080, height: 1350 },
@@ -70,6 +70,7 @@ const projectEntries: Project[] = [
         services: ["Diseño UX / UI", "Desarrollo ecommerce", "Personalizador", "Pagos e integraciones"],
         productCaseStudy: {
           heroImage: { src: "/work/mayma/screens/home.webp", alt: "Home de Mayma Bikinis con accesos al catálogo y al personalizador", width: 2940, height: 1604 },
+          headline: "Una tienda donde cada clienta arma su propio bikini.",
           lead: "E-commerce mobile-first con personalización de bikinis, variantes, stock y un flujo de compra completo.",
           role: "Diseño de experiencia + desarrollo ecommerce",
           challengeTitle: "Vender online sin simplificar de más.",
@@ -169,6 +170,7 @@ const projectEntries: Project[] = [
         services: ["UX / UI design", "Ecommerce development", "Product customiser", "Payments and integrations"],
         productCaseStudy: {
           heroImage: { src: "/work/mayma/screens/home.webp", alt: "Mayma Bikinis homepage with links to the catalogue and customiser", width: 2940, height: 1604 },
+          headline: "A store where every customer builds her own bikini.",
           lead: "A mobile-first ecommerce with bikini customisation, product variants, stock and a complete purchase flow.",
           role: "Experience design + ecommerce development",
           challengeTitle: "Sell online without oversimplifying the product.",
@@ -282,6 +284,7 @@ const projectEntries: Project[] = [
         productCaseStudy: {
           presentation: "product-led",
           heroMedia: cosasDeCasaScreens.home.es,
+          headline: "Una juguetería online que vende por WhatsApp.",
           lead: "Tienda online con catálogo, detalle de producto, carrito, compra por WhatsApp y panel de administración.",
           role: "Diseño UX / UI + desarrollo ecommerce",
           challengeTitle: "Una experiencia de compra completa, de punta a punta.",
@@ -343,6 +346,7 @@ const projectEntries: Project[] = [
         productCaseStudy: {
           presentation: "product-led",
           heroMedia: cosasDeCasaScreens.home.en,
+          headline: "An online toy shop that sells through WhatsApp.",
           lead: "An online shop with a catalogue, product detail, cart, WhatsApp purchasing and an administration panel.",
           role: "UX / UI design + ecommerce development",
           challengeTitle: "A complete shopping experience, from end to end.",
@@ -414,6 +418,7 @@ const projectEntries: Project[] = [
         description: "Una tienda online para descubrir regalos, elegir variantes, pagar y seguir el pedido hasta su entrega o retiro.",
         services: ["Diseño UX / UI", "Desarrollo ecommerce", "Checkout y pagos", "Operación de catálogo y pedidos"],
         productCaseStudy: {
+          headline: "Una regalería que vende y entrega sin fricción.",
           lead: "E-commerce con catálogo, variantes y stock, checkout con Mercado Pago o transferencia y gestión conectada de pedidos y entregas.",
           role: "Diseño de experiencia + desarrollo ecommerce",
           challengeTitle: "Hacer simple una compra con muchas piezas conectadas.",
@@ -473,6 +478,7 @@ const projectEntries: Project[] = [
         description: "An online shop for finding gifts, choosing variants, paying and following an order through delivery or pickup.",
         services: ["UX / UI design", "Ecommerce development", "Checkout and payments", "Catalogue and order operations"],
         productCaseStudy: {
+          headline: "A gift shop that sells and delivers without friction.",
           lead: "An ecommerce with product catalogue, variants and stock, checkout through Mercado Pago or bank transfer, and connected order and delivery management.",
           role: "Experience design + ecommerce development",
           challengeTitle: "Making a connected purchase feel simple.",
@@ -542,6 +548,7 @@ const projectEntries: Project[] = [
         services: ["Diseño de producto", "Desarrollo full stack", "Integración con Google Calendar"],
         productCaseStudy: {
           heroImage: { src: "/work/odontologia/od3-redacted.jpeg", alt: "Captura anonimizada del odontograma FDI dentro del sistema de gestión odontológica", width: 1600, height: 880 },
+          headline: "Todo el consultorio en un solo sistema.",
           lead: "Un sistema para centralizar pacientes, turnos, historia clínica, odontograma, tratamientos, pagos y gestión del consultorio.",
           role: "Diseño de producto + desarrollo full stack",
           challengeTitle: "La clínica, organizada en un solo lugar.",
@@ -625,6 +632,7 @@ const projectEntries: Project[] = [
         services: ["Product design", "Full-stack development", "Google Calendar integration"],
         productCaseStudy: {
           heroImage: { src: "/work/odontologia/od3-redacted.jpeg", alt: "Anonymised capture of the FDI odontogram in the dental management system", width: 1600, height: 880 },
+          headline: "The whole dental practice in one system.",
           lead: "A system that brings together patients, appointments, clinical records, odontograms, treatments, payments and practice operations.",
           role: "Product design + full-stack development",
           challengeTitle: "The clinic, organised in one place.",
@@ -706,7 +714,7 @@ const projectEntries: Project[] = [
   },
   {
     slug: "santa-dominga", index: "04", name: "Santa Dominga", client: "Estancia Santa Dominga", year: "2026",
-    url: "https://arroz2.vercel.app/es#home", featured: true,
+    url: "https://www.santadominga.com.ar/", featured: true,
     palette: { background: "#173b28", foreground: "#f4ead4", accent: "#bfa36a", muted: "#b9c7b0" },
     brandLogo: { src: "/work/santa-dominga/brand-logo.png", alt: "Logo de Santa Dominga", width: 1898, height: 829, contrast: "light" },
     cover: { src: "/work/santa-dominga/cover.webp", alt: "Cultivo de arroz de Santa Dominga en Entre Ríos", width: 1200, height: 1600, position: "center 58%" },
@@ -722,6 +730,7 @@ const projectEntries: Project[] = [
         services: ["Arquitectura de información", "Diseño UX / UI", "Desarrollo web", "Sitio en tres idiomas"],
         productCaseStudy: {
           heroImage: { src: "/work/santa-dominga/screens/home.webp", alt: "Home de Santa Dominga sobre el cultivo de arroz orgánico en Tatutí, Entre Ríos", width: 1600, height: 874 },
+          headline: "Una estancia arrocera presentada al mundo, en tres idiomas.",
           lead: "Un sitio institucional en tres idiomas que organiza dos variedades, documentación certificada y contacto comercial dentro de una experiencia clara.",
           role: "Arquitectura de información + diseño UX / UI + desarrollo web",
           challengeTitle: "Ordenar una propuesta compleja para públicos distintos.",
@@ -797,6 +806,7 @@ const projectEntries: Project[] = [
         services: ["Information architecture", "UX / UI design", "Web development", "Three-language website"],
         productCaseStudy: {
           heroImage: { src: "/work/santa-dominga/screens/home.webp", alt: "Santa Dominga homepage about organic rice cultivation in Tatutí, Entre Ríos", width: 1600, height: 874 },
+          headline: "A rice estate presented to the world, in three languages.",
           lead: "A three-language institutional website that organises two varieties, certified documentation and commercial contact within a clear experience.",
           role: "Information architecture + UX / UI design + web development",
           challengeTitle: "Organising a complex proposition for different audiences.",
@@ -886,6 +896,7 @@ const projectEntries: Project[] = [
         services: ["UX / UI", "Desarrollo web", "Tiendanube", "Mantenimiento continuo"],
         productCaseStudy: {
           heroImage: { src: "/work/uruguai/screens/institucional-home.webp", alt: "Home del sitio institucional de Uruguaí, con presentación de marca y acceso para distribuidores", width: 2000, height: 1092 },
+          headline: "Dos sitios para una yerba: uno cuenta la marca, el otro vende.",
           lead: "Un ecosistema digital de dos sitios: una experiencia institucional para construir marca y una tienda sobre Tiendanube para vender, activar campañas y encontrar puntos de venta.",
           role: "Diseño, desarrollo y mantenimiento del ecosistema digital",
           challengeTitle: "Una marca en movimiento necesitaba más que una sola web.",
@@ -982,6 +993,7 @@ const projectEntries: Project[] = [
         services: ["UX / UI", "Web development", "Tiendanube", "Ongoing maintenance"],
         productCaseStudy: {
           heroImage: { src: "/work/uruguai/screens/institucional-home.webp", alt: "Uruguaí institutional homepage with brand introduction and distributor access", width: 2000, height: 1092 },
+          headline: "Two sites for one yerba brand: one tells the story, the other sells.",
           lead: "A two-site digital ecosystem: an institutional experience for building the brand and a Tiendanube store for selling, running campaigns and finding stockists.",
           role: "Design, development and ongoing digital maintenance",
           challengeTitle: "A growing brand needed more than one website.",

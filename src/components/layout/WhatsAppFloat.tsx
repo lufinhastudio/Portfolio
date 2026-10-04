@@ -17,6 +17,7 @@ const copy = {
     open: "Abrir opciones de WhatsApp",
     close: "Cerrar opciones de WhatsApp",
     contact: "Escribir a",
+    send: "Enviar mensaje",
   },
   en: {
     label: "WhatsApp",
@@ -27,6 +28,7 @@ const copy = {
     open: "Open WhatsApp options",
     close: "Close WhatsApp options",
     contact: "Message",
+    send: "Send a message",
   },
 };
 
@@ -85,7 +87,7 @@ export function WhatsAppFloat() {
               aria-label={`${content.contact} ${contact.name} ${locale === "es" ? "por" : "via"} WhatsApp`}
             >
               <span className={styles.avatar} aria-hidden="true">{contact.name.charAt(0)}</span>
-              <span className={styles.contactText}><strong>{contact.name}</strong><small>{contact.phone}</small></span>
+              <span className={styles.contactText}><strong>{contact.name}</strong><small>{content.send}</small></span>
               <ArrowUpRight className={styles.contactArrow} size="1em" aria-hidden="true" />
             </a>
           ))}

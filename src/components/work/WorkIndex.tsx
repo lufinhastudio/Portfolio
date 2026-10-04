@@ -12,18 +12,17 @@ import styles from "./WorkIndex.module.css";
 /* ==========================================================================
    Trabajo — índice de proyectos
    1. Hero con fondo vivo (mismo lenguaje que Home y Estudio)
-   2. Lista editorial: cada proyecto en su propia fila, imagen grande +
-      ficha legible (qué es, qué hicimos, año) y acceso al caso.
+   2. Galería: el primero destacado a todo el ancho, el resto en dos
+      columnas. Cada tarjeta muestra sólo imagen, nombre, rubro y año.
    ========================================================================== */
 
 export function WorkIndex({ locale }: { locale: Locale }) {
   const projects = getLocalizedProjects(locale);
   const content = getStudioContent(locale);
-  const total = String(projects.length).padStart(2, "0");
   const titleWords = (locale === "es" ? "Trabajo." : "Work.").split(" ");
   const labels = locale === "es"
-    ? { type: "Qué es", did: "Qué hicimos", year: "Año", open: "Ver el caso", soon: "Próximamente" }
-    : { type: "What it is", did: "What we did", year: "Year", open: "View case study", soon: "Coming soon" };
+    ? { open: "Ver el caso", soon: "Próximamente" }
+    : { open: "View case study", soon: "Coming soon" };
 
   const itemListJsonLd = {
     "@context": "https://schema.org", "@type": "ItemList",
@@ -60,50 +59,44 @@ export function WorkIndex({ locale }: { locale: Locale }) {
         </div>
       </header>
 
-      {/* ── 2. Lista de proyectos ── */}
+      {/* ── 2. Proyectos: galería. Desde afuera sólo imagen, nombre y rubro;
+             el detalle (qué hicimos, stack, etc.) vive dentro de cada caso. ── */}
       <section className={styles.list} aria-label={content.common.selectedWork}>
         {projects.map((project, index) => {
           const href = localePath(locale, `/work/${project.slug}`);
-          const cover = (
+          // Destacados a todo el ancho: el primero y, si queda uno suelto al final, el último
+          const isFeatured = index === 0 || (index === projects.length - 1 && (projects.length - 1) % 2 === 1);
+          const kind = project.category.split(" / ").slice(0, 2).join(" · ");
+          const inner = (
             <>
-              <Image src={project.cover.src} alt={project.cover.alt} fill sizes="(max-width: 860px) 100vw, 58vw" priority={index < 1} style={{ objectPosition: project.cover.position ?? "center" }} />
-              <ProjectBrand logo={project.brandLogo} placement="cover" />
-              {!project.previewOnly ? <span className={styles.viewProject}>{labels.open}<ArrowUpRight size=".9em" aria-hidden="true" /></span> : null}
+              <span className={styles.visual}>
+                <Image src={project.cover.src} alt={project.cover.alt} fill sizes={isFeatured ? "(max-width: 760px) 100vw, 90vw" : "(max-width: 760px) 100vw, 45vw"} priority={index < 1} style={{ objectPosition: project.cover.position ?? "center" }} />
+                <ProjectBrand logo={project.brandLogo} placement="cover" />
+                <span className={styles.badge}>
+                  {project.previewOnly
+                    ? labels.soon
+                    : <>{labels.open}<span className={styles.badgeIcon} aria-hidden="true"><ArrowUpRight size=".8rem" /></span></>}
+                </span>
+              </span>
+              <span className={styles.meta}>
+                <span className={`${styles.projectName} display`}>{project.name}</span>
+                <span className={`${styles.year} mono`}>{project.year}</span>
+                <span className={styles.kind}>{kind}</span>
+              </span>
             </>
           );
 
           return (
             <article
-              className={`${styles.item} ${index % 2 ? styles.itemReverse : ""} ${project.previewOnly ? styles.previewItem : ""}`}
+              className={`${styles.item} ${isFeatured ? styles.featured : ""} ${project.previewOnly ? styles.previewItem : ""}`}
               key={project.slug}
-              style={{ "--project-accent": project.palette.accent, "--project-bg": project.palette.background } as React.CSSProperties}
-              data-reveal-group
+              style={{ "--project-bg": project.palette.background } as React.CSSProperties}
+              data-reveal
             >
-              {/* Imagen */}
+              <h2 className="sr-only">{project.name}</h2>
               {project.previewOnly
-                ? <div className={`${styles.visual} ${styles.visualPreview}`} data-reveal-item>{cover}</div>
-                : <Link className={styles.visual} href={href} aria-label={`${labels.open}: ${project.client}`} tabIndex={-1} data-reveal-item>{cover}</Link>}
-
-              {/* Ficha */}
-              <div className={styles.info}>
-                <span className={`${styles.index} mono`} data-reveal-item>{project.index} / {total}</span>
-
-                <h2 className={`${styles.projectName} display`} data-reveal-item>
-                  {project.previewOnly ? project.name : <Link href={href}>{project.name}</Link>}
-                </h2>
-
-                <p className={styles.description} data-reveal-item>{project.description}</p>
-
-                <dl className={styles.facts} data-reveal-item>
-                  <div><dt className="mono">{labels.type}</dt><dd>{project.category.split(" / ").join(" · ")}</dd></div>
-                  <div><dt className="mono">{labels.did}</dt><dd>{project.services.join(" · ")}</dd></div>
-                  <div><dt className="mono">{labels.year}</dt><dd>{project.year}</dd></div>
-                </dl>
-
-                {project.previewOnly
-                  ? <span className={`${styles.cta} ${styles.ctaDisabled}`} data-reveal-item>{labels.soon}</span>
-                  : <Link className={styles.cta} href={href} data-reveal-item><span>{labels.open}</span><ArrowUpRight size="1em" aria-hidden="true" /></Link>}
-              </div>
+                ? <div className={styles.card}>{inner}</div>
+                : <Link className={styles.card} href={href} aria-label={`${labels.open}: ${project.client}`}>{inner}</Link>}
             </article>
           );
         })}

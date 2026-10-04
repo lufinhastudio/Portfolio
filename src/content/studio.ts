@@ -32,7 +32,7 @@ export const studioContent = {
       body: "Diseñamos el sistema completo para que cada interacción siga hablando el idioma de la marca.",
     },
     services: {
-      eyebrow: "Lufinha Studio / Diseño + desarrollo digital",
+      eyebrow: "Lufinha Studio",
       title: "Qué hacemos.",
       statement: "El alcance justo para cada proyecto.",
       intro: "No todo negocio necesita lo mismo. Lo pensamos con vos y construimos lo que realmente hace falta.",
@@ -132,7 +132,7 @@ export const studioContent = {
       body: "We design the complete system so every interaction keeps speaking the brand's language.",
     },
     services: {
-      eyebrow: "Lufinha Studio / Digital design + development",
+      eyebrow: "Lufinha Studio",
       title: "What we do.",
       statement: "The right scope for each project.",
       intro: "Every business needs something different. We think it through with you and build what the project actually needs.",

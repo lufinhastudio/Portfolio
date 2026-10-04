@@ -199,14 +199,18 @@
   .invite { justify-items: start; text-align: left; }
   .invite:is(:hover, :focus-visible) .inviteText { transform: translateX(6px); }
 
+  /* Mobile: una columna — navegación, perfiles y contacto, uno abajo del otro */
   .columns {
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-8) var(--space-5);
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-8);
     padding-block: var(--space-8);
   }
 
-  .columns > :last-child { grid-column: 1 / -1; }
-  .link { word-break: break-word; }
+  .columns > nav { order: 1; }
+  .columns > :nth-child(3) { order: 2; }
+  .columns > :nth-child(2) { order: 3; }
+  .columnTitle { margin-bottom: var(--space-2); }
+  .link { min-height: 2.75rem; font-size: var(--text-base); overflow-wrap: anywhere; }
   .bottom { padding-bottom: var(--space-16); } /* espacio para el botón de WhatsApp */
 }
 

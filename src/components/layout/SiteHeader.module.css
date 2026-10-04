@@ -28,6 +28,7 @@
   gap: var(--space-3);
   padding-inline: var(--page-inline);
   pointer-events: none;
+  view-transition-name: site-header;
 }
 
 /* La entrada se aplica a las cápsulas y no al <header>: un transform en el
@@ -186,13 +187,37 @@
 }
 
 .language {
+  position: relative;
+  isolation: isolate;
   display: flex;
   align-items: center;
   gap: 0.125rem;
   padding: var(--capsule-pad);
 }
 
+/* Pastilla que se desliza entre ES y EN */
+.languageIndicator {
+  position: absolute;
+  z-index: 0;
+  top: calc(var(--capsule-pad));
+  left: calc(var(--capsule-pad));
+  width: var(--inner-h);
+  height: var(--inner-h);
+  border-radius: 50%;
+  background: var(--site-ink);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.16);
+  pointer-events: none;
+  transition: transform 320ms var(--ease-out-expo);
+  will-change: transform;
+}
+
+.language[data-active="en"] .languageIndicator {
+  transform: translateX(calc(var(--inner-h) + 0.125rem));
+}
+
 .languageOption {
+  position: relative;
+  z-index: 1;
   display: grid;
   place-items: center;
   width: var(--inner-h);
@@ -203,18 +228,18 @@
   font-size: var(--text-label);
   font-weight: 600;
   letter-spacing: 0.04em;
+  -webkit-tap-highlight-color: transparent;
   transition:
-    background-color var(--dur-fast) var(--ease-out),
-    color var(--dur-fast) var(--ease-out),
+    color 240ms var(--ease-out),
     transform var(--dur-fast) var(--ease-out);
 }
 
 .languageOption:active { transform: scale(0.92); transition-duration: var(--dur-instant); }
 .languageOption:focus-visible { outline-offset: 1px; }
 
-.languageActive {
+.languageOption[data-active="true"],
+.languageOption[data-active="true"]:hover {
   color: #fff;
-  background: var(--site-ink);
 }
 
 /* ── 6. Botón de menú ──────────────────────────────────────────────────── */
@@ -275,7 +300,7 @@
     background: rgb(23 25 22 / 0.05);
   }
 
-  .languageOption:hover:not(.languageActive) {
+  .languageOption:hover:not([data-active="true"]) {
     color: var(--site-ink);
     background: rgb(23 25 22 / 0.05);
   }
@@ -376,6 +401,7 @@
   .navLink,
   .language,
   .languageOption,
+  .languageIndicator,
   .menuButton,
   .brandBadge,
   .brandBadge::after,

@@ -5,7 +5,7 @@ import { switchLocalePath } from "@/lib/locale";
 
 type MetadataInput = { title?: string; description?: string; path?: string; image?: string; locale?: Locale };
 
-export function createMetadata({ title, description, path = "/", image = "/work/mayma/cover.png", locale = "es" }: MetadataInput = {}): Metadata {
+export function createMetadata({ title, description, path = "/", image = "/work/mayma/home-banner-2.jpg", locale = "es" }: MetadataInput = {}): Metadata {
   const resolvedDescription = description ?? siteConfig.description[locale];
   const resolvedTitle = title ?? siteConfig.seo.defaultTitle[locale];
   const canonical = new URL(path, siteConfig.url).toString();

@@ -40,7 +40,7 @@ export function SelectedWork({ projects, locale }: { projects: LocalizedProject[
               {!project.previewOnly ? <span className={styles.viewProject}>{content.work.open}<ArrowUpRight size=".9em" aria-hidden="true" /></span> : null}
             </span>
             <span className={styles.meta}>
-              <span className={`${styles.category} mono`}>{project.category} · {project.year}</span>
+              <span className={`${styles.category} mono`}>{project.category}</span>
               <span className={styles.nameLine}><span className={`${styles.name} display`}>{project.name}</span>{!project.previewOnly ? <ArrowUpRight className={styles.arrow} size="1.1rem" aria-hidden="true" /> : null}</span>
             </span>
           </>;

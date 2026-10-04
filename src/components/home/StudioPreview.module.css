@@ -113,51 +113,14 @@
 }
 
 /* ── 4. Contactos ──────────────────────────────────────────────────────── */
-.contacts {
-  display: grid;
-  max-width: 40rem;
-  margin-top: var(--space-8);
-  border-top: 1px solid var(--site-line);
-}
-
-.contacts a {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-4);
-  min-height: 3rem;
-  padding: var(--space-3) var(--space-2);
-  border-bottom: 1px solid var(--site-line);
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  transition: background-color var(--dur-fast) var(--ease-out);
-}
-
-.contacts a > span:first-child {
-  color: var(--site-muted);
-  transition:
-    color var(--dur-fast) var(--ease-out),
-    transform var(--dur-base) var(--ease-out);
-}
-
-.contacts svg {
-  transition:
-    transform var(--dur-base) var(--ease-out),
-    color var(--dur-fast) var(--ease-out);
-}
+/* Viven en components/team/PersonContacts.module.css (compartidos con Estudio). */
 
 /* ── 5. Estados ────────────────────────────────────────────────────────── */
-.contacts a:focus-visible { background: var(--site-tint); outline-offset: -2px; }
-.contacts a:focus-visible > span:first-child,
-.contacts a:focus-visible svg { color: var(--site-accent); }
 .person:focus-within .personAura { opacity: 0.35; }
 
 @media (hover: hover) and (pointer: fine) {
   .person:hover .personAura { opacity: 0.35; }
   .portraitStage:hover .portrait img { transform: scale(1.025); }
-  .contacts a:hover { background: var(--site-tint); }
-  .contacts a:hover > span:first-child { color: var(--site-accent); transform: translateX(4px); }
-  .contacts a:hover svg { color: var(--site-accent); transform: translate(3px, -3px); }
 }
 
 /* ── 6. Responsive ─────────────────────────────────────────────────────── */
@@ -174,69 +137,16 @@
   .personInfo h3 { font-size: clamp(3.25rem, 15vw, 4.5rem); }
   .bio { margin-top: var(--space-4); }
 
-  /* En mobile los contactos pasan a ser botones táctiles de igual ancho */
-  .contacts {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: var(--space-2);
-    max-width: 32rem;
-    margin-top: var(--space-6);
-    border-top: 0;
-  }
-
-  .contacts a {
-    gap: var(--space-1);
-    min-height: 3rem;
-    padding: var(--space-3);
-    border: 1px solid var(--site-line);
-    border-radius: var(--radius-sm);
-    background: var(--site-paper);
-    font-family: inherit;
-    font-size: clamp(0.6875rem, 2.7vw, 0.8125rem);
-    font-weight: 700;
-    transition:
-      color var(--dur-fast) var(--ease-out),
-      background-color var(--dur-fast) var(--ease-out),
-      border-color var(--dur-fast) var(--ease-out),
-      transform var(--dur-fast) var(--ease-out);
-  }
-
-  .contacts a > span:first-child { color: inherit; }
-
-  .contacts a:focus-visible,
-  .contacts a:active {
-    color: var(--site-paper);
-    background: var(--site-ink);
-    border-color: var(--site-ink);
-  }
-
-  .contacts a:active { transform: scale(0.97); }
-  .contacts a:focus-visible > span:first-child,
-  .contacts a:focus-visible svg { color: inherit; }
-}
-
-@media (max-width: 420px) {
-  .contacts a { padding-inline: var(--space-2); }
-}
-
-@media (max-width: 760px) and (hover: hover) and (pointer: fine) {
-  .contacts a:hover { color: var(--site-paper); background: var(--site-ink); border-color: var(--site-ink); }
-  .contacts a:hover > span:first-child,
-  .contacts a:hover svg { color: inherit; transform: none; }
 }
 
 /* ── 7. Reduced motion ─────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   .personAura,
-  .portrait img,
-  .contacts a,
-  .contacts a > span:first-child,
-  .contacts svg {
+  .portrait img {
     transition: none;
   }
 
-  .portraitStage:hover .portrait img,
-  .contacts a:hover > span:first-child,
-  .contacts a:hover svg {
+  .portraitStage:hover .portrait img {
     transform: none;
   }
 }

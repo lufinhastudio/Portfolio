@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { getNavigation, getStudioContent } from "@/content";
 import type { Locale } from "@/types/project";
@@ -10,6 +10,7 @@ import { BrandMark } from "@/components/ui/BrandMark";
 import styles from "./SiteHeader.module.css";
 
 export function SiteHeader() {
+  const router = useRouter();
   const pathname = usePathname();
   const locale = localeFromPathname(pathname);
   const content = getStudioContent(locale);
@@ -93,25 +94,43 @@ export function SiteHeader() {
           className={styles.language}
           role="group"
           aria-label={locale === "es" ? "Idioma" : "Language"}
+          data-active={selectedLocale}
         >
-          {(["es", "en"] as const).map((option) => (
-            <Link
-              className={`${styles.languageOption} ${selectedLocale === option ? styles.languageActive : ""}`}
-              href={switchLocalePath(pathname, option)}
-              scroll={false}
-              hrefLang={option}
-              lang={option}
-              aria-label={option === "es" ? "Español" : "English"}
-              aria-current={locale === option ? "page" : undefined}
-              key={option}
-              onClick={() => {
-                setSelectedLocale(option);
-                setOpen(false);
-              }}
-            >
-              {option.toUpperCase()}
-            </Link>
-          ))}
+          <span className={styles.languageIndicator} aria-hidden="true" />
+          {(["es", "en"] as const).map((option) => {
+            const targetHref = switchLocalePath(pathname, option);
+            const isActive = selectedLocale === option;
+            return (
+              <Link
+                className={styles.languageOption}
+                data-active={isActive ? "true" : "false"}
+                href={targetHref}
+                scroll={false}
+                hrefLang={option}
+                lang={option}
+                aria-label={option === "es" ? "Español" : "English"}
+                aria-current={locale === option ? "page" : undefined}
+                key={option}
+                onClick={(e) => {
+                  if (selectedLocale === option) {
+                    e.preventDefault();
+                    return;
+                  }
+                  setSelectedLocale(option);
+                  setOpen(false);
+
+                  if (typeof document !== "undefined" && "startViewTransition" in document) {
+                    e.preventDefault();
+                    (document as Document & { startViewTransition: (cb: () => void) => void }).startViewTransition(() => {
+                      router.push(targetHref, { scroll: false });
+                    });
+                  }
+                }}
+              >
+                {option.toUpperCase()}
+              </Link>
+            );
+          })}
         </div>
 
         <button

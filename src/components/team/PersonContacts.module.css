@@ -1,0 +1,102 @@
+/* ==========================================================================
+   Contactos de persona (Inicio + Estudio)
+   Desktop: lista de filas finas. Mobile: tarjetas táctiles con círculo.
+   ========================================================================== */
+.list {
+  display: grid;
+  max-width: 43rem;
+  margin-top: var(--space-8);
+  border-top: 1px solid var(--site-line);
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 3rem;
+  padding: var(--space-3) var(--space-2);
+  border-bottom: 1px solid var(--site-line);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+}
+
+.text {
+  display: flex;
+  flex: 1;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4);
+  min-width: 0;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.text > span { color: var(--site-ink); }
+
+.text small {
+  overflow: hidden;
+  color: var(--site-muted);
+  font-size: inherit;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.icon { display: grid; flex: none; place-items: center; }
+.icon svg { transition: transform var(--dur-base) var(--ease-out), color var(--dur-fast) var(--ease-out); }
+
+.item:focus-visible { background: var(--site-tint); outline-offset: -2px; }
+
+@media (hover: hover) and (pointer: fine) {
+  .item:hover { background: var(--site-tint); }
+  .item:hover .text { transform: translateX(4px); }
+  .item:hover .text > span, .item:hover svg { color: var(--site-accent); }
+  .item:hover svg { transform: translate(3px, -3px); }
+}
+
+@media (max-width: 760px) {
+  .list {
+    gap: var(--space-2);
+    max-width: 32rem;
+    margin-top: var(--space-6);
+    border-top: 0;
+  }
+
+  .item {
+    min-height: 3.5rem;
+    padding: var(--space-2) var(--space-2) var(--space-2) var(--space-4);
+    border: 1px solid var(--site-line);
+    border-radius: 0.875rem;
+    background: rgb(255 255 255 / 0.78);
+    box-shadow: var(--shadow-xs);
+    font-family: inherit;
+    font-size: 0.9rem;
+  }
+
+  .text { flex-direction: column; align-items: flex-start; justify-content: center; gap: 0.1rem; }
+  .text > span { font-weight: 650; }
+  .text small { max-width: 100%; font-size: 0.8rem; }
+
+  .icon {
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 50%;
+    color: #fff;
+    background: var(--site-ink);
+  }
+
+  .item:active { transform: scale(0.98); }
+  .item:focus-visible { border-color: var(--site-ink); background: #fff; }
+}
+
+@media (max-width: 760px) and (hover: hover) and (pointer: fine) {
+  .item:hover { border-color: var(--site-ink); background: #fff; }
+  .item:hover .text { transform: none; }
+  .item:hover .text > span { color: var(--site-ink); }
+  .item:hover svg { color: #fff; transform: rotate(45deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .item, .text, .icon svg { transition: none; }
+  .item:hover .text, .item:hover svg { transform: none; }
+}

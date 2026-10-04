@@ -2,7 +2,7 @@ import Image from "next/image";
 import type { Locale } from "@/types/project";
 import { getStudioContent } from "@/content";
 import { siteConfig } from "@/config/site";
-import { ArrowUpRight } from "@/components/ui/Icons";
+import { PersonContacts } from "@/components/team/PersonContacts";
 import { Aura } from "@/components/ui/Aura";
 import styles from "./StudioPreview.module.css";
 
@@ -19,13 +19,6 @@ export function StudioPreview({ locale }: { locale: Locale }) {
       </header>
       <div className={styles.people} aria-label={content.people}>
         {siteConfig.team.map((person, index) => {
-          const whatsapp = siteConfig.contact.whatsapp.find((contact) => contact.name === person.name);
-          const contacts = [
-            { label: "Email", value: siteConfig.contact.email, href: `mailto:${siteConfig.contact.email}` },
-            ...(whatsapp ? [{ label: "WhatsApp", value: whatsapp.phone, href: whatsapp.href }] : []),
-            ...person.links.map((link) => ({ label: link.label, value: locale === "es" ? "Ver perfil" : "View profile", href: link.href })),
-          ];
-
           return (
             <article className={styles.person} key={person.name} data-studio-sequence>
               <span className={`mono ${styles.personNumber}`} data-studio-step>0{index + 1}</span>
@@ -36,9 +29,7 @@ export function StudioPreview({ locale }: { locale: Locale }) {
               <div className={styles.personInfo}>
                 <h3 className="display" data-studio-step>{person.name}</h3>
                 <p className={styles.bio} data-studio-step>{content.shortBios[person.name]}</p>
-                <div className={styles.contacts} data-studio-step aria-label={`${locale === "es" ? "Contacto de" : "Contact details for"} ${person.name}`}>
-                  {contacts.map((contact) => <a href={contact.href} aria-label={`${contact.label}: ${contact.value}`} key={`${person.name}-${contact.label}`} target={contact.label === "WhatsApp" || contact.label === "LinkedIn" ? "_blank" : undefined} rel={contact.label === "WhatsApp" || contact.label === "LinkedIn" ? "noopener noreferrer" : undefined}><span>{contact.label}</span><ArrowUpRight size=".85rem" aria-hidden="true" /></a>)}
-                </div>
+                <PersonContacts person={person} locale={locale} data-studio-step />
               </div>
             </article>
           );

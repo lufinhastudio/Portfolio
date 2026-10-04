@@ -1,10 +1,9 @@
 import { Fragment } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import type { Locale } from "@/types/project";
 import { getStudioContent } from "@/content";
-import { localePath, siteConfig } from "@/config/site";
-import { ArrowUpRight } from "@/components/ui/Icons";
+import { siteConfig } from "@/config/site";
+import { PersonContacts } from "@/components/team/PersonContacts";
 import { Aura } from "@/components/ui/Aura";
 import { ProcessSteps } from "@/components/studio/ProcessSteps";
 import { CapabilitiesTicker } from "@/components/studio/CapabilitiesTicker";
@@ -53,13 +52,7 @@ const englishBios = {
 type StudioPersonData = (typeof siteConfig.team)[number];
 
 function StudioPerson({ person, number, locale }: { person: StudioPersonData; number: number; locale: Locale }) {
-  const whatsapp = siteConfig.contact.whatsapp.find((contact) => contact.name === person.name);
   const biography = locale === "es" ? spanishBios[person.name] : englishBios[person.name];
-  const contacts = [
-    { label: "Email", value: siteConfig.contact.email, href: `mailto:${siteConfig.contact.email}` },
-    ...(whatsapp ? [{ label: "WhatsApp", value: whatsapp.phone, href: whatsapp.href }] : []),
-    ...person.links.map((link) => ({ label: link.label, value: locale === "es" ? "Ver perfil" : "View profile", href: link.href })),
-  ];
   return (
     <article className={styles.person} data-studio-sequence>
       <Aura className={styles.personSectionAura} variant="corner" intensity="soft" position={person.name === "Rafa" ? "top-right" : "bottom-left"} tone={person.name === "Rafa" ? "coral" : "orange"} />
@@ -74,9 +67,7 @@ function StudioPerson({ person, number, locale }: { person: StudioPersonData; nu
         <div className={styles.personNote} data-studio-step>
           {biography.map((paragraph, index) => <p key={`${person.name}-${index}`}>{index === 0 ? <><strong>{locale === "es" ? `Soy ${person.name}.` : `I'm ${person.name}.`}</strong> {paragraph}</> : paragraph}</p>)}
         </div>
-        <div className={styles.personContacts} data-studio-step aria-label={`${locale === "es" ? "Contacto de" : "Contact details for"} ${person.name}`}>
-          {contacts.map((contact) => <a className={styles.personContact} href={contact.href} aria-label={`${contact.label}: ${contact.value}`} key={`${person.name}-${contact.label}`} target={contact.label === "WhatsApp" || contact.label === "LinkedIn" ? "_blank" : undefined} rel={contact.label === "WhatsApp" || contact.label === "LinkedIn" ? "noopener noreferrer" : undefined}><span>{contact.label}</span><ArrowUpRight size=".85rem" aria-hidden="true" /></a>)}
-        </div>
+        <PersonContacts person={person} locale={locale} data-studio-step />
       </div>
     </article>
   );
@@ -138,10 +129,6 @@ export function StudioPage({ locale }: { locale: Locale }) {
             </article>
           ))}
         </div>
-        <Link className={styles.contactLink} href={localePath(locale, locale === "es" ? "/contacto" : "/contact")} data-reveal>
-          <span>{locale === "es" ? "Empezar un proyecto" : "Start a project"}</span>
-          <ArrowUpRight size="1em" aria-hidden="true" />
-        </Link>
       </section>
     </main>
   );

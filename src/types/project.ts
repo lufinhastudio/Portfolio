@@ -52,6 +52,8 @@ export type ProductCaseStudy = {
   heroImage?: ProjectImage;
   heroMedia?: ResponsiveProjectImage;
   presentation?: "default" | "product-led";
+  /** Frase corta y grande del hero (la idea en una línea). */
+  headline?: string;
   lead: string;
   role: string;
   challengeTitle: string;
