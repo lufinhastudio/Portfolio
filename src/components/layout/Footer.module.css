@@ -1,8 +1,17 @@
+/* ==========================================================================
+   Footer
+   1. Contenedor
+   2. Créditos y redes
+   3. Estados
+   4. Responsive
+   ========================================================================== */
+
+/* ── 1. Contenedor ─────────────────────────────────────────────────────── */
 .footer {
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  padding: 1.25rem var(--page-gutter);
+  padding: var(--space-5) var(--page-inline);
   color: var(--site-ink);
   background: var(--site-paper);
   border-top: 1px solid var(--site-line);
@@ -10,71 +19,80 @@
 
 .footer > :not([data-aura]) { position: relative; z-index: 1; }
 
+/* ── 2. Contenido ──────────────────────────────────────────────────────── */
 .bottom {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
   flex-wrap: wrap;
-  gap: 1.5rem;
-  padding-top: 0;
-  color: rgb(23 25 22 / 0.62);
-  font-size: 0.72rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+  color: var(--site-muted);
 }
 
 .credits {
   display: inline-flex;
   align-items: center;
-  gap: 0.55rem;
-  letter-spacing: 0.04em;
+  gap: var(--space-2);
 }
 
 .socials {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.4rem 1.4rem;
+  gap: var(--space-1) var(--space-6);
 }
 
 .socialLink {
+  position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 0.3rem;
-  min-height: 2.5rem;
+  gap: var(--space-1);
+  min-height: 2.75rem;
   color: var(--site-ink);
-  transition: color 180ms ease;
+  transition: color var(--dur-fast) var(--ease-out);
 }
 
-.socialLink:hover,
-.socialLink:focus-visible { color: var(--site-accent); }
+/* Subrayado que se dibuja al pasar */
+.socialLink::after {
+  position: absolute;
+  right: 0;
+  bottom: 0.7rem;
+  left: 0;
+  height: 1px;
+  background: currentColor;
+  content: "";
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform var(--dur-base) var(--ease-out);
+}
 
+.socialLink svg { transition: transform var(--dur-base) var(--ease-out); }
 
+/* ── 3. Estados ────────────────────────────────────────────────────────── */
+.socialLink:is(:hover, :focus-visible) { color: var(--site-accent); }
+.socialLink:is(:hover, :focus-visible)::after { transform: scaleX(1); transform-origin: left; }
+.socialLink:is(:hover, :focus-visible) svg { transform: translate(2px, -2px); }
+
+/* ── 4. Responsive ─────────────────────────────────────────────────────── */
 @media (max-width: 760px) {
-  .footer {
-    padding-block: clamp(1.25rem, 3vh, 1.75rem);
-  }
+  .footer { padding-block: var(--space-6); }
 
   .bottom {
-    display: flex;
     flex-direction: column-reverse;
     align-items: flex-start;
-    gap: 1.25rem;
-    padding-top: 0;
+    gap: var(--space-5);
   }
 
   .socials {
     width: 100%;
-    justify-content: flex-start;
-    gap: 0.35rem 1.15rem;
+    gap: var(--space-1) var(--space-5);
   }
 
-  .credits {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.55rem;
-    padding-top: 0.25rem;
-  }
+  .credits { padding-top: var(--space-1); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .socialLink { transition: none; }
+  .socialLink,
+  .socialLink::after,
+  .socialLink svg { transition: none; }
 }

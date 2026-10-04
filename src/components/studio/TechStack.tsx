@@ -342,12 +342,13 @@ export function TechStack({ locale }: { locale: Locale }) {
 
   return (
     <section className={styles.section} id="stack" aria-labelledby="stack-title" ref={sectionRef}>
-      <p className={`${styles.eyebrow} mono`}>{content.eyebrow}</p>
+      <p className={`${styles.eyebrow} mono`} data-reveal>{content.eyebrow}</p>
       <div className={styles.layout}>
-        <div className={styles.copy}>
-          <h2 className={`${styles.title} display`} id="stack-title">{content.title}</h2>
-          <p className={styles.description}>{content.description}</p>
-          <div className={styles.sceneStage}>
+        {/* ── Texto + escena activa ── */}
+        <div className={styles.copy} data-reveal-group>
+          <h2 className={`${styles.title} display`} id="stack-title" data-reveal-item>{content.title}</h2>
+          <p className={styles.description} data-reveal-item>{content.description}</p>
+          <div className={styles.sceneStage} data-reveal-item>
             {COPY[locale].map((scene, index) => (
               <div className={`${styles.scene} ${activeScene === index ? styles.sceneActive : ""}`} aria-hidden={activeScene !== index} key={scene.title}>
                 <h3 className="display">{scene.title}</h3>
@@ -356,7 +357,8 @@ export function TechStack({ locale }: { locale: Locale }) {
             ))}
           </div>
         </div>
-        <div className={styles.visual} data-scene={activeScene}>
+        {/* ── Diagrama animado (canvas) ── */}
+        <div className={styles.visual} data-scene={activeScene} data-reveal>
           <Aura className={styles.techAura} variant="field" intensity="strong" position="center" tone={SCENE_TONES[activeScene]} />
           <canvas className={styles.canvas} ref={canvasRef} aria-hidden="true" />
           <span className={`${styles.visualLabel} mono`}>{locale === "es" ? "De la interfaz a producción" : "From interface to production"}</span>

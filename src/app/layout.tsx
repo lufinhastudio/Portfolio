@@ -24,6 +24,8 @@ export const metadata: Metadata = {
   formatDetection: { email: false, address: false, telephone: false },
 };
 
+const introScript = `try{if(sessionStorage.getItem("lufinha:intro"))document.documentElement.dataset.intro="seen"}catch(e){}`;
+
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const themeVariables = {
     "--site-bg": siteConfig.theme.background,
@@ -38,6 +40,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang={siteConfig.defaultLocale} style={themeVariables} suppressHydrationWarning>
       <body>
+        {/* Corre antes de pintar: si la intro del hero ya se vio en esta sesión,
+            la marca en <html> para que el CSS la omita sin parpadeo. */}
+        <script dangerouslySetInnerHTML={{ __html: introScript }} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(studioJsonLd()) }}

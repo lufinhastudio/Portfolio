@@ -65,11 +65,11 @@ export const siteConfig = {
   theme: {
     background: "#FFFFFF",
     foreground: "#171916",
-    paper: "#FAFAFA",
+    paper: "#FAF9F6", // blanco cálido (antes #FAFAFA): más identidad, mismo contraste
     ink: "#171916",
     signal: "#5E6C43",
     accent: "#A84F30",
-    line: "rgba(23, 25, 22, 0.18)",
+    line: "rgba(23, 25, 22, 0.14)", // líneas más finas: separan sin pesar
   },
   motion: {
     enabled: true,

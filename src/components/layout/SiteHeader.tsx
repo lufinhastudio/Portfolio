@@ -27,6 +27,14 @@ export function SiteHeader() {
     return () => window.removeEventListener("scroll", updateScrollState);
   }, []);
 
+  // Bloquea el scroll del fondo mientras el menú mobile está abierto
+  useEffect(() => {
+    if (!open) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = previous; };
+  }, [open]);
+
   useEffect(() => {
     if (!open) return;
     const onEscape = (event: KeyboardEvent) => {
@@ -38,7 +46,7 @@ export function SiteHeader() {
 
   return (
     <header className={`${styles.header} ${scrolled ? styles.scrolled : ""} ${open ? styles.mobileOpen : ""}`}>
-      {/* Brand pill with circular logo badge */}
+      {/* ── Marca: badge circular + nombre ── */}
       <Link
         className={styles.brand}
         href={locale === "es" ? "/" : "/en"}
@@ -50,7 +58,7 @@ export function SiteHeader() {
         <span className={styles.brandName}>LUFINHA</span>
       </Link>
 
-      {/* Center navigation pill */}
+      {/* ── Navegación principal (desktop) ── */}
       <nav
         className={styles.nav}
         id="site-navigation"
@@ -77,7 +85,7 @@ export function SiteHeader() {
         })}
       </nav>
 
-      {/* Right tools (Language switcher pill + Mobile menu button) */}
+      {/* ── Herramientas: idioma + botón de menú (mobile) ── */}
       <div className={styles.tools}>
         <div
           className={styles.language}
@@ -118,7 +126,7 @@ export function SiteHeader() {
         </button>
       </div>
 
-      {/* Mobile drawer when open */}
+      {/* ── Drawer mobile ── */}
       {open && (
         <div
           className={styles.mobileDrawer}
@@ -127,7 +135,7 @@ export function SiteHeader() {
           aria-label={locale === "es" ? "Menú" : "Menu"}
         >
           <div className={styles.mobileNav}>
-            {navigation.map((item) => {
+            {navigation.map((item, index) => {
               const active =
                 !item.href.includes("#") &&
                 (item.href === (locale === "es" ? "/" : "/en")
@@ -135,6 +143,7 @@ export function SiteHeader() {
                   : pathname.startsWith(item.href));
               return (
                 <Link
+                  style={{ "--i": index } as React.CSSProperties}
                   className={`${styles.mobileNavLink} ${active ? styles.mobileActive : ""}`}
                   href={item.href}
                   scroll={false}

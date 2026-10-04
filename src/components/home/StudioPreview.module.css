@@ -1,65 +1,242 @@
-.section { position: relative; isolation: isolate; overflow: hidden; padding: clamp(3.75rem, 6.5vw, 6rem) var(--page-gutter); color: var(--site-fg); background: var(--site-bg); }
+/* ==========================================================================
+   Studio preview (Home) — Rafa y Luca
+   1. Sección e introducción
+   2. Perfil (mismo sistema para ambos)
+   3. Retrato
+   4. Contactos
+   5. Estados
+   6. Responsive
+   7. Reduced motion
+   ========================================================================== */
+
+/* ── 1. Sección ────────────────────────────────────────────────────────── */
+.section {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: var(--section-y) var(--page-inline);
+  color: var(--site-fg);
+  background: var(--site-bg);
+}
+
 .section > :not([data-aura]) { position: relative; z-index: 1; }
-.intro { display: grid; grid-template-columns: minmax(150px, .5fr) minmax(0, 1.5fr); gap: clamp(2rem, 5vw, 5rem); }
-.intro > p { color: var(--site-signal); }
-.title { max-width: 15ch; font-size: clamp(2.5rem, 5vw, 5rem); line-height: 1; }
-.body { max-width: 42rem; margin-top: 1.2rem; font-size: clamp(1rem, 1.3vw, 1.2rem); line-height: 1.55; }
-.people { display: grid; grid-template-columns: minmax(0, 1fr); margin-top: clamp(2rem, 4vw, 3.5rem); border-top: 1px solid var(--site-line); border-left: 1px solid var(--site-line); }
-.person { min-width: 0; display: grid; grid-template-columns: minmax(2.5rem, 4rem) minmax(16rem, 24rem) minmax(0, 1fr); gap: clamp(1.25rem, 3vw, 3.5rem); align-items: start; padding: clamp(2rem, 3.5vw, 3.5rem) 1.25rem; border-bottom: 1px solid var(--site-line); }
-.personNumber { padding-top: .65rem; color: var(--site-signal); }
-.portraitStage { position: relative; isolation: isolate; width: min(100%, 24rem); }
-.personAura { left: -2.25rem; bottom: -1.25rem; opacity: .14; transition: opacity 350ms ease; }
-.portrait { position: relative; z-index: 1; width: 100%; aspect-ratio: 3 / 4; overflow: hidden; background: var(--site-paper); }
-.portrait img { object-fit: contain; object-position: center; transition: transform 450ms var(--ease-out), filter 300ms ease; }
-.personInfo { min-width: 0; padding-top: .15rem; }
-.personInfo h3 { font-size: clamp(4rem, 6vw, 6.5rem); line-height: .84; }
-.bio { max-width: 38rem; margin-top: clamp(1.2rem, 2vw, 1.75rem); font-size: clamp(.96rem, 1.05vw, 1.05rem); line-height: 1.55; }
-.contacts { display: grid; max-width: 40rem; margin-top: clamp(1.5rem, 2.5vw, 2.5rem); border-top: 1px solid var(--site-line); }
-.contacts a { display: flex; justify-content: space-between; align-items: center; gap: 1rem; min-height: 3rem; padding: .7rem .5rem; border-bottom: 1px solid var(--site-line); font-family: "IBM Plex Mono", monospace; font-size: .75rem; transition: background-color 200ms ease; }
-.contacts a > span:first-child { color: var(--site-muted); transition: color 200ms ease; }
-.contacts svg { transition: transform 200ms var(--ease-out), color 200ms ease; }
-.contacts a:focus-visible { background: rgb(23 25 22 / .035); }
-.contacts a:focus-visible > span:first-child, .contacts a:focus-visible svg { color: var(--site-accent); }
-.person:focus-within .personAura { opacity: .35; }
-.link { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-top: 2.4rem; padding: .9rem 0; border-top: 1px solid var(--site-line); border-bottom: 1px solid var(--site-line); font-size: .87rem; }
-.link svg { transition: transform 200ms ease; }
+
+.intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.title {
+  max-width: 15ch;
+  font-size: var(--text-3xl);
+  line-height: var(--leading-display);
+}
+
+.body {
+  max-width: 46ch;
+  margin-top: var(--space-5);
+  color: color-mix(in srgb, var(--site-fg) 82%, transparent);
+  font-size: var(--text-md);
+  line-height: 1.55;
+}
+
+/* ── 2. Perfiles ───────────────────────────────────────────────────────── */
+.people {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  margin-top: var(--section-head-gap);
+  border-top: 1px solid var(--site-line);
+  border-left: 1px solid var(--site-line);
+}
+
+.person {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: var(--space-16) minmax(16rem, 24rem) minmax(0, 1fr);
+  gap: clamp(var(--space-5), 3vw, var(--space-12));
+  align-items: start;
+  padding: clamp(var(--space-8), 3.5vw, var(--space-12)) var(--space-5);
+  border-bottom: 1px solid var(--site-line);
+}
+
+.personNumber {
+  padding-top: var(--space-2);
+  color: var(--site-signal);
+}
+
+.personInfo {
+  min-width: 0;
+  padding-top: var(--space-1);
+}
+
+.personInfo h3 {
+  font-size: clamp(3.5rem, 2rem + 5vw, 6rem);
+  line-height: 0.86;
+}
+
+.bio {
+  max-width: var(--measure);
+  margin-top: var(--space-6);
+  font-size: var(--text-base);
+  line-height: var(--leading-body);
+}
+
+/* ── 3. Retrato ────────────────────────────────────────────────────────── */
+.portraitStage {
+  position: relative;
+  isolation: isolate;
+  width: min(100%, 24rem);
+}
+
+.personAura {
+  bottom: -1.25rem;
+  left: -2.25rem;
+  opacity: 0.14;
+  transition: opacity var(--dur-slow) var(--ease-out);
+}
+
+.portrait {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: var(--radius-xs);
+  background: var(--site-paper);
+  box-shadow: inset 0 0 0 1px var(--site-line-subtle);
+}
+
+.portrait img {
+  object-fit: contain;
+  object-position: center;
+  transition: transform 900ms var(--ease-out-expo);
+}
+
+/* ── 4. Contactos ──────────────────────────────────────────────────────── */
+.contacts {
+  display: grid;
+  max-width: 40rem;
+  margin-top: var(--space-8);
+  border-top: 1px solid var(--site-line);
+}
+
+.contacts a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  min-height: 3rem;
+  padding: var(--space-3) var(--space-2);
+  border-bottom: 1px solid var(--site-line);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  transition: background-color var(--dur-fast) var(--ease-out);
+}
+
+.contacts a > span:first-child {
+  color: var(--site-muted);
+  transition:
+    color var(--dur-fast) var(--ease-out),
+    transform var(--dur-base) var(--ease-out);
+}
+
+.contacts svg {
+  transition:
+    transform var(--dur-base) var(--ease-out),
+    color var(--dur-fast) var(--ease-out);
+}
+
+/* ── 5. Estados ────────────────────────────────────────────────────────── */
+.contacts a:focus-visible { background: var(--site-tint); outline-offset: -2px; }
+.contacts a:focus-visible > span:first-child,
+.contacts a:focus-visible svg { color: var(--site-accent); }
+.person:focus-within .personAura { opacity: 0.35; }
+
 @media (hover: hover) and (pointer: fine) {
-  .person:hover .personAura { opacity: .35; }
-  .portraitStage:hover .portrait img { transform: scale(1.025); filter: brightness(1.035) contrast(1.01); }
-  .contacts a:hover { background: rgb(23 25 22 / .035); }
-  .contacts a:hover > span:first-child, .contacts a:hover svg { color: var(--site-accent); }
-  .contacts a:hover svg { transform: translate(4px, -4px); }
-  .link:hover svg { transform: translate(3px, -3px); }
+  .person:hover .personAura { opacity: 0.35; }
+  .portraitStage:hover .portrait img { transform: scale(1.025); }
+  .contacts a:hover { background: var(--site-tint); }
+  .contacts a:hover > span:first-child { color: var(--site-accent); transform: translateX(4px); }
+  .contacts a:hover svg { color: var(--site-accent); transform: translate(3px, -3px); }
 }
+
+/* ── 6. Responsive ─────────────────────────────────────────────────────── */
 @media (max-width: 1100px) {
-  .person { grid-template-columns: 2.5rem minmax(15rem, 20rem) minmax(0, 1fr); gap: clamp(1.25rem, 3vw, 2.5rem); }
+  .person { grid-template-columns: var(--space-10) minmax(15rem, 20rem) minmax(0, 1fr); }
   .portraitStage { width: min(100%, 20rem); }
-  .personInfo h3 { font-size: clamp(4rem, 7vw, 5.5rem); }
 }
+
 @media (max-width: 760px) {
-  .intro { grid-template-columns: 1fr; gap: .85rem; }
-  .title { font-size: clamp(2.4rem, 9vw, 3.5rem); }
-  .people { margin-top: 2rem; border-left: 0; }
-  .person { grid-template-columns: minmax(0, 1fr); gap: 1rem; padding: 2rem 0; }
+  .people { margin-top: var(--space-10); border-left: 0; }
+  .person { grid-template-columns: minmax(0, 1fr); gap: var(--space-5); padding: var(--space-8) 0; }
   .personNumber { padding-top: 0; }
   .portraitStage { width: min(72vw, 20rem); }
-  .personInfo h3 { font-size: clamp(3.5rem, 16vw, 4.75rem); }
-  .bio { margin-top: 1rem; }
-  .contacts { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .5rem; max-width: 32rem; margin-top: 1.35rem; border-top: 0; }
-  .contacts a { display: flex; justify-content: space-between; gap: .25rem; min-height: 3rem; padding: .75rem .65rem; border: 1px solid var(--site-line); border-radius: var(--radius); background: var(--site-paper); font-family: inherit; font-size: clamp(.69rem, 2.7vw, .82rem); font-weight: 700; transition: color 200ms ease, background-color 200ms ease, border-color 200ms ease; }
+  .personInfo h3 { font-size: clamp(3.25rem, 15vw, 4.5rem); }
+  .bio { margin-top: var(--space-4); }
+
+  /* En mobile los contactos pasan a ser botones táctiles de igual ancho */
+  .contacts {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-2);
+    max-width: 32rem;
+    margin-top: var(--space-6);
+    border-top: 0;
+  }
+
+  .contacts a {
+    gap: var(--space-1);
+    min-height: 3rem;
+    padding: var(--space-3);
+    border: 1px solid var(--site-line);
+    border-radius: var(--radius-sm);
+    background: var(--site-paper);
+    font-family: inherit;
+    font-size: clamp(0.6875rem, 2.7vw, 0.8125rem);
+    font-weight: 700;
+    transition:
+      color var(--dur-fast) var(--ease-out),
+      background-color var(--dur-fast) var(--ease-out),
+      border-color var(--dur-fast) var(--ease-out),
+      transform var(--dur-fast) var(--ease-out);
+  }
+
   .contacts a > span:first-child { color: inherit; }
-  .contacts a:focus-visible { color: var(--site-paper); background: var(--site-ink); border-color: var(--site-ink); }
-  .contacts a:focus-visible > span:first-child, .contacts a:focus-visible svg { color: inherit; }
-  .contacts a:active { background: var(--site-ink); color: var(--site-paper); }
+
+  .contacts a:focus-visible,
+  .contacts a:active {
+    color: var(--site-paper);
+    background: var(--site-ink);
+    border-color: var(--site-ink);
+  }
+
+  .contacts a:active { transform: scale(0.97); }
+  .contacts a:focus-visible > span:first-child,
+  .contacts a:focus-visible svg { color: inherit; }
 }
+
 @media (max-width: 420px) {
-  .contacts a { padding-inline: .5rem; }
+  .contacts a { padding-inline: var(--space-2); }
 }
+
 @media (max-width: 760px) and (hover: hover) and (pointer: fine) {
   .contacts a:hover { color: var(--site-paper); background: var(--site-ink); border-color: var(--site-ink); }
-  .contacts a:hover > span:first-child, .contacts a:hover svg { color: inherit; }
+  .contacts a:hover > span:first-child,
+  .contacts a:hover svg { color: inherit; transform: none; }
 }
+
+/* ── 7. Reduced motion ─────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
-  .personAura, .portrait img, .contacts a, .contacts a > span:first-child, .contacts svg { transition: none; }
-  .portraitStage:hover .portrait img, .contacts a:hover svg { transform: none; }
+  .personAura,
+  .portrait img,
+  .contacts a,
+  .contacts a > span:first-child,
+  .contacts svg {
+    transition: none;
+  }
+
+  .portraitStage:hover .portrait img,
+  .contacts a:hover > span:first-child,
+  .contacts a:hover svg {
+    transform: none;
+  }
 }

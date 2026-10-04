@@ -4,12 +4,14 @@ import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { siteConfig } from "@/config/site";
 import { localeFromPathname } from "@/lib/locale";
-import { ArrowUpRight } from "@/components/ui/Icons";
+import { ArrowUpRight, CloseIcon } from "@/components/ui/Icons";
 import styles from "./WhatsAppFloat.module.css";
 
 const copy = {
   es: {
     label: "WhatsApp",
+    cta: "Escribinos",
+    closeLabel: "Cerrar",
     title: "Hablemos de tu proyecto",
     description: "Elegí con quién querés conversar.",
     open: "Abrir opciones de WhatsApp",
@@ -18,6 +20,8 @@ const copy = {
   },
   en: {
     label: "WhatsApp",
+    cta: "Message us",
+    closeLabel: "Close",
     title: "Let's talk about your project",
     description: "Choose who you would like to message.",
     open: "Open WhatsApp options",
@@ -80,8 +84,9 @@ export function WhatsAppFloat() {
               tabIndex={open ? 0 : -1}
               aria-label={`${content.contact} ${contact.name} ${locale === "es" ? "por" : "via"} WhatsApp`}
             >
-              <span><strong>{contact.name}</strong><small>{contact.phone}</small></span>
-              <ArrowUpRight size="1em" />
+              <span className={styles.avatar} aria-hidden="true">{contact.name.charAt(0)}</span>
+              <span className={styles.contactText}><strong>{contact.name}</strong><small>{contact.phone}</small></span>
+              <ArrowUpRight className={styles.contactArrow} size="1em" aria-hidden="true" />
             </a>
           ))}
         </div>
@@ -94,8 +99,17 @@ export function WhatsAppFloat() {
         aria-label={open ? content.close : content.open}
         onClick={() => setOpen((current) => !current)}
       >
-        <span className={styles.icon}><WhatsAppIcon /></span>
-        <span className={styles.triggerLabel}>{open ? (locale === "es" ? "Cerrar" : "Close") : content.label}</span>
+        {/* Ícono: alterna entre WhatsApp y cerrar con un giro */}
+        <span className={styles.icon} aria-hidden="true">
+          <span className={styles.iconWhatsApp}><WhatsAppIcon /></span>
+          <span className={styles.iconClose}><CloseIcon size="1rem" /></span>
+        </span>
+        {/* Texto: dos líneas superpuestas que se intercambian al abrir */}
+        <span className={styles.label} aria-hidden="true">
+          <span className={styles.labelDefault}>{content.cta}</span>
+          <span className={styles.labelOpen}>{content.closeLabel}</span>
+        </span>
+        <span className={styles.status} aria-hidden="true" />
       </button>
     </aside>
   );

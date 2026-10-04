@@ -1,0 +1,74 @@
+/* ==========================================================================
+   ReactiveAura
+   ========================================================================== */
+
+.root {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  contain: strict; /* el repintado del fondo no afecta al resto de la página */
+}
+
+/* Capa que recibe parallax de mouse + scroll */
+.drift {
+  position: absolute;
+  inset: -8% -6%;
+  will-change: transform;
+}
+
+/* El aura ocupa todo el alto del hero (antes tenía un alto fijo) */
+.drift > [data-aura] {
+  top: 0;
+  height: 100%;
+}
+
+/* ── Luces que siguen al cursor ──
+   Un degradé radial grande y desenfocado. Se mueven sólo con transform. */
+.spot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  opacity: 0;
+  mix-blend-mode: multiply;
+  will-change: transform;
+  transition: opacity 1.2s var(--ease-out);
+}
+
+.root[data-live="true"] .spot { opacity: 1; }
+
+.spotA {
+  width: clamp(18rem, 34vw, 34rem);
+  height: clamp(18rem, 34vw, 34rem);
+  background: radial-gradient(circle, rgb(var(--aura-coral-rgb) / 0.32) 0%, rgb(var(--aura-coral-rgb) / 0.12) 40%, transparent 70%);
+  filter: blur(48px);
+}
+
+.spotB {
+  width: clamp(24rem, 48vw, 48rem);
+  height: clamp(24rem, 48vw, 48rem);
+  background: radial-gradient(circle, rgb(var(--aura-yellow-rgb) / 0.45) 0%, rgb(var(--aura-orange-rgb) / 0.18) 40%, transparent 70%);
+  filter: blur(56px);
+}
+
+/* Fundido inferior: el hero se funde con la sección siguiente, sin corte */
+.fade {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 28%;
+  background: linear-gradient(to bottom, transparent, var(--site-paper));
+}
+
+@media (max-width: 600px) {
+  .spotA { filter: blur(22px); }
+  .spotB { filter: blur(30px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spot { display: none; }
+  .drift { will-change: auto; }
+}

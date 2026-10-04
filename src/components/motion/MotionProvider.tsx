@@ -85,52 +85,73 @@ export function MotionProvider({ children }: { children: React.ReactNode }) {
         const ScrollTrigger = triggerModule.ScrollTrigger;
         gsap.registerPlugin(ScrollTrigger);
 
+        /* ── Sistema de reveals ─────────────────────────────────────────────
+           Sólo transform + opacity (compositor → 60fps). Al terminar se limpian
+           los estilos inline para que los hovers CSS vuelvan a funcionar.
+
+           [data-reveal]          → elemento suelto
+           [data-reveal-group]    → contenedor; sus [data-reveal-item] entran
+                                    escalonados (stagger) cuando el grupo entra
+           Los atributos data-services-* / data-studio-* siguen soportados
+           porque los usa la página Estudio. */
+        const EASE = "expo.out";       // ≈ cubic-bezier(0.16, 1, 0.3, 1)
+        const DURATION = 0.7;
+        const DISTANCE = 24;           // px — desplazamiento leve
+        const STAGGER = 0.08;
+        const START = "top 86%";
+        const CLEAR = "opacity,visibility,transform";
+
+        const GROUPS = "[data-reveal-group], [data-services-intro], [data-studio-intro], [data-studio-sequence]";
+        const ITEMS = "[data-reveal-item], [data-services-step], [data-studio-step]";
+        const SINGLES = "[data-reveal], [data-services-item], [data-studio-ticker]";
+
         const context = gsap.context(() => {
-          gsap.utils.toArray<HTMLElement>("[data-reveal]").forEach((element) => {
-            gsap.fromTo(element, { y: 16, opacity: 0 }, {
-              y: 0, opacity: 1, duration: 0.45, ease: "power2.out",
-              scrollTrigger: { trigger: element, start: "top 88%", once: true },
+          // 1. Elementos sueltos
+          gsap.utils.toArray<HTMLElement>(SINGLES).forEach((element) => {
+            gsap.fromTo(element, { y: DISTANCE, autoAlpha: 0 }, {
+              y: 0, autoAlpha: 1, duration: DURATION, ease: EASE, clearProps: CLEAR,
+              scrollTrigger: { trigger: element, start: START, once: true },
             });
           });
-          gsap.utils.toArray<HTMLElement>("[data-services-intro]").forEach((group) => {
-            const steps = gsap.utils.toArray<HTMLElement>(group.querySelectorAll("[data-services-step]"));
-            gsap.fromTo(steps, { y: 12, opacity: 0 }, {
-              y: 0, opacity: 1, duration: 0.45, stagger: 0.07, ease: "power2.out", clearProps: "opacity,transform",
-              scrollTrigger: { trigger: group, start: "top 85%", once: true },
+
+          // 2. Grupos con aparición escalonada
+          gsap.utils.toArray<HTMLElement>(GROUPS).forEach((group) => {
+            // Sólo los items cuyo grupo más cercano es éste (permite anidar grupos)
+            const items = gsap.utils
+              .toArray<HTMLElement>(group.querySelectorAll(ITEMS))
+              .filter((item) => item.parentElement?.closest(GROUPS) === group);
+            if (!items.length) return;
+
+            const timeline = gsap.timeline({
+              scrollTrigger: {
+                trigger: group, start: START, once: true,
+                // Marca el grupo para animaciones CSS (líneas que se dibujan, etc.)
+                onEnter: () => group.setAttribute("data-inview", ""),
+              },
             });
-          });
-          gsap.utils.toArray<HTMLElement>("[data-services-item]").forEach((item) => {
-            gsap.fromTo(item, { y: 12, opacity: 0 }, {
-              y: 0, opacity: 1, duration: 0.45, ease: "power2.out", clearProps: "opacity,transform",
-              scrollTrigger: { trigger: item, start: "top 88%", once: true },
-            });
-          });
-          gsap.utils.toArray<HTMLElement>("[data-studio-intro], [data-studio-sequence]").forEach((group) => {
-            const steps = gsap.utils.toArray<HTMLElement>(group.querySelectorAll("[data-studio-step]"));
-            const timeline = gsap.timeline({ scrollTrigger: { trigger: group, start: "top 85%", once: true } });
-            timeline.fromTo(steps, { y: 14, opacity: 0 }, {
-              y: 0, opacity: 1, duration: 0.48, stagger: 0.075, ease: "power2.out", clearProps: "opacity,transform",
+            timeline.fromTo(items, { y: DISTANCE, autoAlpha: 0 }, {
+              y: 0, autoAlpha: 1, duration: DURATION, stagger: STAGGER, ease: EASE, clearProps: CLEAR,
             });
 
-            if (finePointer && group.hasAttribute("data-studio-sequence")) {
-              const portrait = group.querySelector<HTMLElement>("[data-studio-portrait]");
-              const image = portrait?.querySelector("img");
-              if (portrait && image) {
-                timeline.fromTo(portrait, { clipPath: "inset(0 0 100% 0)" }, {
-                  clipPath: "inset(0 0 0% 0)", duration: 0.6, ease: "power2.out", clearProps: "clipPath",
-                }, 0.08);
-                timeline.fromTo(image, { scale: 1.035 }, {
-                  scale: 1, duration: 0.65, ease: "power2.out", clearProps: "transform",
-                }, 0.08);
-              }
+            // Retratos: la foto se asienta con un zoom-out mínimo (sin clip-path)
+            if (finePointer) {
+              group.querySelectorAll<HTMLElement>("[data-studio-portrait] img").forEach((image) => {
+                timeline.fromTo(image, { scale: 1.06 }, {
+                  scale: 1, duration: 1.1, ease: EASE, clearProps: "transform",
+                }, 0.05);
+              });
             }
           });
-          gsap.utils.toArray<HTMLElement>("[data-studio-ticker]").forEach((ticker) => {
-            gsap.fromTo(ticker, { y: 8, opacity: 0 }, {
-              y: 0, opacity: 1, duration: 0.42, ease: "power2.out", clearProps: "opacity,transform",
-              scrollTrigger: { trigger: ticker, start: "top 90%", once: true },
+
+          // 3. Grupos sin items que igual quieren saber cuándo entran (data-inview)
+          gsap.utils.toArray<HTMLElement>("[data-inview-watch]").forEach((element) => {
+            ScrollTrigger.create({
+              trigger: element, start: START, once: true,
+              onEnter: () => element.setAttribute("data-inview", ""),
             });
           });
+
+          // 4. Parallax suave en imágenes (sólo con mouse; nunca en touch)
           if (finePointer) {
             gsap.utils.toArray<HTMLElement>("[data-parallax]").forEach((element) => {
               gsap.fromTo(element, { yPercent: -4, scale: 1.05 }, {
@@ -153,8 +174,23 @@ export function MotionProvider({ children }: { children: React.ReactNode }) {
           animationFrame = requestAnimationFrame(raf);
         }
 
+        /* ── Brillo que sigue al cursor en tarjetas [data-glow] ──
+           Un solo listener delegado: escribe la posición del mouse relativa a
+           la tarjeta en --gx / --gy; el CSS la usa dentro de un transform. */
+        const onGlowMove = (event: PointerEvent) => {
+          const card = (event.target as Element | null)?.closest<HTMLElement>("[data-glow]");
+          if (!card) return;
+          const rect = card.getBoundingClientRect();
+          card.style.setProperty("--gx", `${(event.clientX - rect.left).toFixed(1)}px`);
+          card.style.setProperty("--gy", `${(event.clientY - rect.top).toFixed(1)}px`);
+        };
+        if (finePointer) document.addEventListener("pointermove", onGlowMove, { passive: true });
+        document.documentElement.dataset.motion = "on";
+
         ScrollTrigger.refresh();
         cleanup = () => {
+          document.removeEventListener("pointermove", onGlowMove);
+          delete document.documentElement.dataset.motion;
           cancelAnimationFrame(animationFrame);
           lenis?.destroy();
           if (lenisRef.current === lenis) lenisRef.current = null;

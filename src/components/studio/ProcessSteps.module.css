@@ -1,8 +1,16 @@
+/* ==========================================================================
+   Process steps — Estudio
+   1. Sección y encabezado
+   2. Pasos (línea que se dibuja al entrar + hover)
+   3. Responsive
+   ========================================================================== */
+
+/* ── 1. Sección ────────────────────────────────────────────────────────── */
 .section {
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  padding: clamp(3.5rem, 6vw, 5.5rem) var(--page-gutter);
+  padding: var(--section-y) var(--page-inline);
   color: var(--site-ink);
   background: var(--site-bg);
 }
@@ -12,52 +20,102 @@
 .header {
   display: grid;
   grid-template-columns: minmax(0, 0.55fr) minmax(0, 1.45fr);
-  gap: 2rem;
+  gap: var(--space-8);
   align-items: start;
-  margin-bottom: clamp(3rem, 5vw, 4.5rem);
+  margin-bottom: var(--section-head-gap);
 }
 
-.header > p { padding-top: 0.5rem; color: var(--site-accent); }
+.header > p { padding-top: var(--space-2); color: var(--site-accent); }
 
 .title {
   max-width: 18ch;
-  font-size: clamp(2.1rem, 4.3vw, 4rem);
-  line-height: 1.04;
+  font-size: var(--text-3xl);
+  line-height: var(--leading-display);
 }
 
+/* ── 2. Pasos ──────────────────────────────────────────────────────────── */
 .steps {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: clamp(1rem, 2.3vw, 2.25rem);
+  gap: clamp(var(--space-4), 2.3vw, var(--space-8));
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
 .step {
+  position: relative;
   display: grid;
   align-content: start;
-  gap: 2rem;
+  gap: var(--space-8);
   min-width: 0;
-  min-height: 10rem;
-  padding-top: 1rem;
+  min-height: 11rem;
+  padding: var(--space-5) var(--space-1) var(--space-6);
   border-top: 1px solid var(--site-line);
 }
 
-.number { color: var(--site-accent); }
-.step h3 { margin-bottom: 0.6rem; font-size: 1.05rem; font-weight: 720; letter-spacing: -0.02em; }
-.step p { max-width: 27rem; color: rgb(23 25 22 / 0.72); font-size: 0.94rem; line-height: 1.55; }
+/* Línea de acento que se dibuja sobre el borde, paso por paso */
+.step::before {
+  position: absolute;
+  top: -1px;
+  right: 0;
+  left: 0;
+  height: 2px;
+  background: var(--site-ink);
+  content: "";
+  transform: scaleX(1);
+  transform-origin: left;
+  transition: transform 0.9s var(--ease-out-expo), background-color var(--dur-fast) var(--ease-out);
+  transition-delay: calc(0.15s + var(--i, 0) * 0.12s), 0s;
+}
+
+:global(html[data-motion="on"]) .steps:not([data-inview]) .step::before {
+  transform: scaleX(0);
+}
+
+.number {
+  display: inline-block;
+  color: var(--site-accent);
+  font-size: var(--text-xs);
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.step h3 {
+  margin-bottom: var(--space-2);
+  font-size: var(--text-lg);
+  font-weight: 720;
+  letter-spacing: var(--tracking-snug);
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.step p {
+  max-width: 27rem;
+  color: rgb(23 25 22 / 0.72);
+  font-size: var(--text-sm);
+  line-height: 1.55;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .step:hover::before { background: var(--site-accent); }
+  .step:hover .number { transform: translateX(4px); }
+  .step:hover h3 { transform: translateY(-2px); }
+}
+
 .compact { background: var(--site-paper); }
 
+/* ── 3. Responsive ─────────────────────────────────────────────────────── */
 @media (max-width: 900px) {
-  .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 2.25rem; }
-  .step { min-height: 10rem; }
+  .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: var(--space-10); }
 }
 
 @media (max-width: 620px) {
-  .header { grid-template-columns: minmax(0, 1fr); gap: 0.75rem; }
-  .steps { grid-template-columns: minmax(0, 1fr); row-gap: 1.75rem; }
-  .step { grid-template-columns: 2rem minmax(0, 1fr); gap: 0.8rem; min-height: 0; padding-top: 0.85rem; }
+  .header { grid-template-columns: minmax(0, 1fr); gap: var(--space-3); }
+  .steps { grid-template-columns: minmax(0, 1fr); row-gap: var(--space-6); }
+  .step { grid-template-columns: 2rem minmax(0, 1fr); gap: var(--space-3); min-height: 0; padding-top: var(--space-4); }
   .number { grid-row: 1; }
   .step > div { grid-column: 2; grid-row: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .step::before, .number, .step h3 { transition: none; }
 }

@@ -1,8 +1,28 @@
-/* ── Root container ── */
+/* ==========================================================================
+   IdeaBar — "Contanos qué tenés en mente"
+   1. Contenedor (morph de ancho)
+   2. Fase 1: campo de idea
+   3. Botones (cerrar / flecha)
+   4. Fase 2: email + enviar
+   5. Éxito / error
+   6. Hint, honeypot
+   7. Mobile
+   8. Reduced motion
+
+   Nota de performance: el ensanche del contenedor (max-width) y la apertura de
+   la fase 2 (grid-template-rows) no son transform/opacity. Se mantienen a
+   propósito: ocurren una sola vez, por interacción del usuario, sobre un único
+   elemento — no durante el scroll — y el resultado es mucho más natural que
+   escalar el campo (que deformaría el texto).
+   ========================================================================== */
+
+/* ── 1. Contenedor ── */
 .root {
+  --bar-h: 3.5rem;
+  --bar-btn: 2.5rem;
   width: 100%;
   margin-inline: auto;
-  transition: max-width 320ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition: max-width var(--dur-slow) var(--ease-out-expo);
 }
 
 .collapsed {
@@ -13,57 +33,66 @@
   max-width: 52rem;
 }
 
-/* ── Form ── */
+/* Formulario */
 .form {
   display: flex;
   flex-direction: column;
   gap: 0;
 }
 
-/* ── Phase 1: idea input row ── */
+/* ── 2. Fase 1 ──
+   Misma altura y padding en ambos estados: sólo cambian color, borde y
+   sombra, así el morph no "salta" verticalmente. */
 .phase1 {
   display: flex;
   align-items: center;
-  border-radius: 3rem;
+  height: var(--bar-h);
+  padding: 0 0.5rem 0 var(--space-6);
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
   cursor: text;
-  transition: height 280ms cubic-bezier(0.2, 0.8, 0.2, 1),
-              background-color 260ms ease,
-              border-color 260ms ease,
-              box-shadow 260ms ease,
-              transform 180ms ease,
-              padding 260ms ease;
+  transition:
+    background-color var(--dur-base) var(--ease-out),
+    border-color var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out),
+    transform var(--dur-base) var(--ease-out);
 }
 
-/* Collapsed resting state: compact black write field */
+/* Reposo: campo negro compacto */
 .collapsed .phase1 {
-  height: 3.35rem;
-  padding: 0 0.45rem 0 1.4rem;
-  background: var(--site-ink, #171916);
-  border: 1px solid rgba(23, 25, 22, 0.1);
-  box-shadow: 0 4px 18px rgb(23 25 22 / 0.14);
+  background: var(--site-ink);
+  border-color: rgb(23 25 22 / 0.1);
+  box-shadow: var(--shadow-md);
 }
 
-.collapsed .phase1:hover {
-  border-color: rgba(255, 255, 255, 0.25);
-  box-shadow: 0 8px 26px rgb(23 25 22 / 0.2);
-  transform: translateY(-1px);
+@media (hover: hover) and (pointer: fine) {
+  .collapsed .phase1:hover {
+    border-color: rgb(255 255 255 / 0.22);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+  }
 }
 
-/* Open active state: full editorial canvas */
+.collapsed .phase1:active { transform: scale(0.99); transition-duration: var(--dur-instant); }
+
+/* Abierto: lienzo claro */
 .open .phase1 {
-  height: 4rem;
-  padding: 0 0.5rem 0 1.5rem;
   background: #fff;
-  border: 1px solid rgb(23 25 22 / 0.24);
-  box-shadow: 0 4px 22px rgb(23 25 22 / 0.07);
+  border-color: var(--site-line-strong);
+  box-shadow: var(--shadow-sm);
 }
 
-.open .phase1:hover,
+.open .phase1:hover {
+  border-color: rgb(23 25 22 / 0.48);
+}
+
+/* Foco: anillo terracota suave alrededor de todo el campo */
 .open:focus-within .phase1 {
-  border-color: rgb(23 25 22 / 0.45);
+  border-color: var(--site-ink);
+  box-shadow: var(--shadow-sm), 0 0 0 4px rgb(168 79 48 / 0.14);
 }
 
-/* ── Input field ── */
+/* Campo */
 .ideaInput {
   flex: 1;
   min-width: 0;
@@ -73,12 +102,12 @@
   font-family: inherit;
   line-height: 1;
   outline: none;
-  transition: color 240ms ease, font-size 240ms ease;
+  font-size: var(--text-base);
+  transition: color var(--dur-fast) var(--ease-out);
 }
 
 .collapsed .ideaInput {
   color: #fff;
-  font-size: 0.94rem;
 }
 
 .collapsed .ideaInput::placeholder {
@@ -86,8 +115,7 @@
 }
 
 .open .ideaInput {
-  color: var(--site-fg, #171916);
-  font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+  color: var(--site-fg);
 }
 
 .open .ideaInput::placeholder {
@@ -99,111 +127,110 @@
   box-shadow: none;
 }
 
-/* ── Close button (revealed when open) ── */
+/* ── 3. Botones ── */
+/* Cerrar: siempre ocupa su lugar; aparece con opacity + scale */
 .closeBtn {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  width: 2.25rem;
+  height: 2.25rem;
+  margin-right: var(--space-1);
+  padding: 0;
   border: none;
   border-radius: 50%;
   background: transparent;
   color: var(--site-muted);
   cursor: pointer;
-  overflow: hidden;
-  transition: opacity 220ms ease,
-              width 220ms ease,
-              margin 220ms ease,
-              background-color 180ms ease,
-              color 180ms ease;
+  transition:
+    opacity var(--dur-fast) var(--ease-out),
+    transform var(--dur-base) var(--ease-out),
+    background-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out);
 }
 
 .collapsed .closeBtn {
   opacity: 0;
-  width: 0;
-  height: 0;
-  margin: 0;
+  transform: scale(0.6);
   pointer-events: none;
 }
 
 .open .closeBtn {
   opacity: 1;
-  width: 2.25rem;
-  height: 2.25rem;
-  margin-right: 0.25rem;
+  transform: scale(1);
   pointer-events: auto;
 }
 
 .closeBtn:hover {
-  background: rgb(23 25 22 / 0.08);
+  background: rgb(23 25 22 / 0.07);
   color: var(--site-ink);
 }
 
-.closeBtn:active {
-  transform: scale(0.92);
+.open .closeBtn:active {
+  transform: scale(0.9);
+  transition-duration: var(--dur-instant);
 }
 
 .closeBtn:focus-visible {
-  outline: 2px solid var(--terracotta, #a84f30);
   outline-offset: 2px;
 }
 
-/* ── Arrow action button ── */
+/* Flecha: mismo tamaño en ambos estados; cambia color */
 .arrowBtn {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  width: var(--bar-btn);
+  height: var(--bar-btn);
+  padding: 0;
   border: none;
   border-radius: 50%;
+  color: #fff;
   cursor: pointer;
-  transition: width 260ms ease,
-              height 260ms ease,
-              background-color 200ms ease,
-              transform 180ms ease;
+  transition:
+    background-color var(--dur-fast) var(--ease-out),
+    transform var(--dur-base) var(--ease-out);
 }
 
-.collapsed .arrowBtn {
-  width: 2.45rem;
-  height: 2.45rem;
-  background: rgba(255, 255, 255, 0.16);
-  color: #fff;
-}
+.arrowBtn svg { transition: transform var(--dur-base) var(--ease-out); }
 
-.collapsed .arrowBtn:hover {
-  background: var(--olive, #5e6c43);
-  transform: translate(2px, -2px);
-}
+.collapsed .arrowBtn { background: rgb(255 255 255 / 0.14); }
+.open .arrowBtn { background: var(--site-ink); }
 
-.open .arrowBtn {
-  width: 2.75rem;
-  height: 2.75rem;
-  background: var(--site-ink, #171916);
-  color: #fff;
-}
-
+.collapsed .arrowBtn:hover,
 .open .arrowBtn:hover:not(:disabled) {
-  background: var(--olive, #5e6c43);
+  background: var(--olive);
+}
+
+.collapsed .phase1:hover .arrowBtn svg,
+.arrowBtn:hover:not(:disabled) svg {
   transform: translate(2px, -2px);
+}
+
+.arrowBtn:active:not(:disabled) {
+  transform: scale(0.92);
+  transition-duration: var(--dur-instant);
 }
 
 .open .arrowBtn:disabled {
-  background: rgb(23 25 22 / 0.18);
+  background: rgb(23 25 22 / 0.16);
   cursor: default;
 }
 
 .arrowBtn:focus-visible {
-  outline: 2px solid var(--terracotta, #a84f30);
   outline-offset: 3px;
 }
 
-/* ── Phase 2: email input & send ── */
+/* ── 4. Fase 2 ── */
 .phase2 {
   display: grid;
   grid-template-rows: 0fr;
   opacity: 0;
-  transition: grid-template-rows 300ms cubic-bezier(0.22, 1, 0.36, 1),
-              opacity 240ms ease;
+  transition:
+    grid-template-rows var(--dur-base) var(--ease-out-expo),
+    opacity var(--dur-fast) var(--ease-out);
   pointer-events: none;
 }
 
@@ -215,13 +242,21 @@
 
 .phase2Content {
   overflow: hidden;
-  padding-top: 0.65rem;
+  padding-top: var(--space-3);
 }
+
+/* El contenido de la fase 2 sube levemente mientras se abre */
+.emailRow {
+  transform: translateY(-6px);
+  transition: transform var(--dur-slow) var(--ease-out-expo);
+}
+
+.expanded .emailRow { transform: translateY(0); }
 
 .emailRow {
   display: flex;
   align-items: flex-end;
-  gap: 0.75rem;
+  gap: var(--space-3);
 }
 
 .emailLabel {
@@ -233,34 +268,35 @@
 }
 
 .emailLabel > span {
+  padding-left: var(--space-5);
   color: var(--site-muted);
-  font-size: 0.62rem;
-  letter-spacing: 0.06em;
+  text-align: left;
 }
 
 .emailInput {
   flex: 1;
   min-width: 0;
   height: 3.25rem;
-  padding: 0 1.25rem;
-  border: 1px solid rgb(23 25 22 / 0.22);
-  border-radius: 2rem;
+  padding: 0 var(--space-5);
+  border: 1px solid var(--site-line-strong);
+  border-radius: var(--radius-pill);
   background: #fff;
   color: var(--site-fg);
   font: inherit;
-  font-size: 0.92rem;
-  transition: border-color 180ms ease;
+  font-size: var(--text-sm);
   outline: none;
+  transition:
+    border-color var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out);
 }
 
-.emailInput:hover,
-.emailInput:focus {
-  border-color: var(--olive, #5e6c43);
+.emailInput:hover {
+  border-color: rgb(23 25 22 / 0.48);
 }
 
 .emailInput:focus-visible {
-  outline: 2px solid var(--terracotta, #a84f30);
-  outline-offset: 2px;
+  border-color: var(--site-ink);
+  box-shadow: 0 0 0 4px rgb(168 79 48 / 0.14);
 }
 
 .sendBtn {
@@ -268,27 +304,36 @@
   align-items: center;
   gap: 0.6rem;
   height: 3.25rem;
-  padding: 0 1.35rem;
+  padding: 0 var(--space-6);
   border: 1px solid var(--site-ink);
-  border-radius: 2rem;
+  border-radius: var(--radius-pill);
   background: var(--site-ink);
   color: #fff;
   font: inherit;
-  font-size: 0.88rem;
-  font-weight: 600;
+  font-size: var(--text-sm);
+  font-weight: 650;
   white-space: nowrap;
   cursor: pointer;
-  transition: background-color 200ms ease, border-color 200ms ease, transform 180ms ease;
+  transition:
+    background-color var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out),
+    opacity var(--dur-fast) var(--ease-out),
+    transform var(--dur-base) var(--ease-out);
 }
 
+.sendBtn svg { transition: transform var(--dur-base) var(--ease-out); }
+
 .sendBtn:hover:not(:disabled) {
-  background: var(--olive, #5e6c43);
-  border-color: var(--olive, #5e6c43);
+  background: var(--olive);
+  border-color: var(--olive);
   transform: translateY(-1px);
 }
 
-.sendBtn:active {
-  transform: translateY(0);
+.sendBtn:hover:not(:disabled) svg { transform: translate(2px, -2px); }
+
+.sendBtn:active:not(:disabled) {
+  transform: scale(0.97);
+  transition-duration: var(--dur-instant);
 }
 
 .sendBtn:disabled {
@@ -297,7 +342,6 @@
 }
 
 .sendBtn:focus-visible {
-  outline: 2px solid var(--terracotta, #a84f30);
   outline-offset: 3px;
 }
 
@@ -307,28 +351,36 @@
 }
 
 .errorMsg {
-  margin-top: 0.5rem;
+  margin-top: var(--space-2);
+  padding-left: var(--space-5);
   color: #a53f28;
-  font-size: 0.82rem;
+  font-size: var(--text-sm);
+  text-align: left;
 }
 
-/* ── Success state ── */
+/* ── 5. Éxito ── */
 .successState {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  height: 4rem;
-  padding: 0 1.5rem;
+  min-height: var(--bar-h);
+  padding: 0 var(--space-2) 0 var(--space-6);
   border: 1px solid rgb(94 108 67 / 0.45);
-  border-radius: 3rem;
+  border-radius: var(--radius-pill);
   background: rgb(94 108 67 / 0.07);
+  animation: successIn var(--dur-slow) var(--ease-out-expo) backwards;
+}
+
+@keyframes successIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .successMsg {
-  font-size: 0.95rem;
-  color: var(--olive, #5e6c43);
-  font-weight: 600;
+  color: var(--olive);
+  font-size: var(--text-sm);
+  font-weight: 650;
 }
 
 .successActions {
@@ -338,16 +390,18 @@
 }
 
 .resetBtn {
-  padding: 0 0.9rem;
   height: 2.25rem;
-  border: 1px solid rgb(23 25 22 / 0.22);
-  border-radius: 2rem;
+  padding: 0 var(--space-4);
+  border: 1px solid var(--site-line-strong);
+  border-radius: var(--radius-pill);
   background: transparent;
   color: var(--site-muted);
   font: inherit;
-  font-size: 0.78rem;
+  font-size: var(--text-xs);
   cursor: pointer;
-  transition: border-color 180ms ease, color 180ms ease;
+  transition:
+    border-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out);
 }
 
 .resetBtn:hover {
@@ -355,30 +409,33 @@
   color: var(--site-ink);
 }
 
-/* ── Hint ── */
+/* ── 6. Hint ── */
 .hint {
-  text-align: center;
   color: var(--site-muted);
-  font-size: 0.72rem;
+  font-size: var(--text-xs);
   line-height: 1.4;
-  transition: opacity 250ms ease, max-height 250ms ease, margin 250ms ease;
+  text-align: center;
+  transition:
+    opacity var(--dur-base) var(--ease-out),
+    transform var(--dur-base) var(--ease-out);
 }
 
 .collapsed .hint {
-  opacity: 0;
   max-height: 0;
-  margin: 0;
   overflow: hidden;
+  opacity: 0;
+  transform: translateY(-4px);
   pointer-events: none;
 }
 
 .open .hint {
+  margin-top: var(--space-3);
   opacity: 1;
-  max-height: 3rem;
-  margin-top: 0.75rem;
+  transform: translateY(0);
+  transition-delay: 80ms;
 }
 
-/* ── Honeypot ── */
+/* Honeypot (anti-spam) */
 .trap {
   position: absolute;
   left: -10000px;
@@ -387,40 +444,28 @@
   overflow: hidden;
 }
 
-/* ── Mobile ── */
+/* ── 7. Mobile ── */
 @media (max-width: 600px) {
+  .root {
+    --bar-h: 3.25rem;
+    --bar-btn: 2.375rem;
+  }
+
   .collapsed {
     max-width: 100%;
   }
 
-  .collapsed .phase1 {
-    height: 3.2rem;
-    padding: 0 0.4rem 0 1.15rem;
+  .phase1 {
+    padding: 0 0.375rem 0 var(--space-5);
   }
 
-  .open .phase1 {
-    height: 3.5rem;
-    padding: 0 0.4rem 0 1.1rem;
-  }
-
-  .collapsed .ideaInput,
-  .open .ideaInput {
-    font-size: 0.9rem;
+  .ideaInput {
+    font-size: 1rem; /* 16px: evita el zoom automático de iOS al enfocar */
   }
 
   .closeBtn {
     width: 2rem;
     height: 2rem;
-  }
-
-  .collapsed .arrowBtn {
-    width: 2.3rem;
-    height: 2.3rem;
-  }
-
-  .open .arrowBtn {
-    width: 2.45rem;
-    height: 2.45rem;
   }
 
   .emailRow {
@@ -435,9 +480,8 @@
   }
 
   .successState {
-    height: auto;
-    padding: 1rem 1.1rem;
-    border-radius: 1rem;
+    padding: var(--space-4) var(--space-5);
+    border-radius: var(--radius-sm);
     flex-direction: column;
     align-items: flex-start;
     gap: 0.65rem;
@@ -449,14 +493,22 @@
   }
 }
 
+/* ── 8. Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
   .root,
   .phase1,
   .ideaInput,
   .arrowBtn,
+  .arrowBtn svg,
   .closeBtn,
   .hint,
-  .phase2 {
+  .phase2,
+  .emailRow,
+  .sendBtn,
+  .sendBtn svg {
     transition: none !important;
   }
+
+  .successState { animation: none; }
+  .emailRow { transform: none; }
 }

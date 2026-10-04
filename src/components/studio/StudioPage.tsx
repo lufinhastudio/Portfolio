@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import type { Locale } from "@/types/project";
@@ -6,6 +7,8 @@ import { localePath, siteConfig } from "@/config/site";
 import { ArrowUpRight } from "@/components/ui/Icons";
 import { Aura } from "@/components/ui/Aura";
 import { ProcessSteps } from "@/components/studio/ProcessSteps";
+import { CapabilitiesTicker } from "@/components/studio/CapabilitiesTicker";
+import { ReactiveAura } from "@/components/ui/ReactiveAura";
 import styles from "@/app/studio/studio.module.css";
 
 const principles = {
@@ -49,25 +52,6 @@ const englishBios = {
 
 type StudioPersonData = (typeof siteConfig.team)[number];
 
-const capabilities = {
-  es: ["Diseño UX/UI", "Desarrollo web", "Tiendas online", "Sistemas a medida", "Producto digital", "Criterio"],
-  en: ["UX/UI design", "Web development", "Online stores", "Custom systems", "Digital products", "Judgement"],
-} as const;
-
-function CapabilitiesTicker({ locale }: { locale: Locale }) {
-  return (
-    <div className={styles.ticker} data-studio-ticker role="group" aria-label={locale === "es" ? "Capacidades de Lufinha Studio" : "Lufinha Studio capabilities"}>
-      <div className={styles.tickerTrack}>
-        {[0, 1].map((copy) => (
-          <div className={styles.tickerGroup} key={copy} aria-hidden={copy === 1 ? "true" : undefined}>
-            {capabilities[locale].map((capability) => <span className={styles.tickerItem} key={capability}>{capability}</span>)}
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
 function StudioPerson({ person, number, locale }: { person: StudioPersonData; number: number; locale: Locale }) {
   const whatsapp = siteConfig.contact.whatsapp.find((contact) => contact.name === person.name);
   const biography = locale === "es" ? spanishBios[person.name] : englishBios[person.name];
@@ -81,7 +65,9 @@ function StudioPerson({ person, number, locale }: { person: StudioPersonData; nu
       <Aura className={styles.personSectionAura} variant="corner" intensity="soft" position={person.name === "Rafa" ? "top-right" : "bottom-left"} tone={person.name === "Rafa" ? "coral" : "orange"} />
       <span className={`mono ${styles.personNumber}`} data-studio-step>{String(number).padStart(2, "0")}</span>
       {person.photo ? <div className={styles.portraitStage} data-studio-step>
-        <div className={styles.personPortrait} data-studio-portrait><Image src={person.photo} alt={`${person.name} — Lufinha Studio`} fill loading={person.name === "Rafa" ? "eager" : "lazy"} sizes="(max-width: 760px) 72vw, (max-width: 1050px) 280px, 320px" style={{ objectPosition: person.name === "Luca" ? "center 40%" : "center" }} /></div>
+        <div className={styles.personPortrait} data-studio-portrait data-glow>
+          <span className={styles.portraitGlow} aria-hidden="true" /><Image src={person.photo} alt={`${person.name} — Lufinha Studio`} fill loading={person.name === "Rafa" ? "eager" : "lazy"} sizes="(max-width: 760px) 72vw, (max-width: 1050px) 280px, 320px" style={{ objectPosition: person.name === "Luca" ? "center 40%" : "center" }} />
+        </div>
       </div> : null}
       <div className={styles.personDetails}>
         <h3 className={`${styles.personName} display`} data-studio-step>{person.name}</h3>
@@ -98,23 +84,64 @@ function StudioPerson({ person, number, locale }: { person: StudioPersonData; nu
 
 export function StudioPage({ locale }: { locale: Locale }) {
   const content = getStudioContent(locale).studio;
+  const titleWords = content.title.split(" ");
   return (
     <main className={styles.page} lang={locale}>
-      <section className={styles.hero} data-studio-intro>
-        <Aura variant="corner" intensity="medium" position="top-right" />
-        <div className={styles.eyebrow} data-studio-step><span className="mono">Lufinha Studio</span></div>
-        <div className={styles.heroCopy}><h1 className={`${styles.title} display`} data-studio-step>{content.title}</h1><p data-studio-step>{locale === "es" ? "Somos un estudio de diseño y desarrollo. Vas a hablar directamente con quienes piensan, diseñan y construyen tu proyecto." : "We are a design and development studio. You'll speak directly with the people who think through, design and build your project."}</p></div>
+      {/* ── Hero: mismo fondo vivo que la Home ── */}
+      <section className={styles.hero}>
+        <ReactiveAura className={styles.heroAura} intensity="medium" />
+        <div className={styles.eyebrow}><span className="mono">Lufinha Studio</span></div>
+        <div className={styles.heroCopy}>
+          <h1 className={`${styles.title} display`}>
+            <span className="sr-only">{content.title}</span>
+            <span aria-hidden="true">
+              {titleWords.map((word, index) => (
+                <Fragment key={`${word}-${index}`}>
+                  <span className={styles.word}><span className={styles.wordInner} style={{ "--i": index } as React.CSSProperties}>{word}</span></span>
+                  {index < titleWords.length - 1 ? " " : null}
+                </Fragment>
+              ))}
+            </span>
+          </h1>
+          <p className={styles.heroLead}>{locale === "es" ? "Somos un estudio de diseño y desarrollo. Vas a hablar directamente con quienes piensan, diseñan y construyen tu proyecto." : "We are a design and development studio. You'll speak directly with the people who think through, design and build your project."}</p>
+        </div>
         <div className={styles.heroFoot}><span className="mono">{locale === "es" ? "Dos personas, un mismo estudio." : "Two people, one studio."}</span><span className="mono">{locale === "es" ? "Diseño · desarrollo · proyectos reales" : "Design · development · real projects"}</span></div>
       </section>
+
+      {/* ── Cinta de capacidades (acelera con el scroll) ── */}
       <CapabilitiesTicker locale={locale} />
+
+      {/* ── Rafa y Luca ── */}
       <section className={styles.team} aria-label={content.people}>
         <div className={styles.people}>{siteConfig.team.map((person, index) => <StudioPerson key={person.name} person={person} number={index + 1} locale={locale} />)}</div>
       </section>
+
+      {/* ── Proceso ── */}
       <ProcessSteps locale={locale} compact />
+
+      {/* ── Principios: tarjetas con brillo que sigue al cursor ── */}
       <section className={styles.principles} aria-label={locale === "es" ? "Principios del estudio" : "Studio principles"}>
-        <header className={styles.principlesHeader}><p className="mono">{locale === "es" ? "Cómo pensamos" : "How we think"}</p><h2 className="display">{locale === "es" ? "Lo que guía cada proyecto." : "What guides every project."}</h2></header>
-        <div className={styles.principlesGrid}>{principles[locale].map((principle, index) => <article className={styles.principle} key={principle.title}><Aura className={styles.principleAura} variant="accent" intensity="soft" position="bottom-right" /><span className="mono">{locale === "es" ? "Principio" : "Principle"} 0{index + 1}</span><div><h3 className="display">{principle.title}</h3><p>{principle.text}</p></div></article>)}</div>
-        <Link className={styles.contactLink} href={localePath(locale, locale === "es" ? "/contacto" : "/contact")}>{locale === "es" ? "Empezar un proyecto" : "Start a project"}<ArrowUpRight size="1em" aria-hidden="true" /></Link>
+        <header className={styles.principlesHeader} data-reveal-group>
+          <p className="mono" data-reveal-item>{locale === "es" ? "Cómo pensamos" : "How we think"}</p>
+          <h2 className="display" data-reveal-item>{locale === "es" ? "Lo que guía cada proyecto." : "What guides every project."}</h2>
+        </header>
+        <div className={styles.principlesGrid} data-reveal-group>
+          {principles[locale].map((principle, index) => (
+            <article className={styles.principle} key={principle.title} data-reveal-item data-glow>
+              <span className={styles.principleGlow} aria-hidden="true" />
+              <Aura className={styles.principleAura} variant="accent" intensity="soft" position="bottom-right" />
+              <span className={`${styles.principleLabel} mono`}>{locale === "es" ? "Principio" : "Principle"} 0{index + 1}</span>
+              <div>
+                <h3 className="display">{principle.title}</h3>
+                <p>{principle.text}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+        <Link className={styles.contactLink} href={localePath(locale, locale === "es" ? "/contacto" : "/contact")} data-reveal>
+          <span>{locale === "es" ? "Empezar un proyecto" : "Start a project"}</span>
+          <ArrowUpRight size="1em" aria-hidden="true" />
+        </Link>
       </section>
     </main>
   );

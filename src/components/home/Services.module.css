@@ -1,9 +1,25 @@
+/* ==========================================================================
+   Services (Home) — sección oscura
+   1. Tokens locales y sección
+   2. Columna de introducción (sticky)
+   3. Fila de servicio
+   4. Link "Consultar"
+   5. Estados (hover / foco)
+   6. Responsive
+   7. Reduced motion
+   ========================================================================== */
+
+/* ── 1. Sección ────────────────────────────────────────────────────────── */
 .section {
   --services-foreground: #f7f5ef;
-  --services-muted: #c7c9c2;
-  --services-line: rgb(247 245 239 / 0.2);
-  --services-accent: #efaa83;
-  padding: clamp(4.5rem, 7vw, 7rem) var(--page-gutter);
+  --services-muted: #bfc1b9;               /* ≈9:1 sobre la tinta */
+  --services-line: rgb(247 245 239 / 0.16);
+  --services-line-strong: rgb(247 245 239 / 0.34);
+  --services-accent: var(--terracotta-soft);
+  --services-accent-strong: #ffd0ad;
+  --focus-color: var(--services-accent);
+
+  padding: var(--section-y) var(--page-inline);
   color: var(--services-foreground);
   background: var(--site-ink);
   scroll-margin-top: var(--header-height);
@@ -13,57 +29,57 @@
   display: grid;
   grid-template-columns: minmax(17rem, 0.7fr) minmax(0, 1.3fr);
   align-items: start;
-  gap: clamp(2.5rem, 6vw, 7rem);
-  width: min(100%, 92rem);
-  margin-inline: auto;
+  gap: clamp(var(--space-10), 6vw, 7rem);
 }
 
+/* ── 2. Introducción ───────────────────────────────────────────────────── */
 .intro {
   position: sticky;
-  top: calc(var(--header-height) + 2rem);
+  top: calc(var(--header-height) + var(--space-8));
   min-width: 0;
 }
 
 .brandLine {
   max-width: 30ch;
-  margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
+  margin-bottom: var(--space-12);
   color: var(--services-accent);
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 .title {
   max-width: 11ch;
-  font-size: clamp(3.2rem, 4.8vw, 5rem);
-  line-height: 0.98;
+  font-size: var(--text-3xl);
+  line-height: var(--leading-display);
 }
 
 .statement {
   max-width: 18ch;
-  margin-top: clamp(1.75rem, 3vw, 2.5rem);
-  font-size: clamp(1.4rem, 2vw, 2rem);
+  margin-top: var(--space-8);
+  font-size: var(--text-xl);
   font-weight: 700;
-  line-height: 1.25;
-  letter-spacing: -0.035em;
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-heading);
 }
 
 .introCopy {
   max-width: 40ch;
-  margin-top: 0.9rem;
+  margin-top: var(--space-4);
   color: var(--services-muted);
-  font-size: clamp(0.95rem, 1.1vw, 1.05rem);
-  line-height: 1.6;
+  font-size: var(--text-base);
+  line-height: var(--leading-body);
 }
 
 .signature {
   max-width: 22rem;
-  margin-top: clamp(3rem, 5vw, 5rem);
-  padding-top: 0.85rem;
+  margin-top: var(--space-16);
+  padding-top: var(--space-4);
   border-top: 1px solid var(--services-line);
   color: var(--services-muted);
-  font-size: 0.8rem;
+  font-size: var(--text-sm);
   line-height: 1.5;
 }
 
+/* ── 3. Fila de servicio ───────────────────────────────────────────────── */
 .list { min-width: 0; }
 
 .item {
@@ -73,10 +89,11 @@
   display: grid;
   grid-template-rows: auto 1fr;
   min-height: clamp(18rem, 23vw, 21rem);
-  padding: 1.2rem clamp(1rem, 2vw, 1.7rem) 2.1rem;
+  padding: var(--space-5) clamp(var(--space-4), 2vw, var(--space-6)) var(--space-8);
   border-top: 1px solid var(--services-line);
-  background: transparent;
-  transition: background-color 260ms var(--ease-out), border-color 260ms var(--ease-out);
+  transition:
+    background-color var(--dur-base) var(--ease-out),
+    border-color var(--dur-base) var(--ease-out);
 }
 
 .item:last-child { border-bottom: 1px solid var(--services-line); }
@@ -84,65 +101,74 @@
 
 .item .rowAura {
   opacity: 0.1;
-  transition: opacity 300ms var(--ease-out);
+  transition: opacity var(--dur-slow) var(--ease-out);
 }
 
 .itemTop {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  gap: 1rem;
+  gap: var(--space-4);
 }
 
-.number { color: var(--services-accent); transition: color 260ms var(--ease-out); }
-.focus { color: var(--services-muted); text-align: right; transition: color 260ms var(--ease-out); }
+.number {
+  color: var(--services-accent);
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+.focus {
+  color: var(--services-muted);
+  text-align: right;
+  transition: color var(--dur-fast) var(--ease-out);
+}
 
 .itemMain {
   display: grid;
   grid-template-columns: minmax(0, 0.95fr) minmax(15rem, 1fr);
   align-items: end;
-  gap: clamp(1.5rem, 3vw, 3rem);
-  margin-top: clamp(2rem, 4vw, 3.5rem);
+  gap: clamp(var(--space-6), 3vw, var(--space-12));
+  margin-top: clamp(var(--space-8), 4vw, var(--space-12));
 }
 
 .name {
   max-width: 11ch;
-  font-size: clamp(2.45rem, 3.15vw, 3.7rem);
-  line-height: 0.98;
-  transition: transform 260ms var(--ease-out);
+  font-size: var(--text-2xl);
+  line-height: 1;
+  letter-spacing: var(--tracking-heading);
+  transition: transform var(--dur-base) var(--ease-out);
 }
 
 .details { min-width: 0; }
 
 .description {
   max-width: 42ch;
-  font-size: clamp(1rem, 1.2vw, 1.12rem);
-  line-height: 1.5;
+  font-size: var(--text-base);
+  line-height: 1.55;
 }
 
 .fit {
   max-width: 43ch;
-  margin-top: 0.75rem;
+  margin-top: var(--space-3);
   color: var(--services-muted);
-  font-size: 0.89rem;
-  line-height: 1.5;
+  font-size: var(--text-sm);
+  line-height: 1.55;
 }
 
+/* ── 4. Link ───────────────────────────────────────────────────────────── */
 .link {
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1.5rem;
+  gap: var(--space-6);
   min-height: 2.75rem;
-  margin-top: 1.2rem;
-  padding: 0.35rem 0;
-  border-bottom: 1px solid transparent;
+  margin-top: var(--space-5);
+  padding: var(--space-2) 0;
   color: var(--services-foreground);
-  font-size: 0.91rem;
+  font-size: var(--text-sm);
   font-weight: 700;
   line-height: 1.3;
-  transition: color 180ms var(--ease-out);
+  transition: color var(--dur-fast) var(--ease-out);
 }
 
 .link::after {
@@ -155,67 +181,95 @@
   content: "";
   transform: scaleX(0.7);
   transform-origin: left;
-  transition: transform 220ms var(--ease-out);
+  transition: transform var(--dur-base) var(--ease-out);
 }
 
-.link span { transition: transform 220ms var(--ease-out); }
-.link svg { flex: none; transition: transform 220ms var(--ease-out); }
-.link:focus-visible { color: var(--services-accent); outline-color: var(--services-accent); }
-.link:focus-visible::after { transform: scaleX(1); transition: none; }
+.link span,
+.link svg {
+  transition: transform var(--dur-base) var(--ease-out);
+}
 
-.item:focus-within { background: rgb(255 255 255 / 0.035); border-color: rgb(247 245 239 / 0.34); }
+.link svg { flex: none; }
+.link:active span { transform: translateX(1px); transition-duration: var(--dur-instant); }
+
+/* ── 5. Estados ────────────────────────────────────────────────────────── */
+.item:focus-within {
+  border-color: var(--services-line-strong);
+  background: rgb(255 255 255 / 0.035);
+}
+
 .item:focus-within .rowAura { opacity: 0.3; }
 .item:focus-within .focus { color: var(--services-accent); }
-.item:focus-within .number { color: #ffd0ad; }
-.item:focus-within .link::after { transform: scaleX(1); transition: none; }
+.item:focus-within .number { color: var(--services-accent-strong); }
+.item:focus-within .link::after { transform: scaleX(1); }
+.link:focus-visible { color: var(--services-accent); }
 
 @media (hover: hover) and (pointer: fine) {
-  .item:hover { background: rgb(255 255 255 / 0.035); border-color: rgb(247 245 239 / 0.34); }
+  .item:hover {
+    border-color: var(--services-line-strong);
+    background: rgb(255 255 255 / 0.035);
+  }
+
   .item:hover .rowAura { opacity: 0.3; }
-  .item:hover .name { transform: translateX(4px); }
+  .item:hover .name { transform: translateX(6px); }
   .item:hover .focus { color: var(--services-accent); }
-  .item:hover .number { color: #ffd0ad; }
+  .item:hover .number { color: var(--services-accent-strong); }
   .item:hover .link::after { transform: scaleX(1); }
   .item:hover .link span { transform: translateX(2px); }
   .item:hover .link svg { transform: translate(4px, -3px); }
   .link:hover { color: var(--services-accent); }
 }
 
+/* ── 6. Responsive ─────────────────────────────────────────────────────── */
 @media (max-width: 1080px) {
-  .layout { grid-template-columns: minmax(15rem, 0.65fr) minmax(0, 1.35fr); gap: 2.5rem; }
-  .itemMain { grid-template-columns: minmax(0, 1fr); gap: 1.1rem; }
+  .layout {
+    grid-template-columns: minmax(15rem, 0.65fr) minmax(0, 1.35fr);
+    gap: var(--space-10);
+  }
+
   .item { min-height: 0; }
+  .itemMain { grid-template-columns: minmax(0, 1fr); gap: var(--space-5); }
   .name { max-width: 18ch; }
 }
 
 @media (max-width: 850px) {
-  .layout { grid-template-columns: minmax(0, 1fr); gap: 2.75rem; }
+  .layout { grid-template-columns: minmax(0, 1fr); gap: var(--space-12); }
   .intro { position: static; }
-  .brandLine { margin-bottom: 2rem; }
-  .statement { max-width: 30ch; margin-top: 1.5rem; }
+  .brandLine { margin-bottom: var(--space-8); }
+  .statement { max-width: 30ch; margin-top: var(--space-6); }
   .introCopy { max-width: 55ch; }
-  .signature { margin-top: 2rem; }
-  .itemMain { grid-template-columns: minmax(0, 0.95fr) minmax(15rem, 1fr); gap: 2rem; }
+  .signature { margin-top: var(--space-8); }
+  .itemMain { grid-template-columns: minmax(0, 0.95fr) minmax(15rem, 1fr); gap: var(--space-8); }
 }
 
 @media (max-width: 600px) {
-  .section { padding-block: 4rem; }
-  .layout { gap: 2.25rem; }
-  .title { font-size: clamp(3.1rem, 12vw, 4rem); }
-  .statement { max-width: 22ch; font-size: clamp(1.4rem, 5.8vw, 1.75rem); }
-  .introCopy { font-size: 1rem; }
-  .item { padding: 1.15rem 0.25rem 2rem; }
+  .layout { gap: var(--space-10); }
+  .item { padding: var(--space-5) var(--space-1) var(--space-8); }
+  .item .rowAura { opacity: 0.13; }
   .itemTop { align-items: start; }
   .focus { max-width: 15ch; }
-  .itemMain { grid-template-columns: minmax(0, 1fr); gap: 1.35rem; margin-top: 2.5rem; }
-  .name { max-width: 12ch; font-size: clamp(2.7rem, 10vw, 3.4rem); }
+  .itemMain { grid-template-columns: minmax(0, 1fr); gap: var(--space-5); margin-top: var(--space-10); }
+  .name { max-width: 12ch; font-size: clamp(2.25rem, 9vw, 2.75rem); }
   .description { max-width: 38ch; }
-  .fit { font-size: 0.9rem; }
-  .link { margin-top: 1.1rem; }
-  .item .rowAura { opacity: 0.13; }
 }
 
+/* ── 7. Reduced motion ─────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
-  .item, .rowAura, .name, .number, .focus, .link, .link::after, .link span, .link svg { transition: none; }
-  .item:focus-within .name, .item:hover .name, .item:focus-within .link span, .item:hover .link span, .item:focus-within .link svg, .item:hover .link svg { transform: none; }
+  .item,
+  .rowAura,
+  .name,
+  .number,
+  .focus,
+  .link,
+  .link::after,
+  .link span,
+  .link svg {
+    transition: none;
+  }
+
+  .item:hover .name,
+  .item:hover .link span,
+  .item:hover .link svg {
+    transform: none;
+  }
 }

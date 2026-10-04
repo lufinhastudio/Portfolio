@@ -12,18 +12,20 @@ export function Services({ locale }: { locale: Locale }) {
   return (
     <section className={styles.section} id="services" aria-labelledby="services-title">
       <div className={styles.layout}>
-        <div className={styles.intro} data-services-intro>
+        {/* ── Columna izquierda (sticky en desktop) ── */}
+        <div className={styles.intro} data-reveal-group>
           <header>
-            <p className={`${styles.brandLine} mono`} data-services-step>{content.eyebrow}</p>
-            <h2 className={`${styles.title} display`} id="services-title" data-services-step>{content.title}</h2>
-            <p className={styles.statement} data-services-step>{content.statement}</p>
-            <p className={styles.introCopy} data-services-step>{content.intro}</p>
+            <p className={`${styles.brandLine} mono`} data-reveal-item>{content.eyebrow}</p>
+            <h2 className={`${styles.title} display`} id="services-title" data-reveal-item>{content.title}</h2>
+            <p className={styles.statement} data-reveal-item>{content.statement}</p>
+            <p className={styles.introCopy} data-reveal-item>{content.intro}</p>
           </header>
-          <p className={styles.signature} data-services-step>{content.signature}</p>
+          <p className={styles.signature} data-reveal-item>{content.signature}</p>
         </div>
+        {/* ── Lista de servicios ── */}
         <div className={styles.list}>
           {content.items.map((service, index) => (
-            <article className={styles.item} key={service.title} data-services-item>
+            <article className={styles.item} key={service.title} data-reveal>
               <Aura className={styles.rowAura} variant="field" intensity="medium" position="top-left" tone={index === 0 ? "coral" : index === 1 ? "orange" : "yellow"} />
               <div className={styles.itemTop}>
                 <span className={`${styles.number} mono`}>0{index + 1} / 03</span>
