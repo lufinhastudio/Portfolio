@@ -2,7 +2,7 @@ import { Hero } from "@/components/home/Hero";
 import { SelectedWork } from "@/components/home/SelectedWork";
 import { StudioPreview } from "@/components/home/StudioPreview";
 import { Services } from "@/components/home/Services";
-import { TechStack } from "@/components/studio/TechStack";
+import { ProcessSteps } from "@/components/studio/ProcessSteps";
 import { getLocalizedProjects } from "@/content";
 import { createMetadata } from "@/lib/metadata";
 
@@ -16,7 +16,8 @@ export default function EnglishHomePage() {
       <SelectedWork locale="en" projects={projects} />
       <Services locale="en" />
       <StudioPreview locale="en" />
-      <TechStack locale="en" />
+      {/* Último paso antes del footer: cómo sería trabajar juntos */}
+      <ProcessSteps locale="en" compact />
     </main>
   );
 }

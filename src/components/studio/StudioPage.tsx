@@ -6,6 +6,7 @@ import { siteConfig } from "@/config/site";
 import { PersonContacts } from "@/components/team/PersonContacts";
 import { Aura } from "@/components/ui/Aura";
 import { ProcessSteps } from "@/components/studio/ProcessSteps";
+import { TechStack } from "@/components/studio/TechStack";
 import { CapabilitiesTicker } from "@/components/studio/CapabilitiesTicker";
 import { ReactiveAura } from "@/components/ui/ReactiveAura";
 import styles from "@/app/studio/studio.module.css";
@@ -130,6 +131,9 @@ export function StudioPage({ locale }: { locale: Locale }) {
           ))}
         </div>
       </section>
+
+      {/* ── Tecnología: para quien quiere conocer cómo lo construimos ── */}
+      <TechStack locale={locale} />
     </main>
   );
 }
