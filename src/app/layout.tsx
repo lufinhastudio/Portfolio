@@ -9,6 +9,7 @@ import { SiteHeader } from "@/components/layout/SiteHeader";
 import { Footer } from "@/components/layout/Footer";
 import { MotionProvider } from "@/components/motion/MotionProvider";
 import { WhatsAppFloat } from "@/components/layout/WhatsAppFloat";
+import { Analytics } from "@/components/analytics/Analytics";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -54,6 +55,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <Footer />
           <WhatsAppFloat />
         </MotionProvider>
+        <Analytics />
       </body>
     </html>
   );

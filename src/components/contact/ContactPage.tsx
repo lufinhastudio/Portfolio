@@ -5,6 +5,7 @@ import type { Locale } from "@/types/project";
 import { siteConfig } from "@/config/site";
 import { ArrowUpRight } from "@/components/ui/Icons";
 import { Aura } from "@/components/ui/Aura";
+import { trackEvent } from "@/lib/analytics";
 import styles from "@/app/contacto/contact.module.css";
 
 const copy = {
@@ -108,6 +109,7 @@ export function ContactPage({ locale }: { locale: Locale }) {
       });
       if (!response.ok) throw new Error("Send failed");
       form.reset();
+      trackEvent("contact_submit", { type: type || "sin elegir", locale });
       setStatus("success");
       // En mobile el formulario se achica: llevamos la vista al mensaje de éxito
       window.requestAnimationFrame(() => successRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }));

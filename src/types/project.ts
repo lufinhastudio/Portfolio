@@ -26,11 +26,6 @@ export type ResponsiveProjectImage = {
   treatment?: "primary" | "supporting";
 };
 
-export type ProjectHighlight = {
-  title: string;
-  text: string;
-};
-
 export type ProductCaseStudySection = {
   eyebrow: string;
   title: string;
@@ -73,13 +68,6 @@ export type ProjectCopy = {
   description: string;
   services: string[];
   productCaseStudy?: ProductCaseStudy;
-  caseStudy?: {
-    statement: string;
-    challenge: string;
-    approach: string;
-    highlights: ProjectHighlight[];
-    outcome: string;
-  };
 };
 
 export type Project = {

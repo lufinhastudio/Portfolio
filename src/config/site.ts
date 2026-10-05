@@ -80,8 +80,8 @@ export const siteConfig = {
   seo: {
     titleTemplate: "%s — Lufinha Studio",
     defaultTitle: {
-      es: "Lufinha Studio — Software y sistemas a medida",
-      en: "Lufinha Studio — Custom software and systems",
+      es: "Lufinha Studio — Páginas web, tiendas online y sistemas a medida",
+      en: "Lufinha Studio — Websites, online stores and custom systems",
     },
     twitterCard: "summary_large_image" as const,
   },

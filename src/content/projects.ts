@@ -41,11 +41,11 @@ const cosasDeCasaScreens = {
     es: "Carrito con resumen y acción para enviar el pedido por WhatsApp",
     en: "Cart summary with the action to send the order through WhatsApp",
   }),
-  adminProducts: cosasDeCasaScreen("admin-products-desktop-redacted.png", [1697, 927], "admin-products-mobile-redacted.png", [954, 1648], {
+  adminProducts: cosasDeCasaScreen("admin-products-desktop-redacted.webp", [1697, 927], "admin-products-mobile-redacted.webp", [954, 1648], {
     es: "Panel administrador con búsqueda, filtros y gestión del catálogo; datos internos ocultos",
     en: "Admin catalogue with search, filters and product management; internal data redacted",
   }),
-  adminEditor: cosasDeCasaScreen("admin-editor-desktop-redacted.png", [1686, 933], "admin-editor-mobile.jpeg", [854, 1442], {
+  adminEditor: cosasDeCasaScreen("admin-editor-desktop-redacted.webp", [1686, 933], "admin-editor-mobile.jpeg", [854, 1442], {
     es: "Editor de producto del panel administrador; datos privados ocultos donde corresponde",
     en: "Product editor in the admin panel; private data redacted where needed",
   }, "supporting"),
@@ -57,7 +57,7 @@ const projectEntries: Project[] = [
     url: "https://www.maymabikinis.com.ar/", featured: true,
     palette: { background: "#315757", foreground: "#fffdf9", accent: "#f0a298", muted: "#b8d9d5" },
     brandLogo: { src: "/work/mayma/brand-logo.png", alt: "Logo de Mayma Bikinis", width: 2042, height: 1274, contrast: "light" },
-    cover: { src: "/work/mayma/home-banner-2.jpg", alt: "Bikini a rayas de Mayma Bikinis flotando sobre el agua", width: 1916, height: 821, position: "78% center" },
+    cover: { src: "/work/mayma/home-banner-2.webp", alt: "Bikini a rayas de Mayma Bikinis flotando sobre el agua", width: 1916, height: 821, position: "78% center" },
     gallery: [
       { src: "/work/mayma/customizer.jpg", alt: "Bikini azul presentado en el personalizador Mayma Bikinis", width: 1080, height: 1350 },
       { src: "/work/mayma/product-04.jpg", alt: "Enteriza Mayma Bikinis en una escena de verano", width: 1080, height: 1350 },
@@ -65,7 +65,7 @@ const projectEntries: Project[] = [
     ],
     copy: copy(
       {
-        category: "Fashion / Swimwear / Ecommerce",
+        category: "Indumentaria / Trajes de baño / Tienda online",
         description: "Un e-commerce mobile-first con catálogo, stock, personalización de bikinis y checkout integrado.",
         services: ["Diseño UX / UI", "Desarrollo ecommerce", "Personalizador", "Pagos e integraciones"],
         productCaseStudy: {
@@ -152,20 +152,9 @@ const projectEntries: Project[] = [
           technologies: ["React", "Vite", "Neon PostgreSQL", "Mercado Pago", "Cloudinary", "Correo Argentino", "Vercel"],
           closing: "Una tienda donde la compra directa y la personalización conviven, cada una con el flujo que necesita.",
         },
-        caseStudy: {
-          statement: "El verano como interfaz: liviano, combinable y siempre en movimiento.",
-          challenge: "Mayma Bikinis necesitaba vender productos con múltiples combinaciones de talle, color y modelo sin convertir la compra en un formulario frío.",
-          approach: "Construimos una experiencia visual donde catálogo y personalización conviven. La jerarquía editorial mantiene el producto al frente y la interfaz acompaña con decisiones claras.",
-          highlights: [
-            { title: "Catálogo flexible", text: "Variantes, stock y colecciones se presentan sin perder ritmo visual." },
-            { title: "Personalización", text: "Corpiños y bombachas pueden combinarse desde una experiencia guiada." },
-            { title: "Identidad en movimiento", text: "Agua, coral y verde profundo traducen la energía de la marca." },
-          ],
-          outcome: "Una tienda cercana, expresiva y preparada para crecer con nuevas colecciones.",
-        },
       },
       {
-        category: "Fashion / Swimwear / Ecommerce",
+        category: "Swimwear / Fashion / Online store",
         description: "A mobile-first ecommerce with a product catalogue, stock, custom swimwear and an integrated checkout.",
         services: ["UX / UI design", "Ecommerce development", "Product customiser", "Payments and integrations"],
         productCaseStudy: {
@@ -252,17 +241,6 @@ const projectEntries: Project[] = [
           technologies: ["React", "Vite", "Neon PostgreSQL", "Mercado Pago", "Cloudinary", "Correo Argentino", "Vercel"],
           closing: "A store where direct purchase and product customisation coexist, each with the flow it needs.",
         },
-        caseStudy: {
-          statement: "Summer as an interface: light, flexible and always in motion.",
-          challenge: "Mayma Bikinis needed to sell products with multiple size, colour and model combinations without turning the purchase into a cold form.",
-          approach: "We built a visual experience where catalogue and customisation coexist. Editorial hierarchy keeps the product forward while the interface supports clear choices.",
-          highlights: [
-            { title: "Flexible catalogue", text: "Variants, stock and collections keep their visual rhythm." },
-            { title: "Customisation", text: "Tops and bottoms can be matched through a guided experience." },
-            { title: "Identity in motion", text: "Water, coral and deep green translate the brand's energy." },
-          ],
-          outcome: "A warm, expressive store ready to grow with every new collection.",
-        },
       },
     ),
   },
@@ -270,15 +248,15 @@ const projectEntries: Project[] = [
     slug: "cosas-de-casa", index: "05", name: "Cosas de Casa", client: "Cosas de Casa Juguetería", year: "2026",
     url: "https://www.cosasdecasajugueteria.com.ar/", featured: true,
     palette: { background: "#f7c9d8", foreground: "#4c4145", accent: "#c6f0de", muted: "#fff9f4" },
-    cover: { src: "/work/cosas-de-casa/cover.png", alt: "Casa de muñecas y juguetes de Cosas de Casa", width: 2048, height: 1024 },
+    cover: { src: "/work/cosas-de-casa/cover.webp", alt: "Casa de muñecas y juguetes de Cosas de Casa", width: 1697, height: 927 },
     gallery: [
-      { src: "/work/cosas-de-casa/category-wood.jpeg", alt: "Casa de muñecas de madera de Cosas de Casa", width: 800, height: 1067 },
-      { src: "/work/cosas-de-casa/category-tiny.jpeg", alt: "Pequeños juguetes de colores de Cosas de Casa", width: 1200, height: 800 },
-      { src: "/work/cosas-de-casa/detail.jpeg", alt: "El local de Cosas de Casa", width: 1164, height: 2048 },
+      { src: "/work/cosas-de-casa/category-wood.webp", alt: "Casa de muñecas de madera de Cosas de Casa", width: 800, height: 1067 },
+      { src: "/work/cosas-de-casa/category-tiny.webp", alt: "Pequeños juguetes de colores de Cosas de Casa", width: 1200, height: 800 },
+      { src: "/work/cosas-de-casa/detail.webp", alt: "El local de Cosas de Casa", width: 1164, height: 2048 },
     ],
     copy: copy(
       {
-        category: "Deco / Home / Juguetería / Ecommerce",
+        category: "Juguetería / Deco y hogar / Tienda online",
         description: "Una tienda de juguetes y objetos para el hogar con catálogo por mundos, variantes y pedidos preparados por WhatsApp.",
         services: ["Diseño UX / UI", "Catálogo y navegación", "Carrito y pedido por WhatsApp", "Administración de productos"],
         productCaseStudy: {
@@ -327,20 +305,9 @@ const projectEntries: Project[] = [
           closing: "¿Necesitás una tienda que funcione así para tu negocio?",
           cta: { label: "Contanos tu idea", href: "/contacto" },
         },
-        caseStudy: {
-          statement: "Una tienda que conserva la sensación de entrar, mirar y encontrar algo especial.",
-          challenge: "La variedad era parte del encanto, pero necesitaba una estructura capaz de ordenar categorías y productos sin perder el tono humano del local.",
-          approach: "Usamos la idea de casa como sistema de navegación. Los mundos de producto funcionan como habitaciones y el recorrido termina en una consulta simple.",
-          highlights: [
-            { title: "Mundos, no filtros", text: "Las categorías hablan el lenguaje de la tienda y facilitan explorar." },
-            { title: "Consulta cuidada", text: "El carrito organiza productos antes de abrir una conversación real." },
-            { title: "Historia visible", text: "La historia de la tienda suma confianza sin volverse corporativa." },
-          ],
-          outcome: "Una experiencia cálida y navegable que lleva el carácter boutique a cualquier pantalla.",
-        },
       },
       {
-        category: "Deco / Home / Toys / Ecommerce",
+        category: "Toy store / Home decor / Online store",
         description: "An online shop for toys and home goods, with category-led discovery, product variants and WhatsApp orders.",
         services: ["UX / UI design", "Catalogue and navigation", "Cart and WhatsApp orders", "Product management"],
         productCaseStudy: {
@@ -389,17 +356,6 @@ const projectEntries: Project[] = [
           closing: "Need a shop that works like this for your business?",
           cta: { label: "Tell us your idea", href: "/contact" },
         },
-        caseStudy: {
-          statement: "A shop that keeps the feeling of stepping in, looking around and finding something special.",
-          challenge: "Variety was part of its charm, but it needed a structure that could organise categories and products without losing the shop's human tone.",
-          approach: "We used the idea of a home as a navigation system. Product worlds become rooms and the journey ends in a simple conversation.",
-          highlights: [
-            { title: "Worlds, not filters", text: "Categories speak the shop's language and make exploration easier." },
-            { title: "Considered enquiry", text: "The cart organises products before opening a real conversation." },
-            { title: "A visible story", text: "The shop's story builds trust without becoming corporate." },
-          ],
-          outcome: "A warm, navigable experience that carries the boutique character to every screen.",
-        },
       },
     ),
   },
@@ -414,7 +370,7 @@ const projectEntries: Project[] = [
     ],
     copy: copy(
       {
-        category: "Ecommerce / Regalería",
+        category: "Regalería / Tienda online",
         description: "Una tienda online para descubrir regalos, elegir variantes, pagar y seguir el pedido hasta su entrega o retiro.",
         services: ["Diseño UX / UI", "Desarrollo ecommerce", "Checkout y pagos", "Operación de catálogo y pedidos"],
         productCaseStudy: {
@@ -461,20 +417,9 @@ const projectEntries: Project[] = [
           technologies: ["React", "Vite", "Tailwind CSS", "Supabase", "Zustand", "Mercado Pago", "Correo Argentino", "Cloudinary", "Vercel Functions", "Resend"],
           closing: "Una compra conectada de punta a punta: descubrir, elegir, pagar y coordinar la entrega.",
         },
-        caseStudy: {
-          statement: "Regalar debería sentirse fácil antes, durante y después de elegir.",
-          challenge: "El catálogo necesitaba convivir con stock, variantes, pagos y operación diaria sin hacer visible la complejidad detrás de escena.",
-          approach: "Diseñamos un recorrido comercial franco: descubrimiento, producto, carrito y pago. El rosa funciona como señal, no como decoración constante.",
-          highlights: [
-            { title: "Compra directa", text: "Menos fricción entre encontrar un producto y completar el pago." },
-            { title: "Catálogo vivo", text: "Stock, variantes y ofertas se administran para el día a día." },
-            { title: "Marca reconocible", text: "Tipografía editorial y color intenso convierten cada pantalla en Xeneize." },
-          ],
-          outcome: "Un ecommerce con personalidad que ordena la operación y mantiene la compra simple.",
-        },
       },
       {
-        category: "Ecommerce / Gifts",
+        category: "Gift shop / Online store",
         description: "An online shop for finding gifts, choosing variants, paying and following an order through delivery or pickup.",
         services: ["UX / UI design", "Ecommerce development", "Checkout and payments", "Catalogue and order operations"],
         productCaseStudy: {
@@ -521,17 +466,6 @@ const projectEntries: Project[] = [
           technologies: ["React", "Vite", "Tailwind CSS", "Supabase", "Zustand", "Mercado Pago", "Correo Argentino", "Cloudinary", "Vercel Functions", "Resend"],
           closing: "One connected purchase journey: discover, choose, pay and arrange delivery.",
         },
-        caseStudy: {
-          statement: "Giving should feel easy before, during and after choosing.",
-          challenge: "The catalogue needed to coexist with stock, variants, payments and daily operations without exposing the complexity behind it.",
-          approach: "We designed a direct commercial path: discovery, product, cart and payment. Pink works as a signal rather than constant decoration.",
-          highlights: [
-            { title: "Direct purchase", text: "Less friction between finding a product and completing payment." },
-            { title: "Living catalogue", text: "Stock, variants and offers are ready for daily operations." },
-            { title: "Recognisable brand", text: "Editorial type and intense colour make every screen feel like Xeneize." },
-          ],
-          outcome: "A distinctive ecommerce that organises operations while keeping the purchase simple.",
-        },
       },
     ),
   },
@@ -539,11 +473,11 @@ const projectEntries: Project[] = [
     slug: "sistema-odontologico-completo", index: "03", name: "Sistema Odontológico Completo", client: "Sistema Odontológico Completo", year: "2026",
     featured: true,
     palette: { background: "#f3f8f8", foreground: "#171916", accent: "#087f7d", muted: "#526267" },
-    cover: { src: "/work/odontologia/cover-redacted.png", alt: "Captura del sistema odontológico en la pantalla de plan de tratamiento, con el DNI oculto", width: 1697, height: 927 },
+    cover: { src: "/work/odontologia/cover-redacted.webp", alt: "Captura del sistema odontológico en la pantalla de plan de tratamiento, con el DNI oculto", width: 1697, height: 927 },
     gallery: [],
     copy: copy(
       {
-        category: "Sistema de gestión odontológica",
+        category: "Salud / Sistema de gestión odontológica",
         description: "Una plataforma para centralizar pacientes, agenda, historia clínica, odontograma, tratamientos y gestión del consultorio.",
         services: ["Diseño de producto", "Desarrollo full stack", "Integración con Google Calendar"],
         productCaseStudy: {
@@ -627,7 +561,7 @@ const projectEntries: Project[] = [
         },
       },
       {
-        category: "Custom system / Dentistry",
+        category: "Healthcare / Dental practice system",
         description: "A platform that brings together patients, scheduling, clinical records, odontograms, treatments and practice management.",
         services: ["Product design", "Full-stack development", "Google Calendar integration"],
         productCaseStudy: {
@@ -716,7 +650,7 @@ const projectEntries: Project[] = [
     slug: "santa-dominga", index: "04", name: "Santa Dominga", client: "Estancia Santa Dominga", year: "2026",
     url: "https://www.santadominga.com.ar/", featured: true,
     palette: { background: "#173b28", foreground: "#f4ead4", accent: "#bfa36a", muted: "#b9c7b0" },
-    brandLogo: { src: "/work/santa-dominga/brand-logo.png", alt: "Logo de Santa Dominga", width: 1898, height: 829, contrast: "light" },
+    brandLogo: { src: "/work/santa-dominga/brand-logo.webp", alt: "Logo de Santa Dominga", width: 1600, height: 699, contrast: "light" },
     cover: { src: "/work/santa-dominga/cover.webp", alt: "Cultivo de arroz de Santa Dominga en Entre Ríos", width: 1200, height: 1600, position: "center 58%" },
     gallery: [
       { src: "/work/santa-dominga/origin.webp", alt: "Arroz de Santa Dominga sostenido frente al campo", width: 960, height: 1280 },
@@ -725,7 +659,7 @@ const projectEntries: Project[] = [
     ],
     copy: copy(
       {
-        category: "Sitio institucional / Experiencia multilingüe",
+        category: "Agro / Sitio institucional en tres idiomas",
         description: "Diseñamos y desarrollamos un sitio institucional que ordena dos variedades, certificados y contenido comercial en español, inglés y portugués.",
         services: ["Arquitectura de información", "Diseño UX / UI", "Desarrollo web", "Sitio en tres idiomas"],
         productCaseStudy: {
@@ -788,20 +722,9 @@ const projectEntries: Project[] = [
           technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion", "Lucide"],
           closing: "Una web que ordena información técnica y comercial, hace visibles sus certificados y funciona de forma completa en tres idiomas.",
         },
-        caseStudy: {
-          statement: "Una historia de origen que se lee igual de bien en el campo y en un mercado internacional.",
-          challenge: "La propuesta debía presentar producción, certificaciones y oferta comercial a públicos diferentes sin fragmentar la identidad.",
-          approach: "El paisaje funciona como hilo narrativo. La información técnica aparece cuando aporta confianza, con una arquitectura multilingüe para compradores internacionales.",
-          highlights: [
-            { title: "Origen primero", text: "La geografía y el proceso productivo construyen credibilidad desde el inicio." },
-            { title: "Información precisa", text: "Productos y certificaciones se explican con jerarquía, sin ruido." },
-            { title: "Tres idiomas", text: "Español, inglés y portugués comparten estructura y tono." },
-          ],
-          outcome: "Una presencia institucional serena capaz de hablar de territorio, producto y exportación en un solo recorrido.",
-        },
       },
       {
-        category: "Institutional website / Multilingual experience",
+        category: "Agriculture / Three-language brand website",
         description: "We designed and developed an institutional website that organises two varieties, certificates and commercial content in Spanish, English and Portuguese.",
         services: ["Information architecture", "UX / UI design", "Web development", "Three-language website"],
         productCaseStudy: {
@@ -864,17 +787,6 @@ const projectEntries: Project[] = [
           technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion", "Lucide"],
           closing: "A website that organises technical and commercial information, makes certificates visible and works fully across three languages.",
         },
-        caseStudy: {
-          statement: "An origin story that reads just as well in the field as in an international market.",
-          challenge: "The website had to present production, certifications and commercial offer to different audiences without fragmenting the identity.",
-          approach: "The landscape is the narrative thread. Technical information appears where it builds trust, within a multilingual architecture for international buyers.",
-          highlights: [
-            { title: "Origin first", text: "Geography and production build credibility from the start." },
-            { title: "Precise information", text: "Products and certifications are explained with hierarchy and no noise." },
-            { title: "Three languages", text: "Spanish, English and Portuguese share structure and tone." },
-          ],
-          outcome: "A calm institutional presence that connects territory, product and export in one journey.",
-        },
       },
     ),
   },
@@ -882,8 +794,8 @@ const projectEntries: Project[] = [
     slug: "uruguai-yerba-mate", index: "02", name: "Uruguaí", client: "Uruguaí Yerba Mate", year: "2026",
     url: "https://yerbamateuruguai.com/", featured: true,
     palette: { background: "#394736", foreground: "#f7f1e2", accent: "#b99655", muted: "#c7c6a6" },
-    brandLogo: { src: "/work/uruguai/brand-logo.png", alt: "Logo de Uruguaí Yerba Mate", width: 1916, height: 821, contrast: "light" },
-    cover: { src: "/work/uruguai/cover-portada.jpg", alt: "Paquetes de yerba mate Uruguaí sobre una mesa de madera", width: 2803, height: 1869 },
+    brandLogo: { src: "/work/uruguai/brand-logo.webp", alt: "Logo de Uruguaí Yerba Mate", width: 1600, height: 686, contrast: "light" },
+    cover: { src: "/work/uruguai/cover-portada.webp", alt: "Paquetes de yerba mate Uruguaí sobre una mesa de madera", width: 2400, height: 1600 },
     gallery: [
       { src: "/work/uruguai/variety.webp", alt: "Paquete de yerba mate Uruguaí Tradicional", width: 800, height: 1000 },
       { src: "/work/uruguai/product.webp", alt: "Paquete de yerba mate Uruguaí Premium", width: 640, height: 1160 },
@@ -891,7 +803,7 @@ const projectEntries: Project[] = [
     ],
     copy: copy(
       {
-        category: "Ecosistema digital / Institucional + Ecommerce",
+        category: "Yerba mate / Sitio institucional + Tienda online",
         description: "Dos sitios conectados para presentar la marca, vender online y acompañar sus campañas con contenido siempre actualizado.",
         services: ["UX / UI", "Desarrollo web", "Tiendanube", "Mantenimiento continuo"],
         productCaseStudy: {
@@ -975,20 +887,9 @@ const projectEntries: Project[] = [
             { label: "Ver tienda online", href: "https://tiendauruguai.com/" },
           ],
         },
-        caseStudy: {
-          statement: "Dos sitios conectados para construir marca, vender y acompañar cada campaña.",
-          challenge: "Uruguaí tenía producto, historia y reconocimiento; el sitio debía reunirlos y facilitar el descubrimiento de variedades y el contacto comercial.",
-          approach: "Llevamos los códigos del paquete —verde, oro y geometría— a una narrativa pausada, con producto protagonista y contenido sobre el padrón uruguayo.",
-          highlights: [
-            { title: "Familia de producto", text: "Variedades y presentaciones se comparan con claridad visual." },
-            { title: "Calidad demostrada", text: "El reconocimiento Gran Oro y el proceso aparecen como evidencia." },
-            { title: "Contenido que perdura", text: "Novedades y distribuidores extienden la utilidad del sitio." },
-          ],
-          outcome: "Un sitio con el peso de la marca y la calidez del ritual, útil para consumidores y distribuidores.",
-        },
       },
       {
-        category: "Digital ecosystem / Institutional + Ecommerce",
+        category: "Yerba mate / Brand website + Online store",
         description: "Two connected websites that present the brand, sell online and support its campaigns with continuously updated content.",
         services: ["UX / UI", "Web development", "Tiendanube", "Ongoing maintenance"],
         productCaseStudy: {
@@ -1071,17 +972,6 @@ const projectEntries: Project[] = [
             { label: "Visit institutional site", href: "https://yerbamateuruguai.com/" },
             { label: "Visit online store", href: "https://tiendauruguai.com/" },
           ],
-        },
-        caseStudy: {
-          statement: "Two connected websites for building the brand, selling and supporting every campaign.",
-          challenge: "Uruguaí had product, story and recognition; the site needed to bring them together and make varieties and commercial contact easy to discover.",
-          approach: "We translated the package codes —green, gold and geometry— into a calm narrative with the product and Uruguayan profile at its core.",
-          highlights: [
-            { title: "Product family", text: "Varieties and formats compare with visual clarity." },
-            { title: "Proven quality", text: "The Gran Oro award and the process appear as evidence." },
-            { title: "Lasting content", text: "News and distributors extend the site's usefulness." },
-          ],
-          outcome: "A site with the brand's weight and the ritual's warmth, useful to consumers and distributors.",
         },
       },
     ),

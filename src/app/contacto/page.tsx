@@ -1,6 +1,6 @@
 import { ContactPage } from "@/components/contact/ContactPage";
 import { createMetadata } from "@/lib/metadata";
 
-export const metadata = createMetadata({ title: "Contacto", description: "Contanos tu proyecto de software, sistema o solución digital a medida. Hablemos de cómo hacerlo realidad.", path: "/contacto", locale: "es" });
+export const metadata = createMetadata({ title: "Contacto", description: "¿Necesitás una página web, una tienda online o un sistema a medida? Contanos tu proyecto y te respondemos personalmente.", path: "/contacto", locale: "es" });
 
 export default function ContactRoute() { return <ContactPage locale="es" />; }

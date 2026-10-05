@@ -9,7 +9,7 @@ import { Aura } from "@/components/ui/Aura";
 import styles from "./SelectedWork.module.css";
 
 const maymaHomeImage = {
-  src: "/work/mayma/home-banner-2.jpg",
+  src: "/work/mayma/home-banner-2.webp",
   alt: "Bikini rayado de Mayma Bikinis sobre el agua",
   width: 1916,
   height: 821,
