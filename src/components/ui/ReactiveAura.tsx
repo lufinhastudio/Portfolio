@@ -128,6 +128,8 @@ export function ReactiveAura({ className = "", intensity = "strong" }: Props) {
     host.addEventListener("pointerdown", onPointerDown, { passive: true });
     window.addEventListener("resize", onResize, { passive: true });
     root.dataset.live = "true";
+    // El aura global del cursor se apaga sobre este hero (ya tiene la suya)
+    host.setAttribute("data-aura-host", "");
 
     return () => {
       running = false;
@@ -137,6 +139,7 @@ export function ReactiveAura({ className = "", intensity = "strong" }: Props) {
       host.removeEventListener("pointerleave", onPointerLeave);
       host.removeEventListener("pointerdown", onPointerDown);
       window.removeEventListener("resize", onResize);
+      host.removeAttribute("data-aura-host");
     };
   }, []);
 

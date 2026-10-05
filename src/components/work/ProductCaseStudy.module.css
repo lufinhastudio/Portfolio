@@ -15,7 +15,7 @@
   --accent-ink: color-mix(in srgb, var(--product-accent) 62%, var(--site-ink));
   --accent-soft: color-mix(in srgb, var(--product-accent) 16%, white);
   color: var(--site-ink);
-  background: var(--site-bg);
+  background: transparent; /* el aura del cursor se ve detrás */
 }
 
 .progress {
@@ -91,7 +91,7 @@
   isolation: isolate;
   overflow: hidden;
   padding: calc(var(--header-height) + var(--space-8)) var(--page-inline) clamp(var(--space-10), 5vw, var(--space-16));
-  background: var(--site-paper);
+  background: transparent; /* el aura del cursor se ve detrás */
 }
 
 .hero > :not(.heroWash) { position: relative; z-index: 1; }
@@ -257,7 +257,7 @@ a.frame:hover img { transform: scale(1.02); }
   scroll-margin-top: var(--header-height);
 }
 
-.chapter:nth-child(even) { background: var(--site-paper); }
+.chapter:nth-child(even) { background: transparent; }
 
 .chapterCopy {
   display: grid;
@@ -417,7 +417,7 @@ a.frame:hover img { transform: scale(1.02); }
   grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
   gap: var(--space-5);
   padding: clamp(var(--space-12), 6vw, var(--space-20)) var(--page-inline);
-  background: var(--site-paper);
+  background: transparent; /* el aura del cursor se ve detrás */
 }
 
 .inviteCard {

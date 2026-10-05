@@ -15,7 +15,7 @@
   overflow: hidden;
   padding: var(--space-16) var(--page-inline) var(--space-6);
   color: var(--site-ink);
-  background: var(--site-paper);
+  background: transparent; /* el aura del cursor se ve detrás */
   border-top: 1px solid var(--site-line);
 }
 

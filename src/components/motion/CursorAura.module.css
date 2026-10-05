@@ -1,0 +1,61 @@
+/* Capa fija DETRÁS de todo el contenido (z-index -1): se ve a través de las
+   secciones con fondo transparente y queda tapada por tarjetas, imágenes,
+   botones y secciones oscuras. El color de fondo lo pone <html>. */
+.root {
+  position: fixed;
+  z-index: -1;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  contain: strict;
+}
+
+.spot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  opacity: 0;
+  will-change: transform;
+  transition: opacity 600ms var(--ease-out);
+}
+
+.root[data-state="on"] .spot { opacity: 1; }
+
+.spotA {
+  width: 18rem;
+  height: 18rem;
+  background: radial-gradient(circle, rgb(var(--aura-coral-rgb) / 0.22) 0%, rgb(var(--aura-coral-rgb) / 0.08) 42%, transparent 70%);
+  filter: blur(36px);
+}
+
+.spotB {
+  width: 30rem;
+  height: 30rem;
+  background: radial-gradient(circle, rgb(var(--aura-yellow-rgb) / 0.3) 0%, rgb(var(--aura-orange-rgb) / 0.12) 42%, transparent 70%);
+  filter: blur(48px);
+}
+
+/* Toque en mobile: destello que se expande y se desvanece */
+.tap {
+  position: absolute;
+  width: 14rem;
+  height: 14rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgb(var(--aura-coral-rgb) / 0.32) 0%, rgb(var(--aura-orange-rgb) / 0.16) 38%, rgb(var(--aura-yellow-rgb) / 0.08) 55%, transparent 72%);
+  opacity: 0;
+  filter: blur(18px);
+  transform: translate(-50%, -50%) scale(0.3);
+}
+
+.tapActive { animation: auraTap 900ms var(--ease-out) forwards; }
+
+@keyframes auraTap {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.3); }
+  25% { opacity: 1; }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(1.25); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .root { display: none; }
+}

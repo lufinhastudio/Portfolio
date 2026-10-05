@@ -12,7 +12,7 @@
   overflow: hidden;
   padding: var(--section-y) var(--page-inline);
   color: var(--site-ink);
-  background: var(--site-bg);
+  background: transparent; /* el aura del cursor se ve detrás */
 }
 
 .section > :not([data-aura]) { position: relative; z-index: 1; }
@@ -160,7 +160,7 @@
   .step:hover .number > span { transform: translateX(4px); }
 }
 
-.compact { background: var(--site-paper); }
+.compact { background: transparent; }
 
 /* ── 3. Responsive ─────────────────────────────────────────────────────── */
 @media (max-width: 900px) {

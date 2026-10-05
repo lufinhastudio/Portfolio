@@ -13,7 +13,7 @@
 /* ── 1. Página ─────────────────────────────────────────────────────────── */
 .page {
   color: var(--site-ink);
-  background: var(--site-paper);
+  background: transparent; /* el aura del cursor se ve detrás */
 }
 
 /* ── 2. Hero ───────────────────────────────────────────────────────────── */
@@ -175,7 +175,7 @@
 .team {
   padding: var(--section-y) var(--page-inline);
   color: var(--site-fg);
-  background: var(--site-bg);
+  background: transparent; /* el aura del cursor se ve detrás */
 }
 
 .people {

@@ -16,7 +16,7 @@
   overflow: hidden;
   padding: var(--section-y) var(--page-inline);
   color: var(--site-fg);
-  background: var(--site-bg);
+  background: transparent; /* el aura del cursor se ve detrás */
 }
 
 .section > :not([data-aura]) { position: relative; z-index: 1; }

@@ -9,7 +9,7 @@
    ========================================================================== */
 
 /* ── 1. Página ─────────────────────────────────────────────────────────── */
-.page { position: relative; isolation: isolate; overflow: hidden; min-height: 100svh; padding: calc(var(--header-height) + 2rem) var(--page-gutter) clamp(4rem, 7vw, 6rem); color: var(--site-fg); background: var(--site-bg); }
+.page { position: relative; isolation: isolate; overflow: hidden; min-height: 100svh; padding: calc(var(--header-height) + 2rem) var(--page-gutter) clamp(4rem, 7vw, 6rem); color: var(--site-fg); background: transparent; }
 .page > :not([data-aura]) { position: relative; z-index: 1; }
 .kicker { display: flex; justify-content: space-between; gap: 1rem; padding-bottom: .9rem; border-bottom: 1px solid var(--site-line); color: var(--site-muted); font-family: var(--font-mono); font-size: .66rem; letter-spacing: .08em; text-transform: uppercase; }
 .grid { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); grid-template-rows: auto 1fr; gap: 2.5rem clamp(2.5rem, 7vw, 7rem); margin-top: clamp(3rem, 6vw, 5rem); }

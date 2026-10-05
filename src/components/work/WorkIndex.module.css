@@ -11,7 +11,7 @@
 /* ── 1. Página y hero ──────────────────────────────────────────────────── */
 .page {
   color: var(--site-fg);
-  background: var(--site-paper);
+  background: transparent; /* el aura del cursor se ve detrás */
 }
 
 .hero {
