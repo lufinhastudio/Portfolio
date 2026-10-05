@@ -5,7 +5,6 @@ import { getStudioContent } from "@/content";
 import { siteConfig } from "@/config/site";
 import { PersonContacts } from "@/components/team/PersonContacts";
 import { Aura } from "@/components/ui/Aura";
-import { ProcessSteps } from "@/components/studio/ProcessSteps";
 import { TechStack } from "@/components/studio/TechStack";
 import { CapabilitiesTicker } from "@/components/studio/CapabilitiesTicker";
 import { ReactiveAura } from "@/components/ui/ReactiveAura";
@@ -107,9 +106,6 @@ export function StudioPage({ locale }: { locale: Locale }) {
       <section className={styles.team} aria-label={content.people}>
         <div className={styles.people}>{siteConfig.team.map((person, index) => <StudioPerson key={person.name} person={person} number={index + 1} locale={locale} />)}</div>
       </section>
-
-      {/* ── Proceso ── */}
-      <ProcessSteps locale={locale} compact />
 
       {/* ── Principios: tarjetas con brillo que sigue al cursor ── */}
       <section className={styles.principles} aria-label={locale === "es" ? "Principios del estudio" : "Studio principles"}>
